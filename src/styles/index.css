@@ -10,10 +10,16 @@
   /* colors */
   --yellow-color: #ffb627;
   --icon-violet-color: #734aef;
+  --background-blue-color: #693bbd;
   --white-color: #fbfbfb;
   --white-40-color: rgba(255, 255, 255, 0.4);
   --white-60-color: rgba(255, 255, 255, 0.6);
   --text-button-color: #623f8b;
   --dashboard-text-color: #ff868d;
   --form-color-color: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  background-color: var(--background-blue-color);
+  color: var(--white-color);
 }

@@ -8,6 +8,7 @@ import CurrencyTab from "./components/CurrencyTab/CurrencyTab";
 import RestrictedRoute from "./components/RestrictedRoute";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 //! ADD LAZY LOAD
 
@@ -51,6 +52,7 @@ function App() {
             </RestrictedRoute>
           }
         />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );
