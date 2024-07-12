@@ -1,0 +1,17 @@
+/* 400 */
+@font-face {
+  font-family: "Poppins-Regular";
+  src: url("../fonts/Poppins/Poppins-Regular.ttf");
+}
+
+/* 600 */
+@font-face {
+  font-family: "Poppins-Semi-Bold";
+  src: url("../fonts/Poppins/Poppins-SemiBold.ttf");
+}
+
+/* 700 */
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url("../fonts/Poppins/Poppins-Bold.ttf");
+}
