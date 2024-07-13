@@ -1,21 +1,23 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import DashboardPage from "./pages/DashboardPage/DashboardPage";
-import PrivateRoute from "./components/PrivateRoute";
-import HomeTab from "./components/HomeTab/HomeTab";
-import StatisticsTab from "./components/StatisticsTab/StatisticsTab";
-import CurrencyTab from "./components/CurrencyTab/CurrencyTab";
-import RestrictedRoute from "./components/RestrictedRoute";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
-import PageNotFound from "./pages/PageNotFound/PageNotFound";
+// import { Route, Routes } from "react-router-dom";
+// import "./App.css";
+// import DashboardPage from "./pages/DashboardPage/DashboardPage";
+// import PrivateRoute from "./components/PrivateRoute";
+// import HomeTab from "./components/HomeTab/HomeTab";
+// import StatisticsTab from "./components/StatisticsTab/StatisticsTab";
+// import CurrencyTab from "./components/CurrencyTab/CurrencyTab";
+// import RestrictedRoute from "./components/RestrictedRoute";
+// import LoginPage from "./pages/LoginPage/LoginPage";
+// import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
+// import PageNotFound from "./pages/PageNotFound/PageNotFound";
+
+import Balance from "./components/Balance/Balance";
 
 //! ADD LAZY LOAD
 
 function App() {
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route
           path="/dashboard"
           element={
@@ -53,7 +55,8 @@ function App() {
           }
         />
         <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      </Routes> */}
+      <Balance />
     </>
   );
 }
