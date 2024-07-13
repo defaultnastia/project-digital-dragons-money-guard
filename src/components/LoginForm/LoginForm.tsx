@@ -1,5 +1,6 @@
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Link } from "react-router-dom";
 import "./LoginForm.css";
 import { loginFormSchema } from "../../schema/schema";
 
@@ -22,7 +23,9 @@ const LoginForm: React.FC = () => {
   return (
     <div className="wrapper">
       <div>
-        <img src="../assets/react.svg" />
+        {/* <svg>
+          <use xlinkHref={`${icons}#icon-logo-Money-Guard`} />
+        </svg> */}
         <p>Money Guard</p>
       </div>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -39,6 +42,7 @@ const LoginForm: React.FC = () => {
           />
         </label>
         <button type="submit">LOG IN</button>
+        <Link to="/register">REGISTER</Link>
       </form>
     </div>
   );
