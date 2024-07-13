@@ -64,6 +64,7 @@ const CurrencyTab: React.FC = () => {
           </tbody>
         </table>
       )}
+      <img src="../../img/graph-mobile_result.png" alt="graph" />
     </div>
   );
 };
