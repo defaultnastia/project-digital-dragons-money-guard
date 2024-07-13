@@ -61,7 +61,6 @@ export const refreshUser = createAsyncThunk(
 
     try {
       setAuthHeader(persistedToken);
-      console.log(walletAuthInstance.defaults.headers.common.Authorization);
 
       const response = await walletAuthInstance.get("/users/current");
       return response.data;
