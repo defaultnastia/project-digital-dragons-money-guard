@@ -1,5 +1,12 @@
+import CurrencyTab from "../../components/CurrencyTab/CurrencyTab";
+
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return (
+    <div>
+      <p>LoginPage</p>
+      <CurrencyTab />
+    </div>
+  );
 };
 
 export default LoginPage;

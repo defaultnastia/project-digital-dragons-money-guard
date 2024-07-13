@@ -1,12 +1,12 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 const monobankApi: AxiosInstance = axios.create({
-  baseURL: "https://api.monobank.ua/bank/currency",
+  baseURL: "https://api.monobank.ua",
 });
 
-interface CurrencyRate {
-  currencyCodeA?: number;
-  currencyCodeB?: number;
+export interface CurrencyRate {
+  currencyCodeA: number;
+  currencyCodeB: number;
   rateBy: number;
   rateSell: number;
   date?: number;
@@ -40,7 +40,9 @@ export const getCurrencyRates = async (): Promise<CurrencyRate[] | null> => {
     return cachedRates;
   }
   try {
-    const response: AxiosResponse<CurrencyRate[]> = await monobankApi.get("/");
+    const response: AxiosResponse<CurrencyRate[]> = await monobankApi.get(
+      "/bank/currency"
+    );
     const currencyRates = response.data;
     saveToLocalStorage(currencyRates);
     return currencyRates;
