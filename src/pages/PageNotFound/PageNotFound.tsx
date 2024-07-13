@@ -1,34 +1,71 @@
 import { Link } from "react-router-dom";
-import { signUp, UserCredentials } from "../../redux/auth/slice";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../redux/auth/store";
-import { useEffect } from "react";
-import { log } from "console";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  refreshUser,
+  signIn,
+  signOut,
+  signUp,
+} from "../../redux/auth/operations";
+import { UserCredentials } from "../../redux/data.types";
 
 const PageNotFound = () => {
+  const dispatch = useAppDispatch();
+
+  const userData = useAppSelector((state) => state.auth.user);
+  const loading = useAppSelector((state) => state.auth.loading);
+  const error = useAppSelector((state) => state.auth.errorCode);
+
   const userToSignUp: UserCredentials = {
-    username: "Postman2",
-    email: "Postman2@post.com",
+    username: "Postman19",
+    email: "Postman19@post.com",
     password: "&jf7jm!jeo",
   };
 
-  const dispatch = useDispatch<AppDispatch>();
+  const userToSignIn: Omit<UserCredentials, "username"> = {
+    email: "Postman15@post.com",
+    password: "&jf7jm!jeo",
+  };
 
-  const userData = useSelector((state: any) => state.auth.user);
-  const loading = useSelector((state: any) => state.auth.loading);
-  const error = useSelector((state: any) => state.auth.error);
+  const handleLogin = (): void => {
+    dispatch(signIn(userToSignIn));
+  };
 
-  useEffect(() => {
-    (async () => {
-      const data = await dispatch(signUp(userToSignUp));
-      console.log(data);
-    })();
-  }, []);
+  const handleRegister = (): void => {
+    dispatch(signUp(userToSignUp));
+  };
+
+  const handleRefresh = (): void => {
+    dispatch(refreshUser());
+  };
+
+  const handleLogout = (): void => {
+    dispatch(signOut());
+  };
 
   return (
     <div>
       <p>The requested page is not found</p>
       <Link to="/">Return to known area</Link>
+      <p>.</p>
+      <p>.</p>
+      <p>IS LOADING:</p>
+      <p>{loading ? "Load" : "no load"}</p>
+      <p>.</p>
+      <p>REGISTRATION</p>
+      <button onClick={handleRegister}>Register</button>
+      <p>{JSON.stringify(userData)}</p>
+      <p>.</p>
+      <p>LOGGING OUT:</p>
+      <button onClick={handleLogout}>Logout</button>
+      <p>.</p>
+      <p>LOGGING IN</p>
+      <button onClick={handleLogin}>Login</button>
+      <p>{userData ? "loggeD in" : "loggeD out"}</p>
+      <p>.</p>
+      <button onClick={handleRefresh}>Refresh</button>
+      <p>.</p>
+      <p>ERROR</p>
+      <p>{`ErroR IS ${error}`}</p>
     </div>
   );
 };

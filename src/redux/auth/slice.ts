@@ -1,23 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-interface UserState {
-  user: {
-    username: string;
-    email: string;
-    id: string;
-    balance: number;
-  };
-  token: string | null;
-  loading: boolean;
-  error: string | null;
-}
-
-export interface UserCredentials {
-  username: string;
-  email: string;
-  password: string;
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { refreshUser, signIn, signOut, signUp } from "./operations";
+import { UserState } from "../data.types";
 
 const initialState: UserState = {
   user: {
@@ -28,32 +11,8 @@ const initialState: UserState = {
   },
   token: null,
   loading: false,
-  error: null,
+  errorCode: null,
 };
-
-const walletAuthInstance = axios.create({
-  baseURL: "https://wallet.b.goit.study/api/auth",
-});
-
-const setAuthHeader = (token: string) => {
-  walletAuthInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-// const clearAuthHeader = () => {
-//   walletAuthInstance.defaults.headers.common.Authorization = "";
-// };
-
-export const signUp = createAsyncThunk(
-  "auth/signUp",
-  async (user: UserCredentials, thunkAPI) => {
-    try {
-      const response = await walletAuthInstance.post("/sign-up", user);
-      setAuthHeader(response.data.token);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue((error as Error).message);
-    }
-  }
-);
 
 const authSlice = createSlice({
   name: "auth",
@@ -61,17 +20,67 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      //=== signUp ===//
+      .addCase(signUp.rejected, (state, action) => {
+        state.loading = false;
+        state.errorCode = String(action.payload);
+      })
       .addCase(signUp.pending, (state) => {
         state.loading = true;
-        state.error = null;
+        state.errorCode = null;
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.loading = false;
+        state.errorCode = null;
         state.user = action.payload.user;
         state.token = action.payload.token;
       })
-      .addCase(signUp.rejected, (state) => {
+
+      //=== signIn ===//
+      .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
+        state.errorCode = String(action.payload);
+      })
+      .addCase(signIn.pending, (state) => {
+        state.loading = true;
+        state.errorCode = null;
+      })
+      .addCase(signIn.fulfilled, (state, action) => {
+        state.loading = false;
+        state.errorCode = null;
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+      })
+
+      //=== signOut ===//
+      .addCase(signOut.rejected, (state, action) => {
+        state.loading = false;
+        state.errorCode = String(action.payload);
+      })
+      .addCase(signOut.pending, (state) => {
+        state.loading = true;
+        state.errorCode = null;
+      })
+      .addCase(signOut.fulfilled, (state) => {
+        state.loading = false;
+        state.errorCode = null;
+        state.user = initialState.user;
+        state.token = null;
+      })
+
+      //=== refresh ===//
+      .addCase(refreshUser.rejected, (state, action) => {
+        state.loading = false;
+        state.errorCode = String(action.payload);
+      })
+      .addCase(refreshUser.pending, (state) => {
+        state.loading = true;
+        state.errorCode = null;
+      })
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.errorCode = null;
+        state.user = action.payload;
       });
   },
 });
