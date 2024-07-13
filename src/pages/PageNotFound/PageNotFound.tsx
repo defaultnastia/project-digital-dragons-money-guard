@@ -44,7 +44,7 @@ const PageNotFound = () => {
 
   return (
     <div>
-      <p>The requested page is not found</p>
+      <p className="underline">The requested page is not found</p>
       <Link to="/">Return to known area</Link>
       <p>.</p>
       <p>.</p>
