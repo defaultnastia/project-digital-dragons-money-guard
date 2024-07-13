@@ -44,28 +44,49 @@ const PageNotFound = () => {
 
   return (
     <div>
-      <p className="underline">The requested page is not found</p>
-      <Link to="/">Return to known area</Link>
+      <p>The requested page is not found</p>
+      <Link className="underline" to="/">
+        Return to known area
+      </Link>
       <p>.</p>
       <p>.</p>
-      <p>IS LOADING:</p>
-      <p>{loading ? "Load" : "no load"}</p>
+      <p>MOCKS:</p>
       <p>.</p>
-      <p>REGISTRATION</p>
-      <button onClick={handleRegister}>Register</button>
+      <p>.</p>
+      <p>{loading ? "loading" : "loading finished"}</p>
+      <p>.</p>
+      <button className="border p-1" onClick={handleRegister}>
+        Register
+      </button>
+      <p>.</p>
+      <button className="border p-1" onClick={handleLogout}>
+        Logout
+      </button>
+      <p>.</p>
+      <button className="border p-1" onClick={handleLogin}>
+        Login
+      </button>
+      <p>.</p>
+      <p>
+        {userData.username
+          ? "User is logged in"
+          : "User is logged out (but try refresh)"}
+      </p>
       <p>{JSON.stringify(userData)}</p>
       <p>.</p>
-      <p>LOGGING OUT:</p>
-      <button onClick={handleLogout}>Logout</button>
+      <button className="border p-1" onClick={handleRefresh}>
+        Refresh
+      </button>
       <p>.</p>
-      <p>LOGGING IN</p>
-      <button onClick={handleLogin}>Login</button>
-      <p>{userData ? "loggeD in" : "loggeD out"}</p>
+      <p>{error ? `Error is ${error}` : "No errors happened"}</p>
       <p>.</p>
-      <button onClick={handleRefresh}>Refresh</button>
       <p>.</p>
-      <p>ERROR</p>
-      <p>{`ErroR IS ${error}`}</p>
+      <p>.</p>
+      <p>.</p>
+      <p>
+        All buttons are working. <br /> For the register you have to change
+        "userToSignUp" data to unique email
+      </p>
     </div>
   );
 };
