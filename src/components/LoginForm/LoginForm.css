@@ -1,0 +1,6 @@
+.wrapper {
+  @apply w-[320px] h-[568px] border border-black;
+}
+.form {
+  @apply flex flex-col gap-4;
+}
