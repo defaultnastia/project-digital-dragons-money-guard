@@ -1,6 +1,10 @@
 .wrapper {
   @apply w-[320px] h-[568px] border border-black;
+  background-image: ;
 }
 .form {
   @apply flex flex-col gap-4;
+}
+.icon {
+  @apply w-[40px] h-[40px];
 }

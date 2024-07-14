@@ -3,6 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
 import "./LoginForm.css";
 import { loginFormSchema } from "../../schema/schema";
+import { Icon } from "../Icon/Icon";
 
 interface LoginFormInputs {
   email: string;
@@ -23,9 +24,7 @@ const LoginForm: React.FC = () => {
   return (
     <div className="wrapper">
       <div>
-        {/* <svg>
-          <use xlinkHref={`${icons}#icon-logo-Money-Guard`} />
-        </svg> */}
+        <Icon name="logo" />
         <p>Money Guard</p>
       </div>
       <form className="form" onSubmit={handleSubmit(onSubmit)}>
