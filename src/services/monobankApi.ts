@@ -7,7 +7,7 @@ const monobankApi: AxiosInstance = axios.create({
 export interface CurrencyRate {
   currencyCodeA: number;
   currencyCodeB: number;
-  rateBy: number;
+  rateBuy: number;
   rateSell: number;
   date?: number;
 }
