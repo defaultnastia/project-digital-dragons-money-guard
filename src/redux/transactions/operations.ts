@@ -10,7 +10,7 @@ export const getAllTransactions = createAsyncThunk(
       const response = await walletInstance.get("/transactions");
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue((error as AxiosError).code);
+      return thunkAPI.rejectWithValue((error as AxiosError).status);
     }
   }
 );
@@ -22,7 +22,7 @@ export const addTransaction = createAsyncThunk(
       const response = await walletInstance.post("/transactions", transaction);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue((error as AxiosError).code);
+      return thunkAPI.rejectWithValue((error as AxiosError).status);
     }
   }
 );
@@ -37,7 +37,7 @@ export const updateTransaction = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue((error as AxiosError).code);
+      return thunkAPI.rejectWithValue((error as AxiosError).status);
     }
   }
 );
@@ -49,7 +49,7 @@ export const deleteTransaction = createAsyncThunk(
       const response = await walletInstance.delete(`/transactions/${transId}`);
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue((error as AxiosError).code);
+      return thunkAPI.rejectWithValue((error as AxiosError).status);
     }
   }
 );
@@ -80,7 +80,7 @@ export const getTransactionsCategories = createAsyncThunk(
       const response = await walletInstance.get("/transaction-categories");
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue((error as AxiosError).code);
+      return thunkAPI.rejectWithValue((error as AxiosError).status);
     }
   }
 );
