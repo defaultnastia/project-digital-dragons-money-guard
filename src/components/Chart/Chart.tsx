@@ -1,52 +1,42 @@
-import {Chart as ChartJS, ArcElement, Tooltip, Legend} from "chart.js";
+import {Chart as ChartJS, ArcElement, Tooltip} from "chart.js";
 import {Doughnut} from "react-chartjs-2";
+import {dataProcessing} from "../../helpers/statistics/dataProcessing";
 
 ChartJS.register(ArcElement, Tooltip);
 
 const Chart = () => {
+  const {dataTransaction} = dataProcessing();
   const data = {
-    labels: [
-      "Main expenses",
-      "Products",
-      "Car",
-      "Self care",
-      "Child care",
-      "Household products",
-      "Education",
-      "Leisure",
-      "Other expenses",
-    ],
+    labels: dataTransaction.map((data) => data.name),
     datasets: [
       {
-        label: "# of Votes",
-        data: [8700.0, 3800.74, 1500.0, 800.0, 2208.5, 300.0, 3400.0, 1230.0, 610.0],
-        backgroundColor: [
-          "#FED057",
-          "#FFD8D0",
-          "#FD9498",
-          "#C5BAFF",
-          "#6E78E8",
-          "#4A56E2",
-          "#81E1FF",
-          "#24CCA7",
-          "#00AD84",
-        ],
-        borderColor: [
-          "#FED057",
-          "#FFD8D0",
-          "#FD9498",
-          "#C5BAFF",
-          "#6E78E8",
-          "#4A56E2",
-          "#81E1FF",
-          "#24CCA7",
-          "#00AD84",
-        ],
+        data: dataTransaction.map((data) => data.total),
+        backgroundColor: dataTransaction.map((data) => data.color),
+        borderColor: dataTransaction.map((data) => data.color),
         borderWidth: 1,
+        cutout: "70%",
       },
     ],
   };
-  return <Doughnut data={data} />;
+
+  const shadowPlugin = {
+    id: "shadowPlugin",
+    afterDraw: (chart: any) => {
+      const ctx = chart.ctx;
+      //  boxShadow: "0px 0px 8px 0px #000 inset",
+      ctx.save();
+      ctx.shadowColor = "#000";
+      ctx.shadowBlur = 8;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+    },
+  };
+
+  return (
+    <div>
+      <Doughnut data={data} plugins={[shadowPlugin]} />
+    </div>
+  );
 };
 
 export default Chart;
