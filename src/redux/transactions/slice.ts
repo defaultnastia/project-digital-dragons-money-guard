@@ -1,6 +1,5 @@
 import {
   createSlice,
-  isAnyOf,
   isFulfilled,
   isPending,
   isRejected,
@@ -15,6 +14,7 @@ import {
 const initialState: TransactionsState = {
   transactions: [],
   categories: [],
+  statistics: null,
   loading: false,
   errorCode: null,
 };
@@ -25,6 +25,15 @@ const transactionSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getAllTransactions.fulfilled, (state, action) => {
+        state.transactions = action.payload;
+      })
+      .addCase(getTransactionsSummary.fulfilled, (state, action) => {
+        state.statistics = action.payload;
+      })
+      .addCase(getTransactionsCategories.fulfilled, (state, action) => {
+        state.categories = action.payload;
+      })
       .addMatcher(isFulfilled, (state) => {
         state.loading = false;
         state.errorCode = null;
@@ -36,17 +45,7 @@ const transactionSlice = createSlice({
       .addMatcher(isPending, (state) => {
         state.loading = true;
         state.errorCode = null;
-      })
-      .addMatcher(
-        isAnyOf(
-          getAllTransactions.fulfilled,
-          getTransactionsSummary.fulfilled,
-          getTransactionsCategories.fulfilled
-        ),
-        (state, action) => {
-          state.transactions = action.payload;
-        }
-      );
+      });
   },
 });
 

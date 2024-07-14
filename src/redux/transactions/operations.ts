@@ -33,7 +33,7 @@ export const updateTransaction = createAsyncThunk(
     try {
       const response = await walletInstance.patch(
         `/transactions/${transaction.transId}`,
-        transaction
+        transaction.updTransaction
       );
       return response.data;
     } catch (error) {
@@ -64,7 +64,7 @@ export const getTransactionsSummary = createAsyncThunk(
     range?.month && params.append("month", String(range.month));
     try {
       const response = await walletInstance.get(
-        `/transactions-summary${params.size && "?" + params.toString}`
+        `/transactions-summary${params.size > 0 ? "?" + params : ""}`
       );
       return response.data;
     } catch (error) {

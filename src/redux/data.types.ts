@@ -53,12 +53,11 @@ export interface Transaction {
   balanceAfter?: number;
 }
 
-export interface Categories {
+export interface Category {
   id: string;
   name: string;
   type: TransactionType;
 }
-[];
 
 export interface CategorySummary {
   name: string;
@@ -72,7 +71,8 @@ export interface Statistics {
 
 export interface TransactionsState {
   transactions: Transaction[] | [];
-  categories: Categories | [];
+  categories: Category[] | [];
+  statistics: Statistics | null;
   loading: boolean;
   errorCode: string | null;
 }
