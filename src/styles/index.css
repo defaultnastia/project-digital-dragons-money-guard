@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"), url(../fonts/Poppins/Poppins-Regular.ttf);
+}
+
 :root {
   /* fonts */
-  font-family: "Poppins-Regular", sans-serif;
+
+  font-family: "Poppins", sans-serif;
   font-size: 16px;
 
   /* colors */
