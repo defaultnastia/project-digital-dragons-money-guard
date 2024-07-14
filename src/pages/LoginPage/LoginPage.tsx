@@ -1,5 +1,11 @@
+import Balance from "../../components/Balance/Balance";
+
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return (
+    <div>
+      <Balance />
+    </div>
+  );
 };
 
 export default LoginPage;
