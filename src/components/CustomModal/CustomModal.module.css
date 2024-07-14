@@ -1,0 +1,46 @@
+.modal {
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.bgModal {
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 767px) {
+    flex-flow: column;
+  }
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    box-shadow: 0 0 50px 20px rgba(47, 21, 176, 0.73),
+      /* Внутрішній шар (більш яскравий) */ 0 0 500px 180px
+        rgba(47, 21, 176, 0.4),
+      /* Середній шар */ 0 0 500px 60px rgba(47, 21, 176, 0.1);
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    z-index: -1;
+  }
+}
+
+.btnConfirm {
+  background: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
+}
+
+.childrenWrapper {
+  @media screen and (max-width: 767px) {
+    max-height: calc(100vh - 282px);
+  }
+}

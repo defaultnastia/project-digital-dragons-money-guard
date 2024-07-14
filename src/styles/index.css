@@ -29,3 +29,7 @@ body {
   background-color: var(--background-blue-color);
   color: var(--white-color);
 }
+
+.ReactModal__Body--open {
+  overflow: hidden;
+}
