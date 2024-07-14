@@ -43,7 +43,7 @@ export const getCurrencyRates = async (): Promise<CurrencyRate[] | null> => {
     const response: AxiosResponse<CurrencyRate[]> = await monobankApi.get(
       "/bank/currency"
     );
-    const currencyRates = response.data;
+    const currencyRates = response.data.slice(0, 2);
     saveToLocalStorage(currencyRates);
     return currencyRates;
   } catch (err) {

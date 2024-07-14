@@ -54,17 +54,13 @@ const CurrencyTab: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {currencyRates
-              ?.filter(
-                (rate) => getCurrencyName(rate.currencyCodeA) !== "Unknown"
-              )
-              .map((rate, index) => (
-                <tr key={index}>
-                  <td>{getCurrencyName(rate.currencyCodeA)}</td>
-                  <td>{rate.rateBuy}</td>
-                  <td>{rate.rateSell}</td>
-                </tr>
-              ))}
+            {currencyRates?.map((rate, index) => (
+              <tr key={index}>
+                <td>{getCurrencyName(rate.currencyCodeA)}</td>
+                <td>{rate.rateBuy}</td>
+                <td>{rate.rateSell}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       )}
