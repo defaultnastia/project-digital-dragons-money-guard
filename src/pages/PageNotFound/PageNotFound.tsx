@@ -205,66 +205,6 @@ const PageNotFound = () => {
               placeholder="Enter your text ..."
               className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
             />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
             <select
               {...register("test-select")}
               id="test-select"
