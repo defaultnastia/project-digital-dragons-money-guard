@@ -6,7 +6,7 @@ const CurrencyTab: React.FC = () => {
     null
   );
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,10 +16,10 @@ const CurrencyTab: React.FC = () => {
         if (rates) {
           setCurrencyRates(rates);
         } else {
-          setError("Unable to fetch currency rates");
+          setError(true);
         }
       } catch (error) {
-        setError("Error fetching currency rates");
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -43,7 +43,7 @@ const CurrencyTab: React.FC = () => {
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p>{error}</p>
+        <p>Error fetching currency rates</p>
       ) : (
         <table className="text-[16px] w-full table-fixed">
           <thead className="text-[16px] bg-[rgba(255,255,255,0.20)] w-full">
