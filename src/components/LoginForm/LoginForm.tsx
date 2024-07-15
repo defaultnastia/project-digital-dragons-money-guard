@@ -13,9 +13,6 @@ import {
 import { UserCredentials } from "../../redux/data.types";
 import { signIn } from "../../redux/user/operations";
 import Logo from "../Logo/Logo";
-import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
-
-const { password } = this.state;
 
 interface LoginFormInputs {
   email: string;
@@ -83,7 +80,6 @@ const LoginForm: React.FC = () => {
         </div>
       </form>
       <div className={s.box_btn}></div>
-      <PasswordStrengthBar password={password} />
     </div>
     // </div>
   );
