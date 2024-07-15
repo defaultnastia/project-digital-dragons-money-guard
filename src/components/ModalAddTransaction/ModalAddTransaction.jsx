@@ -33,7 +33,7 @@ export const ModalAddTransaction = () => {
         shouldCloseOnEsc={true}
         onKeyDown={handleKeyDown}
       >
-        <div className="bg-gradient-to-b from-purple-800 to-indigo-900 rounded-lg">
+        <div className="bg-gradient-to-t from-purple-800 to-indigo-900 rounded-lg bg-opacity-80 shadow-xl backdrop-blur-2xl ">
           <AddTransactionForm closeModal={closeModal} />
         </div>
       </Modal>

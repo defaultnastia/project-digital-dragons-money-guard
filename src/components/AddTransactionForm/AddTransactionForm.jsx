@@ -2,13 +2,14 @@ import { useState } from "react";
 import SwitcherComponent from "./SwitcherComponent";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import CustomDropdownIndicator from "./CustomDropdownIndicator";
 import * as yup from "yup";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const schema = yup.object().shape({
-  selectOption: yup.string().required("Please select an option"),
+  // selectOption: yup.string().required("Please select an option"),
   datePicker: yup.date(),
   numberInput: yup
     .number()
@@ -48,7 +49,7 @@ export const AddTransactionForm = ({ closeModal }) => {
       <SwitcherComponent isChecked={isChecked} handleChange={handleChange} />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 w-full mt-[40px]"
+        className="flex flex-col gap-[40px] w-full mt-[40px]"
       >
         {isChecked && (
           <div>
@@ -58,17 +59,71 @@ export const AddTransactionForm = ({ closeModal }) => {
               render={({ field }) => (
                 <Select
                   {...field}
+                  value={
+                    field.value
+                      ? { value: field.value, label: field.value }
+                      : null
+                  }
                   options={[
-                    { value: "option1", label: "Option 1" },
-                    { value: "option2", label: "Option 2" },
-                    { value: "option3", label: "Option 3" },
+                    { value: "Option 1", label: "Option 1" },
+                    { value: "Option 2", label: "Option 2" },
+                    { value: "Option 3", label: "Option 3" },
                   ]}
                   placeholder="Select a category"
-                  classNamePrefix="react-select"
+                  className="w-full border-b border-gray-300 border-opacity-60"
                   onChange={(selectedOption) =>
                     field.onChange(selectedOption.value)
                   }
                   onBlur={field.onBlur}
+                  components={{
+                    IndicatorSeparator: () => null,
+                    DropdownIndicator: CustomDropdownIndicator,
+                  }}
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      background: "none",
+                      border: "none",
+                    }),
+                    menu: (provided) => ({
+                      ...provided,
+                      zIndex: 9999,
+                      borderRadius: "8px",
+                      background:
+                        "var(--Small-Form-color, linear-gradient(0deg, rgba(83, 61, 186, 0.70) 0%, rgba(80, 48, 154, 0.70) 43.14%, rgba(106, 70, 165, 0.52) 73.27%, rgba(133, 93, 175, 0.13) 120.03%))",
+                      boxShadow: "0px 4px 60px 0px rgba(0, 0, 0, 0.25)",
+                      backdropFilter: "blur(50px)",
+                    }),
+                    option: (provided, state) => ({
+                      ...provided,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                      color: "#FBFBFB",
+                      fontFamily: "Poppins",
+                      fontSize: "16px",
+                      fontStyle: "normal",
+                      fontWeight: "400",
+                      lineHeight: "normal",
+                      backgroundColor: state.isSelected ? "lightgray" : null,
+                      "&:hover": {
+                        backgroundColor: "rgba(255, 255, 255, 0.10)",
+                        color: "#FF868D",
+                      },
+                      paddingLeft: "20px",
+                    }),
+                    placeholder: (provided) => ({
+                      ...provided,
+                      color: "var(--white-60, rgba(255, 255, 255, 0.60))",
+                      fontFamily: "Poppins",
+                      fontSize: "18px",
+                      fontStyle: "normal",
+                      fontWeight: "400",
+                      lineHeight: "normal",
+                      paddingLeft: "10px",
+                    }),
+                  }}
                 />
               )}
             />
@@ -80,7 +135,7 @@ export const AddTransactionForm = ({ closeModal }) => {
           </div>
         )}
 
-        <div className="flex-shrink-0 w-280 h-35 text-white text-xl font-semibold mb-6">
+        <div>
           <Controller
             name="numberInput"
             control={control}
@@ -89,7 +144,7 @@ export const AddTransactionForm = ({ closeModal }) => {
                 {...field}
                 type="text"
                 placeholder="0.00"
-                className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none"
+                className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
                 value={field.value || ""}
               />
             )}
@@ -101,7 +156,7 @@ export const AddTransactionForm = ({ closeModal }) => {
           )}
         </div>
 
-        <div className="relative">
+        <div className="w-full">
           <Controller
             name="datePicker"
             control={control}
@@ -111,7 +166,8 @@ export const AddTransactionForm = ({ closeModal }) => {
                 selected={field.value ? field.value : new Date()}
                 onChange={(date) => field.onChange(date)}
                 dateFormat="dd.MM.yyyy"
-                className="w-full p-2 border-b border-gray-300 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none"
+                className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
+                wrapperClassName="w-full"
               />
             )}
           />
@@ -123,7 +179,10 @@ export const AddTransactionForm = ({ closeModal }) => {
         </div>
 
         <div>
-          <label htmlFor="commentInput" className="text-white text-lg">
+          <label
+            htmlFor="commentInput"
+            className="text-white text-lg pl-[20px] text-opacity-60"
+          >
             Comment
           </label>
           <Controller
@@ -134,7 +193,7 @@ export const AddTransactionForm = ({ closeModal }) => {
                 {...field}
                 id="commentInput"
                 type="text"
-                className="w-full p-2 border-b border-gray-300 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none"
+                className="w-full pl-[20px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
                 value={field.value || ""}
               />
             )}
