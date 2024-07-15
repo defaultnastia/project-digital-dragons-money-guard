@@ -9,6 +9,7 @@ import RestrictedRoute from "./components/RestrictedRoute";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import ModalAddTransaction from "./components/ModalAddTransaction/ModalAddTransaction";
 
 //! ADD LAZY LOAD
 
@@ -16,7 +17,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route
+        {/* <Route
           path="/dashboard"
           element={
             <PrivateRoute>
@@ -52,7 +53,8 @@ function App() {
             </RestrictedRoute>
           }
         />
-        <Route path="*" element={<PageNotFound />} />
+        <Route path="*" element={<PageNotFound />} /> */}
+        <Route path="/" element={<ModalAddTransaction />}></Route>
       </Routes>
     </>
   );
