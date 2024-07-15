@@ -19,6 +19,7 @@ export const ModalAddTransaction = () => {
       closeModal();
     }
   };
+
   return (
     <div>
       <button onClick={openModal}>Open Modal</button>
@@ -26,34 +27,18 @@ export const ModalAddTransaction = () => {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         onAfterOpen={() => {}}
-        style={{
-          overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-          },
-          content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-            borderRadius: "8px",
-            border: "none",
-            width: "320px",
-            height: "600px",
-            padding: "20px",
-            backgroundColor: "rgba(255, 255, 255, 0.10)",
-          },
-        }}
+        className="flex justify-center items-center"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
         shouldCloseOnOverlayClick={true}
         shouldCloseOnEsc={true}
         onKeyDown={handleKeyDown}
       >
-        <>
+        <div className="bg-gradient-to-b from-purple-800 to-indigo-900 rounded-lg">
           <AddTransactionForm closeModal={closeModal} />
-        </>
+        </div>
       </Modal>
     </div>
   );
 };
+
 export default ModalAddTransaction;
