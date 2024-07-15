@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CurrencyRate, getCurrencyRates } from "../../services/monobankApi";
+import s from "./CurrencyTab.module.css";
 
 const CurrencyTab: React.FC = () => {
   const [currencyRates, setCurrencyRates] = useState<CurrencyRate[] | null>(
@@ -39,7 +40,7 @@ const CurrencyTab: React.FC = () => {
   };
 
   return (
-    <div className="flex-col w-full md:w-[336px] xl:w-full bg-[rgba(74,86,226,0.10)]">
+    <div className="flex-col w-[336px] xl:w-[480px] bg-[rgba(74,86,226,0.10)]">
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
@@ -77,8 +78,8 @@ const CurrencyTab: React.FC = () => {
           </tbody>
         </table>
       )}
-      <div>
-        <img src="" alt="graph" className="w-full" />
+      <div className="h-[97px] xl:min-h-[192px]">
+        <div className={s.chart}></div>
       </div>
     </div>
   );

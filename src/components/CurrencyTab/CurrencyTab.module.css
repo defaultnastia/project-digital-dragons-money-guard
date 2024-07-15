@@ -1,0 +1,7 @@
+.chart {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../images/chart.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
