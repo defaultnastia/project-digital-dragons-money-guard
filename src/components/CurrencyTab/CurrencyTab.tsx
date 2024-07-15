@@ -45,33 +45,40 @@ const CurrencyTab: React.FC = () => {
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <table className="text-[16px] w-full pl-[20px] pr-[20px] flex-col">
+        <table className="text-[16px] w-full table-fixed">
           <thead className="text-[16px] bg-[rgba(255,255,255,0.20)] w-full">
             <tr>
-              <th scope="col" className="pt-[13px] pb-[13px]">
+              <th className="pt-[13px] pb-[13px] pl-[20px]" align="left">
                 Currency
               </th>
-              <th scope="col" className="pt-[13px] pb-[13px]">
+              <th className="pt-[13px] pb-[13px]" align="center">
                 Purchase
               </th>
-              <th scope="col" className="pt-[13px] pb-[13px]">
+              <th className="pt-[13px] pb-[13px] pr-[20px]" align="right">
                 Sale
               </th>
             </tr>
           </thead>
-          <tbody className="flex-col">
+          <tbody>
+            <tr className="h-[8px] bg-transparent"></tr>
             {currencyRates?.map((rate, index) => (
               <tr key={index}>
-                <td className="">{getCurrencyName(rate.currencyCodeA)}</td>
-                <td className="">{rate.rateBuy}</td>
-                <td className="">{rate.rateSell}</td>
+                <td className="pb-[12px] pl-[20px]" align="left">
+                  {getCurrencyName(rate.currencyCodeA)}
+                </td>
+                <td className="pb-[12px]" align="center">
+                  {rate.rateBuy.toFixed(2)}
+                </td>
+                <td className="pb-[12px] pr-[20px]" align="right">
+                  {rate.rateSell.toFixed(2)}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
       <div>
-        <img src="" alt="graph" className="w-[100%]" />
+        <img src="" alt="graph" className="w-full" />
       </div>
     </div>
   );
