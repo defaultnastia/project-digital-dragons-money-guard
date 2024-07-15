@@ -11,6 +11,7 @@ export interface UserState {
   token: string | null;
   loading: boolean;
   errorCode: string | null;
+  isLoggedIn: boolean;
 }
 
 // to be used when user enters credentials
@@ -81,5 +82,3 @@ export interface PatchData {
   updTransaction: Omit<Transaction, "id">;
   transId: string;
 }
-
-// === MONO (currencies) ===

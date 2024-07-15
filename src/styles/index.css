@@ -25,6 +25,24 @@
   --form-color-color: rgba(255, 255, 255, 0.1);
 }
 
+#root {
+  min-width: 320px;
+  /* max-width: 375px; */
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  #root {
+    max-width: 768px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  #root {
+    max-width: 1280px;
+  }
+}
+
 body {
   background-color: var(--background-blue-color);
   color: var(--white-color);
