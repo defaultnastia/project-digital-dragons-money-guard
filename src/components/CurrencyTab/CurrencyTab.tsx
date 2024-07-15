@@ -39,26 +39,32 @@ const CurrencyTab: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="flex-col w-full md:w-[336px] xl:w-full bg-[rgba(74,86,226,0.10)]">
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
         <p>{error}</p>
       ) : (
-        <table>
-          <thead>
+        <table className="text-[16px] w-full pl-[20px] pr-[20px] flex-col">
+          <thead className="text-[16px] bg-[rgba(255,255,255,0.20)] w-full">
             <tr>
-              <th>Currency</th>
-              <th>Purchase</th>
-              <th>Sale</th>
+              <th scope="col" className="pt-[13px] pb-[13px]">
+                Currency
+              </th>
+              <th scope="col" className="pt-[13px] pb-[13px]">
+                Purchase
+              </th>
+              <th scope="col" className="pt-[13px] pb-[13px]">
+                Sale
+              </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="flex-col">
             {currencyRates?.map((rate, index) => (
               <tr key={index}>
-                <td>{getCurrencyName(rate.currencyCodeA)}</td>
-                <td>{rate.rateBuy}</td>
-                <td>{rate.rateSell}</td>
+                <td className="">{getCurrencyName(rate.currencyCodeA)}</td>
+                <td className="">{rate.rateBuy}</td>
+                <td className="">{rate.rateSell}</td>
               </tr>
             ))}
           </tbody>
