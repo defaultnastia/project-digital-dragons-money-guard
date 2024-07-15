@@ -12,7 +12,7 @@ import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { refreshUser } from "./redux/user/operations";
 import { selectLoadingState } from "./redux/user/selectors";
-import { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 // import { lazy } from "react";
 
 //! ADD LAZY LOAD
@@ -22,7 +22,7 @@ import { useEffect } from "react";
 // const RegistrationPage = lazy(() => import("./pages/PageNotFound"));
 // const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
-function App() {
+const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const userRefreshing = useAppSelector(selectLoadingState);
 
@@ -34,47 +34,49 @@ function App() {
     <b>Refreshing user...</b>
   ) : (
     <>
-      <Routes>
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <DashboardPage />
-            </PrivateRoute>
-          }
-        >
-          <Route path="home" element={<HomeTab />} />
-          <Route path="statistics" element={<StatisticsTab />} />
-          <Route path="currency" element={<CurrencyTab />} />
-        </Route>
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute>
-              <LoginPage />
-            </RestrictedRoute>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <RestrictedRoute>
-              <LoginPage />
-            </RestrictedRoute>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute>
-              <RegistrationPage />
-            </RestrictedRoute>
-          }
-        />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <DashboardPage />
+              </PrivateRoute>
+            }
+          >
+            <Route path="home" element={<HomeTab />} />
+            <Route path="statistics" element={<StatisticsTab />} />
+            <Route path="currency" element={<CurrencyTab />} />
+          </Route>
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute>
+                <RegistrationPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Suspense>
     </>
   );
-}
+};
 
 export default App;
