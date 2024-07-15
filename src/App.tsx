@@ -9,11 +9,30 @@ import RestrictedRoute from "./components/RestrictedRoute";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { refreshUser } from "./redux/user/operations";
+import { selectLoadingState } from "./redux/user/selectors";
+import { useEffect } from "react";
+// import { lazy } from "react";
 
 //! ADD LAZY LOAD
 
+// const DashboardPage = lazy(() => import("./pages/DashboardPage"));
+// const LoginPage = lazy(() => import("./pages/LoginPage"));
+// const RegistrationPage = lazy(() => import("./pages/PageNotFound"));
+// const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+
 function App() {
-  return (
+  const dispatch = useAppDispatch();
+  const userRefreshing = useAppSelector(selectLoadingState);
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return userRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
     <>
       <Routes>
         <Route
