@@ -1,9 +1,4 @@
-import {
-  createSlice,
-  isFulfilled,
-  isPending,
-  isRejected,
-} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { TransactionsState } from "../data.types";
 import {
   getAllTransactions,
@@ -33,18 +28,6 @@ const transactionSlice = createSlice({
       })
       .addCase(getTransactionsCategories.fulfilled, (state, action) => {
         state.categories = action.payload;
-      })
-      .addMatcher(isFulfilled, (state) => {
-        state.loading = false;
-        state.errorCode = null;
-      })
-      .addMatcher(isRejected, (state, action) => {
-        state.loading = false;
-        state.errorCode = String(action.payload);
-      })
-      .addMatcher(isPending, (state) => {
-        state.loading = true;
-        state.errorCode = null;
       });
   },
 });
