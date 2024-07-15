@@ -2,14 +2,13 @@ import { useState } from "react";
 import SwitcherComponent from "./SwitcherComponent";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import CustomDropdownIndicator from "./CustomDropdownIndicator";
 import * as yup from "yup";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import CustomDropdownIndicator from "./CustomDropdownIndicator";
 
 const schema = yup.object().shape({
-  // selectOption: yup.string().required("Please select an option"),
   datePicker: yup.date(),
   numberInput: yup
     .number()
@@ -18,7 +17,7 @@ const schema = yup.object().shape({
   commentInput: yup.string().trim().required("Please enter a comment"),
 });
 
-export const AddTransactionForm = ({ closeModal }) => {
+const AddTransactionForm = ({ closeModal }) => {
   const [isChecked, setIsChecked] = useState(false);
 
   const {
@@ -37,7 +36,6 @@ export const AddTransactionForm = ({ closeModal }) => {
     if (!data.datePicker) {
       data.datePicker = new Date();
     }
-
     console.log(data);
   };
 
@@ -70,7 +68,7 @@ export const AddTransactionForm = ({ closeModal }) => {
                     { value: "Option 3", label: "Option 3" },
                   ]}
                   placeholder="Select a category"
-                  className="w-full border-b border-gray-300 border-opacity-60"
+                  className="w-full border-b border-gray-300 border-opacity-60 focus:border-opacity-100"
                   onChange={(selectedOption) =>
                     field.onChange(selectedOption.value)
                   }
@@ -100,7 +98,6 @@ export const AddTransactionForm = ({ closeModal }) => {
                       flexDirection: "column",
                       justifyContent: "center",
                       flexShrink: 0,
-                      color: "#FBFBFB",
                       fontFamily: "Poppins",
                       fontSize: "16px",
                       fontStyle: "normal",
@@ -145,7 +142,6 @@ export const AddTransactionForm = ({ closeModal }) => {
                 type="text"
                 placeholder="0.00"
                 className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
-                value={field.value || ""}
               />
             )}
           />
@@ -194,7 +190,6 @@ export const AddTransactionForm = ({ closeModal }) => {
                 id="commentInput"
                 type="text"
                 className="w-full pl-[20px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
-                value={field.value || ""}
               />
             )}
           />

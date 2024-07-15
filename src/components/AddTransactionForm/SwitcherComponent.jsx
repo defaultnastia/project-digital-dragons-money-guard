@@ -37,31 +37,40 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const SwitcherComponent = ({ isChecked, handleChange }) => {
+  const incomeColor = isChecked ? "rgba(255, 255, 255, 0.60)" : "#FFB627";
+  const expenseColor = isChecked ? "#FF868D" : "rgba(255, 255, 255, 0.60)";
+
   return (
     <Box display="flex" alignItems="center" justifyContent="center">
-      <Typography variant="body1" style={{ marginRight: 8 }}>
+      <Typography
+        variant="body1"
+        style={{
+          marginRight: 8,
+          color: incomeColor,
+          fontFamily: "Poppins",
+          fontWeight: 500,
+          lineHeight: "normal",
+        }}
+      >
         Income
       </Typography>
       <CustomSwitch
         checked={isChecked}
         onChange={handleChange}
         color="primary"
-        icon={
-          <img
-            src={incomeIcon}
-            alt="Income Icon"
-            style={{ width: 40, height: 40 }}
-          />
-        }
-        checkedIcon={
-          <img
-            src={expenseIcon}
-            alt="Expense Icon"
-            style={{ width: 40, height: 40 }}
-          />
-        }
+        icon={<img src={incomeIcon} alt="Income Icon" />}
+        checkedIcon={<img src={expenseIcon} alt="Expense Icon" />}
       />
-      <Typography variant="body1" style={{ marginLeft: 8 }}>
+      <Typography
+        variant="body1"
+        style={{
+          marginLeft: 8,
+          color: expenseColor,
+          fontFamily: "Poppins",
+          fontWeight: 500,
+          lineHeight: "normal",
+        }}
+      >
         Expense
       </Typography>
     </Box>
