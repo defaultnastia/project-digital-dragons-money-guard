@@ -1,15 +1,16 @@
 import Icons from "../../img/icons/icons.svg";
 
-type NameIcon = "lock" | "logo" | "user";
+type NameIcon = "lock" | "logo" | "email";
 
 interface Props {
   name: NameIcon;
   size?: number;
+  className?: string;
 }
 
-export const Icon = ({ name, size = 24 }: Props) => {
+export const Icon = ({ name, size = 24, className }: Props) => {
   return (
-    <svg width={size} height={size}>
+    <svg className={` ${className}`} width={size} height={size}>
       <use href={`${Icons}#icon-${name}`} />
     </svg>
   );
