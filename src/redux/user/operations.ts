@@ -1,24 +1,18 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { UserCredentials } from "../data.types";
 import { RootState } from "../store";
-
-const walletAuthInstance = axios.create({
-  baseURL: "https://wallet.b.goit.study/api",
-});
-
-const setAuthHeader = (token: string) => {
-  walletAuthInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
-const clearAuthHeader = () => {
-  walletAuthInstance.defaults.headers.common.Authorization = "";
-};
+import {
+  clearAuthHeader,
+  setAuthHeader,
+  walletInstance,
+} from "../../services/axiosInstance";
 
 export const signUp = createAsyncThunk(
-  "auth/signUp",
+  "user/signUp",
   async (user: UserCredentials, thunkAPI) => {
     try {
-      const response = await walletAuthInstance.post("/auth/sign-up", user);
+      const response = await walletInstance.post("/auth/sign-up", user);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
@@ -28,10 +22,10 @@ export const signUp = createAsyncThunk(
 );
 
 export const signIn = createAsyncThunk(
-  "auth/signIn",
+  "user/signIn",
   async (user: Omit<UserCredentials, "username">, thunkAPI) => {
     try {
-      const response = await walletAuthInstance.post("/auth/sign-in", user);
+      const response = await walletInstance.post("/auth/sign-in", user);
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
@@ -40,9 +34,9 @@ export const signIn = createAsyncThunk(
   }
 );
 
-export const signOut = createAsyncThunk("auth/signOut", async (_, thunkAPI) => {
+export const signOut = createAsyncThunk("user/signOut", async (_, thunkAPI) => {
   try {
-    await walletAuthInstance.delete("/auth/sign-out");
+    await walletInstance.delete("/auth/sign-out");
     clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
@@ -50,11 +44,11 @@ export const signOut = createAsyncThunk("auth/signOut", async (_, thunkAPI) => {
 });
 
 export const refreshUser = createAsyncThunk(
-  "auth/refreshUser",
+  "user/refreshUser",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
 
-    const persistedToken = state.auth.token;
+    const persistedToken = state.user.token;
     if (persistedToken === null) {
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
@@ -62,10 +56,26 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
 
-      const response = await walletAuthInstance.get("/users/current");
+      const response = await walletInstance.get("/users/current");
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+export const getBalance = createAsyncThunk(
+  "auth/getBalance",
+  async (_, thunkAPI) => {
+    try {
+      const response = await walletInstance.get("/users/current");
+      return response.data.balance;
+    } catch (error) {
+      if (error instanceof Error) {
+        return thunkAPI.rejectWithValue(error.message);
+      }
     }
   }
 );
