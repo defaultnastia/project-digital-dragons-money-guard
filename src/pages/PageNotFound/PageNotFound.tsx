@@ -35,7 +35,6 @@ import {
 } from "../../redux/transactions/operations";
 import {
   selectCategories,
-  selectLoading,
   selectStatistics,
   selectTransactions,
 } from "../../redux/transactions/selectors";
@@ -48,8 +47,6 @@ const PageNotFound = () => {
   const error = useAppSelector(selectErrorCode);
 
   const transactions = useAppSelector(selectTransactions);
-  const loadingTrans = useAppSelector(selectLoading);
-  const errorTrans = useAppSelector(selectErrorCode);
 
   const categories = useAppSelector(selectCategories);
   const statistics = useAppSelector(selectStatistics);
@@ -279,7 +276,7 @@ const PageNotFound = () => {
         <p>TRANSACTIONS MOCKS:</p>
         <p>.</p>
         <p>.</p>
-        <p>{loadingTrans ? "loading" : "loading finished"}</p>
+        <p>{loading ? "loading" : "loading finished"}</p>
         <p>.</p>
         <button className="border p-1" onClick={handleGetAllTrans}>
           Get Transactions
@@ -302,7 +299,7 @@ const PageNotFound = () => {
           Delete Transaction
         </button>
         <p>.</p>
-        <p>{errorTrans ? `Error is ${errorTrans}` : "No errors happened"}</p>
+        <p>{error ? `Error is ${error}` : "No errors happened"}</p>
         <p>.</p>
         <p>.</p>
         <p>.</p>
