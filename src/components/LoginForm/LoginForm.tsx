@@ -1,11 +1,18 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router-dom";
-import "./LoginForm.css";
+import s from "./LoginForm.module.css";
 import { loginFormSchema } from "../../schema/schema";
 import { Icon } from "../Icon/Icon";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { signIn } from "../../redux/auth/operations";
+import {
+  selectErrorCode,
+  selectLoadingState,
+  selectUserData,
+} from "../../redux/user/selectors";
+import { UserCredentials } from "../../redux/data.types";
+import { signIn } from "../../redux/user/operations";
+import Logo from "../Logo/Logo";
 
 interface LoginFormInputs {
   email: string;
@@ -20,9 +27,9 @@ const LoginForm: React.FC = () => {
   } = useForm<LoginFormInputs>({ resolver: yupResolver(loginFormSchema) });
 
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state.auth.user);
-  // const loading = useAppSelector((state) => state.auth.loading);
-  const error = useAppSelector((state) => state.auth.errorCode);
+  const userData = useAppSelector(selectUserData);
+  const loading = useAppSelector(selectLoadingState);
+  const error = useAppSelector(selectErrorCode);
 
   const userToSignIn: Omit<UserCredentials, "username"> = {
     email: "Postman15@post.com",
@@ -38,41 +45,46 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="wrapper">
-      <div className="logo_wrap">
+    // <div className="container">
+    <div className={s.wrapper}>
+      {/* <div className={s.box_logo}>
         <Icon name="logo" size={26} />
-        <p className="logo_text">Money Guard</p>
-      </div>
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="input_mail">
-          <Icon className="email" name="email" size={24} />
+        <p className={s.logo_text}>Money Guard</p>
+      </div> */}
+      <Logo sizeLogo={26} sizeText={19} />
+
+      <form className={s.box_form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={s.form_mail}>
+          <Icon className={s.icon} name="email" size={24} />
 
           <input
             {...register("email", { required: true })}
             placeholder="E-mail"
-            className="input"
+            className={s.input}
           />
-          {errors.email && <p className="error">{errors.email.message}</p>}
+          {errors.email && <p className={s.error}>{errors.email.message}</p>}
         </div>
-        <div className="input_mail">
-          <Icon />
+        <div className={s.form_pass}>
+          <Icon className={s.icon} name="lock" />
           <input
             {...register("password", { required: true })}
             placeholder="Password"
-            className="input"
+            className={s.input}
           />
           {errors.password && (
-            <p className="error">{errors.password.message}</p>
+            <p className={s.error}>{errors.password.message}</p>
           )}
         </div>
-        <button className="btn_log" type="submit">
+        <button className={s.btn_log} type="submit">
           LOG IN
         </button>
-        <span className="btn_reg">
+        <div className={s.btn_reg}>
           <Link to="/register">REGISTER</Link>
-        </span>
+        </div>
       </form>
+      <div className={s.box_btn}></div>
     </div>
+    // </div>
   );
 };
 

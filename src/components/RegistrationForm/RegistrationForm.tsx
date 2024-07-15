@@ -2,7 +2,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { registerFormSchema } from "../../schema/schema";
-import "../LoginForm/LoginForm.css";
+import "../LoginForm/LoginForm.module.css";
 
 interface RegisterFormInputs {
   name: string;
@@ -30,7 +30,7 @@ const RegistrationForm: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
         <input {...register("name")} type="text" />
         <input {...register("email")} type="text" />
         <input {...register("password")} type="text" />

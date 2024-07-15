@@ -1,25 +1,45 @@
 .wrapper {
-  @apply w-[320px] h-[568px] border border-black;
+  @apply w-[320px] h-[568px];
   background-image: url("/src/img/login/Rectangle\ 4logi_mob.jpg");
-}
-
-.logo_wrap {
+  background-size: cover;
   display: flex;
   flex-direction: column;
+}
+@media screen {
+}
+
+.box_logo {
+  @apply flex flex-col items-center pt-[97px] mb-[53px]
+  /* display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-top: 97px;
-  margin-bottom: 53px;
+  padding-top: 97px;
+  margin-bottom: 53px; */;
+}
+
+.box_form {
+  @apply flex flex-col gap-4;
+  position: relative;
+  margin-bottom: 52px;
+}
+
+.box_btn {
+  /* align-items: center; */
+  /* justify-content: center; */
 }
 
 .logo_text {
   font-size: 19px;
 }
 
-.form {
-  @apply flex flex-col gap-4;
-  gap: 40px;
+.form_mail {
 }
-.input-box {
+.form_pass {
+}
+.icon {
+  fill: var(--white-40-color);
+  position: absolute;
+  left: 31px;
 }
 .input {
   width: 280px;
@@ -30,11 +50,9 @@
   outline: none;
   font-size: 18px;
   margin-left: 20px;
-}
-.input_mail {
-  display: flex;
   position: relative;
 }
+
 .error {
   color: var(--dashboard-text-color);
   font-size: 10px;
@@ -42,6 +60,7 @@
 }
 
 .btn_log {
+  margin-bottom: 20px;
   width: 280px;
   height: 50px;
   margin: 0 auto;
@@ -72,12 +91,8 @@
 
   background-color: var(--white-color);
   color: var(--text-button-color);
-  display: inline-block;
-  justify-content: center;
-}
 
-.email {
-  fill: var(--white-40-color);
-  position: absolute;
-  left: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
