@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+import CustomModal from "../../components/CustomModal/CustomModal";
+
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   getBalance,
@@ -52,6 +57,23 @@ const PageNotFound = () => {
       return JSON.stringify(trans, null, 1);
     });
     return newArr.join("\r\n");
+  };
+
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const { register, handleSubmit } = useForm();
+
+  const openModal = (): void => {
+    setIsOpenModal(true);
+  };
+
+  const closeModal = (): void => {
+    setIsOpenModal(false);
+  };
+
+  const onSubmit = (obj: object): void => {
+    console.log(obj);
+
+    console.log("The form has been submitted");
   };
 
   // #region USER and AUTH server interactions
@@ -142,6 +164,126 @@ const PageNotFound = () => {
   return (
     <div className="text-center p-5 w-full flex-col">
       <div className="p-5 border-b-2">
+        <p>Test modal for everything</p>
+        <p>.</p>
+
+        <button
+          onClick={openModal}
+          className="py-[6px] px-[12px] border-solid border-[1px] border-[var(--white-color)] rounded-[8px] mt-[10px]"
+        >
+          Open modal
+        </button>
+
+        <CustomModal
+          isOpen={isOpenModal}
+          onClose={closeModal}
+          headerText="Add transaction"
+          type="add"
+          firstBtnText="Add"
+          secondBtnText="Cancel"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <>
+            <input
+              type="text"
+              {...register("test1")}
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <input
+              type="text"
+              placeholder="Enter your text ..."
+              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+            />
+            <select
+              {...register("test-select")}
+              id="test-select"
+              defaultValue="Select value"
+              className="mt-[10px] w-[100%] text-[var(--text-button-color)]"
+            >
+              <option value="Select value" disabled hidden>
+                Select value
+              </option>
+              <option value="car">Car</option>
+              <option value="toy">Toy</option>
+              <option value="furniture">Furniture</option>
+              <option value="food">Food</option>
+              <option value="education">Education</option>
+            </select>
+          </>
+        </CustomModal>
+
+        <p>.</p>
         <p>USER AND AUTH MOCKS:</p>
         <p>.</p>
         <p>.</p>
