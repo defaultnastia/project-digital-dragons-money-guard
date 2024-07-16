@@ -25,6 +25,6 @@ export const registerFormSchema = yup.object().shape({
   password: passwordSchema,
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password"), null], "Паролі повинні співпадати")
+    .oneOf([yup.ref("password")], "Паролі повинні співпадати")
     .required("Підтвердження пароля є обов'язковим полем"),
 });

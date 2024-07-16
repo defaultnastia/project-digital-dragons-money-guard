@@ -26,7 +26,7 @@ const LoginForm: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<LoginFormInputs> = (data) => {
-    const userToSignIn: UserCredentials = {
+    const userToSignIn: Omit<UserCredentials, "username"> = {
       email: data.email,
       password: data.password,
     };
