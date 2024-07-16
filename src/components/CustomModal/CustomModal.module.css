@@ -32,10 +32,13 @@
 
 .btnConfirm {
   background: linear-gradient(
-    167deg,
+    /* 167deg,
     #ffc727 0%,
     #9e40ba 61.46%,
-    #7000ff 90.54%
+    #7000ff 90.54% */ 97deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
   );
 }
 

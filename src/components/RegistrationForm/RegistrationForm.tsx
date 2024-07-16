@@ -2,7 +2,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { registerFormSchema } from "../../schema/schema";
-import "../LoginForm/LoginForm.module.css";
+import CustomModal from "../CustomModal/CustomModal";
+import Logo from "../Logo/Logo";
+import { Icon } from "../Icon/Icon";
+// import "../LoginForm/LoginForm.module.css";
 
 interface RegisterFormInputs {
   name: string;
@@ -30,14 +33,49 @@ const RegistrationForm: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <form className={s.form} onSubmit={handleSubmit(onSubmit)}>
-        <input {...register("name")} type="text" />
-        <input {...register("email")} type="text" />
-        <input {...register("password")} type="text" />
-        <input {...register("confirmPassword")} type="text" />
-        <button type="submit">REGISTER</button>
-        <Link to="/login">LOG IN</Link>
-      </form>
+      <CustomModal
+        isOpen={true}
+        onSubmit={handleSubmit(onSubmit)}
+        type="register"
+        firstBtnText="REGISTER"
+        secondBtnText="LOG IN"
+      >
+        <Logo sizeLogo={26} sizeText={19} />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <Icon name="user" size={24} />
+
+            <input
+              {...register("user", { required: true })}
+              placeholder="Name"
+            />
+          </div>
+          <div>
+            <Icon name="email" size={24} />
+
+            <input
+              {...register("email", { required: true })}
+              placeholder="E-mail"
+            />
+          </div>
+          <div>
+            <Icon name="lock" size={24} />
+
+            <input
+              {...register("email", { required: true })}
+              placeholder="Password"
+            />
+          </div>
+          <div>
+            <Icon name="lock" size={24} />
+
+            <input
+              {...register("email", { required: true })}
+              placeholder="Confirm password"
+            />
+          </div>
+        </form>
+      </CustomModal>
     </div>
   );
 };

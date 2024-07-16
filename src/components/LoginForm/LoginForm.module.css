@@ -1,9 +1,10 @@
 .wrapper {
-  @apply w-[320px] h-[568px];
-  background-image: url("/src/img/login/Rectangle\ 4logi_mob.jpg");
-  background-size: cover;
+  /* @apply w-[320px] h-[568px]; */
+  /* background-image: url("/src/img/login/Rectangle\ 4logi_mob.jpg"); */
+  /* background-size: cover;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; */
+  background-image: url("/src/img/login/Gradient\ 4login_tab.jpg");
 }
 @media screen {
 }
