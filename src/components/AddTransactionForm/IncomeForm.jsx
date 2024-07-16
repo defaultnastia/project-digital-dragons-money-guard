@@ -4,11 +4,13 @@ import * as yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CustomButton } from "../CustomButton/CustomButton";
+import { useDispatch } from "react-redux";
+import { addTransaction } from "../../redux/transactions/operations";
 
 import sprite from "../../images/icons.svg";
 
 const schema = yup.object().shape({
-  datePicker: yup.date(),
+  datePicker: yup.date().required("Please select a date"),
   numberInput: yup
     .number()
     .typeError("Please enter a number")
@@ -17,6 +19,8 @@ const schema = yup.object().shape({
 });
 
 const IncomeForm = ({ closeModal }) => {
+  const dispatch = useDispatch();
+
   const {
     handleSubmit,
     control,
@@ -30,13 +34,21 @@ const IncomeForm = ({ closeModal }) => {
     },
   });
 
-  const onSubmit = (data) => {
-    if (!data.datePicker) {
-      data.datePicker = new Date();
-    }
-    console.log(data);
+  const onSubmit = async (data) => {
+    const formattedData = {
+      transactionDate: data.datePicker,
+      type: "INCOME",
+      categoryId: "063f1132-ba5d-42b4-951d-44011ca46262",
+      comment: data.commentInput,
+      amount: parseFloat(data.numberInput),
+    };
 
-    closeModal();
+    try {
+      await dispatch(addTransaction(formattedData));
+      closeModal();
+    } catch (error) {
+      // toast.error("Error adding transaction. Please try again.");
+    }
   };
 
   return (
@@ -71,10 +83,10 @@ const IncomeForm = ({ closeModal }) => {
           render={({ field }) => (
             <DatePicker
               {...field}
-              selected={field.value ? field.value : new Date()}
+              selected={field.value}
               onChange={(date) => field.onChange(date)}
               dateFormat="dd.MM.yyyy"
-              className=" w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
+              className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
               wrapperClassName="w-full"
             />
           )}
@@ -85,7 +97,7 @@ const IncomeForm = ({ closeModal }) => {
           width="24"
           height="24"
         >
-          <use xlinkHref={`${sprite}#icon-ate_range`}></use>
+          <use xlinkHref={`${sprite}#icon-date_range`}></use>
         </svg>
         {errors.datePicker && (
           <p className="text-red-500 text-sm mt-1">

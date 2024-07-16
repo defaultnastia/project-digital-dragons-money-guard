@@ -11,6 +11,7 @@ import { CustomButton } from "../CustomButton/CustomButton";
 import sprite from "../../images/icons.svg";
 import { getTransactionsCategories } from "../../redux/transactions/operations";
 import { selectCategories } from "../../redux/transactions/selectors";
+import { addTransaction } from "../../redux/transactions/operations";
 
 const schema = yup.object().shape({
   selectOption: yup.string().required("Please select a category"),
@@ -35,7 +36,7 @@ const ExpenseForm = ({ closeModal }) => {
     if (categories) {
       setOptions(
         categories.map((category) => ({
-          value: category.name,
+          value: category.id,
           label: category.name,
         }))
       );
@@ -56,13 +57,23 @@ const ExpenseForm = ({ closeModal }) => {
     },
   });
 
-  const onSubmit = (data) => {
-    if (!data.datePicker) {
-      data.datePicker = new Date();
-    }
-    console.log(data);
+  const onSubmit = async (data) => {
+    const amount = parseFloat(data.numberInput);
 
-    closeModal();
+    const formattedData = {
+      transactionDate: data.datePicker,
+      type: "EXPENSE",
+      categoryId: data.selectOption,
+      comment: data.commentInput,
+      amount: amount > 0 ? -amount : amount,
+    };
+
+    try {
+      await dispatch(addTransaction(formattedData));
+      closeModal();
+    } catch (error) {
+      // toast.error("Error adding transaction. Please try again.");
+    }
   };
 
   return (
@@ -78,7 +89,9 @@ const ExpenseForm = ({ closeModal }) => {
             <Select
               {...field}
               value={
-                field.value ? { value: field.value, label: field.value } : null
+                field.value
+                  ? options.find((option) => option.value === field.value)
+                  : null
               }
               options={options}
               placeholder="Select a category"
@@ -97,6 +110,7 @@ const ExpenseForm = ({ closeModal }) => {
                   background: "none",
                   border: "none",
                   color: "white",
+                  cursor: "pointer",
                   boxShadow: state.isFocused ? "none" : provided.boxShadow,
                   "&:hover": {
                     borderColor: "none",
@@ -131,6 +145,7 @@ const ExpenseForm = ({ closeModal }) => {
                     color: "#FF868D",
                   },
                   paddingLeft: "20px",
+                  cursor: "pointer",
                 }),
                 placeholder: (provided) => ({
                   ...provided,
@@ -162,6 +177,7 @@ const ExpenseForm = ({ closeModal }) => {
           </p>
         )}
       </div>
+
       <div>
         <Controller
           name="numberInput"
