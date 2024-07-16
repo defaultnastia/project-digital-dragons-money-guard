@@ -2,9 +2,6 @@ import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import expenseIcon from "../../../public/AddTransactionForm/expense.svg";
-import incomeIcon from "../../../public/AddTransactionForm/income.svg";
-import sprite from "../../images/icons.svg";
 
 const CustomSwitch = styled(Switch)(({ theme }) => ({
   width: 80,
@@ -16,7 +13,7 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
       transform: "translateX(40px)",
       color: "#fff",
       "& + .MuiSwitch-track": {
-        backgroundColor: "#fff",
+        backgroundColor: "#FFF",
         opacity: 1,
         border: "none",
       },
@@ -29,7 +26,7 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
   },
   "& .MuiSwitch-track": {
     borderRadius: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFF",
     opacity: 1,
     transition: theme.transitions.create(["background-color"], {
       duration: 500,
@@ -46,7 +43,7 @@ const SwitcherComponent = ({ isChecked, handleChange }) => {
       <Typography
         variant="body1"
         style={{
-          marginRight: 8,
+          marginRight: 20,
           color: incomeColor,
           fontFamily: "Poppins",
           fontWeight: 500,
@@ -60,20 +57,46 @@ const SwitcherComponent = ({ isChecked, handleChange }) => {
         onChange={handleChange}
         color="primary"
         icon={
-          <svg width="44" height="44" style={{ fill: "#FFB627" }}>
-            <use xlinkHref={`${sprite}#icon-plus`}></use>
-          </svg>
+          <Box
+            sx={{
+              width: 36,
+              height: 36,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#FFB627",
+              borderRadius: "50%",
+              color: "#fff",
+              fontSize: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            +
+          </Box>
         }
         checkedIcon={
-          <svg width="44" height="44" style={{ fill: "#FF868D" }}>
-            <use xlinkHref={`${sprite}#icon-minus_btn`}></use>
-          </svg>
+          <Box
+            sx={{
+              width: 36,
+              height: 36,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: "#FF868D",
+              borderRadius: "50%",
+              color: "#fff",
+              fontSize: "20px",
+              fontWeight: "bold",
+            }}
+          >
+            -
+          </Box>
         }
       />
       <Typography
         variant="body1"
         style={{
-          marginLeft: 8,
+          marginLeft: 20,
           color: expenseColor,
           fontFamily: "Poppins",
           fontWeight: 500,
