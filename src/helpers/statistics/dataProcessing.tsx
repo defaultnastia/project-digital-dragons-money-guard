@@ -15,6 +15,8 @@ export const dataProcessing = () => {
   const [nameTransactions, setNameTransactions] = useState<Data[]>([]);
   const [value, setValue] = useState<Data[]>([]);
   const [date, setDate] = useState<Transaction[]>([]);
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [totalExpense, setTotalExpense] = useState(0);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -31,7 +33,7 @@ export const dataProcessing = () => {
 
     const fetchTransactionsSummary = async () => {
       // const {payload: data} = await dispatch(getTransactionsSummary());
-      const {categoriesSummary} = await transactionValue();
+      const {categoriesSummary, incomeSummary, expenseSummary} = await transactionValue();
       // const {categoriesSummary} = data;
       const transactions: Data[] = [...categoriesSummary]
         .filter((item) => item.type !== "INCOME")
@@ -39,12 +41,13 @@ export const dataProcessing = () => {
           return {name: item.name, total: -item.total};
         });
       setValue(transactions);
+      setTotalIncome(incomeSummary);
+      setTotalExpense(expenseSummary);
     };
 
     const fetchTransactions = async () => {
       // const {payload: data} = await dispatch(getTransactionsSummary());
       const data: Transaction[] = await transactionAll();
-      // const {categoriesSummary} = data;
       const dates = data
         .filter((item) => item.type !== "INCOME")
         .map((item) => {
@@ -79,5 +82,5 @@ export const dataProcessing = () => {
     };
   });
 
-  return {dataTransaction};
+  return {dataTransaction, totalExpense, totalIncome};
 };
