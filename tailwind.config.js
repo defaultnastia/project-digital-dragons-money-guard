@@ -8,6 +8,9 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      backgroundImage: {
+        "custom-svg": "url('./src/img/bg.svg')",
+      },
     },
   },
   plugins: [daisyui],

@@ -1,11 +1,12 @@
-import { useSelector } from "react-redux";
 import { useMediaQuery } from "react-responsive";
-import { selectUserData } from "../../redux/user/selectors";
 import Header from "../../components/Header/Header";
 import Navigation from "../../components/Navigation/Navigation";
 import HomeTab from "../../components/HomeTab/HomeTab";
 import StatisticsTab from "../../components/StatisticsTab/StatisticsTab";
 import CurrencyTab from "../../components/CurrencyTab/CurrencyTab";
+import Balance from "../../components/Balance/Balance";
+import { useState } from "react";
+import clsx from "clsx";
 
 const DashboardPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -13,23 +14,30 @@ const DashboardPage = () => {
     query: "(min-width: 768px) and (max-width: 1023px)",
   });
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
-  const user = useSelector(selectUserData);
+
+  const [activeTab, setActiveTab] = useState<string>("home");
 
   return (
     <div>
-      <Header username={user.username} />
-      <div>
-        <Navigation />
-        {/* <Balance /> */}
-        <CurrencyTab />
-      </div>
-      <div>
-        {/* {isDesktop && <div>Desktop content</div>}
-        {isTablet && <div>Tablet content</div>}
-        {isMobile && <div>Mobile content</div>} */}
-        <HomeTab />
-        <StatisticsTab />
-        {isMobile && <CurrencyTab />}
+      <Header />
+      <div className="flex bg-custom-svg bg-[523B7E]">
+        <div
+          className={clsx(
+            "flex",
+            { "flex-col gap-[32px]": isDesktop },
+            { "grid grid-cols-3 gap-[28px]": isTablet },
+            " w-[480px] border-r-[1px] border-[rgba(255,255,255,0.6)] shadow-[1px_4px_1px_0_rgba(0,0,0,0.25)]"
+          )}
+        >
+          <Navigation setActiveTab={setActiveTab} activeTab={activeTab} />
+          <Balance />
+          <CurrencyTab />
+        </div>
+        <div>
+          {activeTab === "home" && <HomeTab />}
+          {activeTab === "statistics" && <StatisticsTab />}
+          {isMobile && <CurrencyTab />}
+        </div>
       </div>
     </div>
   );

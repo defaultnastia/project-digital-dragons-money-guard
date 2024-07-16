@@ -1,3 +1,6 @@
+import { CustomButton } from "../CustomButton/CustomButton";
+import Logo from "../Logo/Logo";
+
 const LogoutForm = ({ onSubmit, onClose }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -6,13 +9,21 @@ const LogoutForm = ({ onSubmit, onClose }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <img src="logo" alt="logo_money_guard" />
-        <h2>Are you sure you want to log out?</h2>
-        <button type="submit">Log out</button>
-        <button type="button" onClick={onClose}>
-          Cancel
-        </button>
+      <div className="p-[20px]">
+        <Logo sizeLogo={36} sizeText={26} icon="logo" />
+        <h2 className="mx-auto mt-[52px] mb-[52px] text-[18px] w-[300px]">
+          Are you sure you want to log out?
+        </h2>
+        <CustomButton
+          elementLike={{ btnType: "submit" }}
+          btnStyle="colorful"
+          children="Logout"
+        />
+        <CustomButton
+          elementLike={{ btnType: "button", onClick: onClose }}
+          btnStyle="mono"
+          children="cancel"
+        />
       </div>
     </form>
   );
