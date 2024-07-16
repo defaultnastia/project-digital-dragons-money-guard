@@ -41,7 +41,7 @@ const LoginForm: React.FC = () => {
           <Logo icon={"logo"} sizeLogo={26} sizeText={19} />
         </div>
         <form className={s.box_form} onSubmit={handleSubmit(onSubmit)}>
-          <div className={s.form_mail}>
+          <div className={s.input_box}>
             <Icon className={s.icon} name="email" size={24} />
 
             <input
@@ -51,7 +51,7 @@ const LoginForm: React.FC = () => {
             />
             {errors.email && <p className={s.error}>{errors.email.message}</p>}
           </div>
-          <div className={s.form_pass}>
+          <div className={s.input_box}>
             <Icon className={s.icon} name="lock" />
             <input
               {...register("password", { required: true })}

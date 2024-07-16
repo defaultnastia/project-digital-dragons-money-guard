@@ -3,7 +3,7 @@
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  background-image: url("../../img/login/Rectangle\ 4logi_mob.jpg");
+  background-color: var(--background-blue-color);
 
   @media screen and (max-width: 767px) {
     flex-flow: column;
