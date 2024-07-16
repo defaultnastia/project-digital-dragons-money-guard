@@ -14,7 +14,7 @@
 }
 
 .row {
-  @apply py-[12px] flex justify-between md:justify-start md:py-[16px] md:pl-[20px] md:pr-[6px];
+  @apply py-[12px] pl-[15px] pr-[20px] flex justify-between md:justify-start md:py-[16px] md:pl-[20px] md:pr-[6px];
 
   &.rowBody {
     @apply border-b-[1px] border-[var(--form-color-color)];
@@ -74,7 +74,15 @@
 }
 
 .mobileTransaction {
-  @apply bg-[var(--form-color-color)] mb-[8px] rounded-[10px] border-l-[5px] px-[20px];
+  @apply bg-[var(--form-color-color)] mb-[8px] rounded-[10px] border-l-[5px];
+
+  .row {
+    @apply border-b-[1px] border-[var(--form-color-color)];
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
 
   &:last-of-type {
     @apply mb-[85px];
@@ -90,7 +98,11 @@
 }
 
 .cellLeft {
-  @apply font-bold;
+  @apply font-semibold;
+}
+
+.cellRight {
+  @apply max-w-[60%] text-right;
 }
 
 .btnEdit {

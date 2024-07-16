@@ -4,6 +4,7 @@ import clsx from "clsx";
 import TransactionItem from "../TransactionItem/TransactionItem";
 
 import { Transaction } from "../../redux/data.types";
+
 import s from "./TransactionsList.module.css";
 
 type Props = {
