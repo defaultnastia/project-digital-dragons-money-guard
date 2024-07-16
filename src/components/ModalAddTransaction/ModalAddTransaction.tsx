@@ -17,13 +17,7 @@ export const ModalAddTransaction: React.FC = () => {
     <div>
       <button onClick={openModal}>Open Modal</button>
 
-      <CustomModal
-        isOpen={modalIsOpen}
-        onClose={closeModal}
-        type="transaction"
-        shouldCloseOnOverlayClick={true}
-        shouldCloseOnEsc={true}
-      >
+      <CustomModal isOpen={modalIsOpen} onClose={closeModal} type="transaction">
         <AddTransactionForm closeModal={closeModal} />
       </CustomModal>
     </div>
