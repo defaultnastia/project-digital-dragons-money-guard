@@ -1,17 +1,15 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { registerFormSchema } from "../../schema/schema";
-import CustomModal from "../CustomModal/CustomModal";
 import Logo from "../Logo/Logo";
 import { Icon } from "../Icon/Icon";
 import { CustomButton } from "../CustomButton/CustomButton";
-import s from "../LoginForm/LoginForm.module.css";
-// import s from "./RegistrationForm.module.css";
 import { useAppDispatch } from "../../redux/hooks";
 import { signUp } from "../../redux/user/operations";
 import { UserCredentials } from "../../redux/data.types";
 import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
 import { useState } from "react";
+import s from "../LoginForm/LoginForm.module.css";
 
 interface RegisterFormInputs {
   username: string;

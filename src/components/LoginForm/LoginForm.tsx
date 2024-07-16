@@ -4,7 +4,6 @@ import { useAppDispatch } from "../../redux/hooks";
 import { UserCredentials } from "../../redux/data.types";
 import { loginFormSchema } from "../../schema/schema";
 import { signIn } from "../../redux/user/operations";
-import CustomModal from "../CustomModal/CustomModal";
 import { CustomButton } from "../CustomButton/CustomButton";
 import Logo from "../Logo/Logo";
 import { Icon } from "../Icon/Icon";
