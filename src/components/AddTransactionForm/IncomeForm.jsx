@@ -10,7 +10,10 @@ import { addTransaction } from "../../redux/transactions/operations";
 import sprite from "../../images/icons.svg";
 
 const schema = yup.object().shape({
-  datePicker: yup.date().required("Please select a date"),
+  datePicker: yup
+    .date()
+    .required("Please select a date")
+    .min(new Date("2020-01-01"), "Date cannot be before 2020"),
   numberInput: yup
     .number()
     .typeError("Please enter a number")
@@ -83,11 +86,12 @@ const IncomeForm = ({ closeModal }) => {
           render={({ field }) => (
             <DatePicker
               {...field}
-              selected={field.value}
+              selected={field.value ? field.value : new Date()}
               onChange={(date) => field.onChange(date)}
               dateFormat="dd.MM.yyyy"
-              className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
+              className=" w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
               wrapperClassName="w-full"
+              placeholderText="Select a date"
             />
           )}
         />
@@ -97,7 +101,7 @@ const IncomeForm = ({ closeModal }) => {
           width="24"
           height="24"
         >
-          <use xlinkHref={`${sprite}#icon-date_range`}></use>
+          <use xlinkHref={`${sprite}#icon-ate_range`}></use>
         </svg>
         {errors.datePicker && (
           <p className="text-red-500 text-sm mt-1">
