@@ -53,7 +53,7 @@
   }
 
   &.cellSum {
-    @apply w-[15%] justify-end;
+    @apply w-[15%] justify-end font-semibold;
   }
 
   &.cellBtn {

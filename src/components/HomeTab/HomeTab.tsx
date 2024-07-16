@@ -12,10 +12,12 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 import icon from "../../img/icons.svg";
 import s from "./HomeTab.module.css";
+import { selectLoadingState } from "../../redux/user/selectors";
 
 const HomeTab = () => {
   const dispatch = useAppDispatch();
   const transactions = useAppSelector(selectTransactions);
+  const loading = useAppSelector(selectLoadingState);
 
   const transactionsSorted = Object.freeze(transactions)
     .slice()
@@ -30,8 +32,13 @@ const HomeTab = () => {
 
   return (
     <>
-      {transactionsSorted.length > 0 && (
+      {transactionsSorted.length > 0 && !loading ? (
         <TransactionsList transactions={transactionsSorted} />
+      ) : (
+        <p className="text-center mx-[20px]">
+          There are no transactions yet. <br /> To add the first one, click on
+          the + button below.
+        </p>
       )}
 
       <button

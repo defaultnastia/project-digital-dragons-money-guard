@@ -86,7 +86,7 @@ const TransactionItem = ({ transaction, scrollable }: Props) => {
             transaction.type === "INCOME" ? s.incomeType : s.expenseType
           )}
         >
-          {transaction.amount.toFixed(2)}
+          {Math.abs(transaction.amount).toFixed(2)}
         </div>
         <div className={clsx(s.cell, s.cellBtn, "flex gap-[4px]")}>
           <button
