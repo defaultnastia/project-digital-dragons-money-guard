@@ -1,7 +1,6 @@
 import { useState } from "react";
-import Modal from "react-modal";
+import CustomModal from "../CustomModal/CustomModal";
 import AddTransactionForm from "../AddTransactionForm/AddTransactionForm";
-Modal.setAppElement("#root");
 
 export const ModalAddTransaction = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -14,29 +13,19 @@ export const ModalAddTransaction = () => {
     setModalIsOpen(false);
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Escape") {
-      closeModal();
-    }
-  };
-
   return (
     <div>
       <button onClick={openModal}>Open Modal</button>
-      <Modal
+
+      <CustomModal
         isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        onAfterOpen={() => {}}
-        className="flex justify-center items-center"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+        onClose={closeModal}
+        type="transaction"
         shouldCloseOnOverlayClick={true}
         shouldCloseOnEsc={true}
-        onKeyDown={handleKeyDown}
       >
-        <div className="bg-gradient-to-t from-purple-800 to-indigo-900 rounded-lg bg-opacity-80 shadow-xl backdrop-blur-2xl ">
-          <AddTransactionForm closeModal={closeModal} />
-        </div>
-      </Modal>
+        <AddTransactionForm closeModal={closeModal} />
+      </CustomModal>
     </div>
   );
 };

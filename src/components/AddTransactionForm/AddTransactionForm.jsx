@@ -11,7 +11,7 @@ const AddTransactionForm = ({ closeModal }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center p-[28px] pr-[20px] pl-[20px]">
+    <div>
       <h2 className="w-280 h-31 text-2xl mb-[32px] text-center">
         Add transaction
       </h2>

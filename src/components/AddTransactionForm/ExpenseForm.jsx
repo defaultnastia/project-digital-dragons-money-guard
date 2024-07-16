@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
 import { CustomButton } from "../CustomButton/CustomButton";
+import sprite from "../../images/icons.svg";
 
 const schema = yup.object().shape({
   selectOption: yup.string().required("Please select a category"),
@@ -166,6 +167,7 @@ const ExpenseForm = ({ closeModal }) => {
           </p>
         )}
       </div>
+
       <div className="w-full relative">
         <Controller
           name="datePicker"
@@ -181,12 +183,21 @@ const ExpenseForm = ({ closeModal }) => {
             />
           )}
         />
+        <svg
+          className="w-6 h-6 absolute"
+          style={{ top: "8px", right: "17px", fill: "#734AEF" }}
+          width="24"
+          height="24"
+        >
+          <use xlinkHref={`${sprite}#icon-ate_range`}></use>
+        </svg>
         {errors.datePicker && (
           <p className="text-red-500 text-sm mt-1">
             {errors.datePicker.message}
           </p>
         )}
       </div>
+
       <div>
         <label
           htmlFor="commentInput"
