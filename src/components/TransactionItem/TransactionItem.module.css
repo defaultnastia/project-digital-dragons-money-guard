@@ -61,7 +61,7 @@
   }
 
   &.cellCategory {
-    text-transform: capitalize;
+    @apply capitalize;
   }
 }
 
