@@ -43,9 +43,9 @@ const CurrencyTab: React.FC = () => {
   return (
     <div className="flex-col w-[320px] md:w-[336px] xl:w-[480px] bg-[rgba(74,86,226,0.1)] rounded-br-[8px] rounded-bl-[8px] xl:rounded-none overflow-hidden">
       {loading ? (
-        <p className="flex items-center justify-center h-[109px]">Loading...</p>
+        <p className="flex items-center justify-center">Loading...</p>
       ) : error ? (
-        <p className="flex items-center justify-center h-[109px]">
+        <p className="flex items-center justify-center">
           Error fetching currency rates
         </p>
       ) : (
