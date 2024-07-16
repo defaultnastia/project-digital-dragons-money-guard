@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import PrivateRoute from "./components/PrivateRoute";
 import HomeTab from "./components/HomeTab/HomeTab";
@@ -9,15 +8,20 @@ import RestrictedRoute from "./components/RestrictedRoute";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import ModalAddTransaction from "./components/ModalAddTransaction/ModalAddTransaction";
 
 //! ADD LAZY LOAD
 
 function App() {
+  const dispatcher = useAppDispatch();
+
+  useEffect(() => {
+    dispatcher(refreshUser());
+  }, [dispatcher]);
+
   return (
     <>
       <Routes>
-        {/* <Route
+        <Route
           path="/dashboard"
           element={
             <PrivateRoute>
@@ -40,9 +44,9 @@ function App() {
         <Route
           path="/"
           element={
-            <RestrictedRoute>
-              <LoginPage />
-            </RestrictedRoute>
+            <PrivateRoute>
+              <DashboardPage />
+            </PrivateRoute>
           }
         />
         <Route
@@ -53,8 +57,7 @@ function App() {
             </RestrictedRoute>
           }
         />
-        <Route path="*" element={<PageNotFound />} /> */}
-        <Route path="/" element={<ModalAddTransaction />}></Route>
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );
