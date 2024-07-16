@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useMediaQuery } from "react-responsive";
 import Header from "../../components/Header/Header";
 import Navigation from "../../components/Navigation/Navigation";
@@ -40,6 +41,19 @@ const DashboardPage = () => {
         </div>
       </div>
     </div>
+=======
+import TransactionsTab from "../../components/TransactionsTab/TransactionsTab";
+
+const DashboardPage = () => {
+  return (
+    <>
+      <div className="text-3xl font-bold underline">DashboardPage</div>
+
+      {/* Uncomment the code below for testing */}
+      {/* <TransactionsTab /> */}
+      {/* End of comment */}
+    </>
+>>>>>>> main
   );
 };
 
