@@ -48,5 +48,15 @@
 <path fill="#563eaf" style="fill: var(--color4, #563eaf)" d="M31.284 16.211c0 0.186-0.151 0.337-0.337 0.337s-0.337-0.151-0.337-0.337c0-0.186 0.151-0.337 0.337-0.337s0.337 0.151 0.337 0.337z"></path>
 <path fill="#563eaf" style="fill: var(--color4, #563eaf)" d="M5.6 19.074c0 0.186-0.151 0.337-0.337 0.337s-0.337-0.151-0.337-0.337c0-0.186 0.151-0.337 0.337-0.337s0.337 0.151 0.337 0.337z"></path>
 </symbol>
+<symbol id="icon-arrow_down" viewBox="0 0 58 32">
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.9091" d="M2.909 2.909l26.182 26.182 26.182-26.182"></path>
+</symbol>
+<symbol id="icon-minus_btn" viewBox="0 0 32 32">
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.8649" d="M11.676 13.405h8.649"></path>
+</symbol>
+<symbol id="icon-plus" viewBox="0 0 34 32">
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.9143" d="M16.457 8.229v9.143"></path>
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.9143" d="M11.886 12.8h9.143"></path>
+</symbol>
 </defs>
 </svg>
