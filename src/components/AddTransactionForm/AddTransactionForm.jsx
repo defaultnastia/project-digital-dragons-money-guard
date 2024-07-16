@@ -11,7 +11,7 @@ const AddTransactionForm = ({ closeModal }) => {
   };
 
   return (
-    <div>
+    <>
       <h2 className="w-280 h-31 text-2xl mb-[32px] text-center">
         Add transaction
       </h2>
@@ -21,7 +21,7 @@ const AddTransactionForm = ({ closeModal }) => {
       ) : (
         <IncomeForm closeModal={closeModal} />
       )}
-    </div>
+    </>
   );
 };
 
