@@ -5,6 +5,7 @@ import Select from "react-select";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
+import { CustomButton } from "../CustomButton/CustomButton";
 
 const schema = yup.object().shape({
   selectOption: yup.string().required("Please select a category"),
@@ -146,7 +147,6 @@ const ExpenseForm = ({ closeModal }) => {
           </p>
         )}
       </div>
-
       <div>
         <Controller
           name="numberInput"
@@ -166,7 +166,6 @@ const ExpenseForm = ({ closeModal }) => {
           </p>
         )}
       </div>
-
       <div className="w-full relative">
         <Controller
           name="datePicker"
@@ -188,7 +187,6 @@ const ExpenseForm = ({ closeModal }) => {
           </p>
         )}
       </div>
-
       <div>
         <label
           htmlFor="commentInput"
@@ -215,19 +213,18 @@ const ExpenseForm = ({ closeModal }) => {
         )}
       </div>
 
-      <button
-        type="submit"
-        className="py-2 px-4 mt-6 bg-gradient-to-r from-yellow-400 to-pink-500 text-white text-lg font-medium rounded-full shadow-lg hover:opacity-90 focus:outline-none"
-      >
-        Add
-      </button>
-      <button
-        type="button"
-        onClick={closeModal}
-        className="py-2 px-4 mt-2 bg-white text-gray-700 text-lg font-medium rounded-full shadow-lg hover:opacity-90 focus:outline-none"
-      >
-        Cancel
-      </button>
+      <div>
+        <CustomButton elementLike={{ btnType: "submit" }} btnStyle="colorful">
+          Add
+        </CustomButton>
+
+        <CustomButton
+          elementLike={{ btnType: "button", onClick: closeModal }}
+          btnStyle="mono"
+        >
+          Cancel
+        </CustomButton>
+      </div>
     </form>
   );
 };
