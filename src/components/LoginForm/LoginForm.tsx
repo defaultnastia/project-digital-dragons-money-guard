@@ -36,33 +36,31 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className={s.wrapper}>
-      <CustomModal isOpen={true} type="auth">
-        <div className={s.box_logo}>
-          <Logo icon={"logo"} sizeLogo={26} sizeText={19} />
-        </div>
-        <form className={s.box_form} onSubmit={handleSubmit(onSubmit)}>
-          <div className={s.input_box}>
-            <Icon className={s.icon} name="email" size={24} />
+      {/* <div className={s.box_logo}> */}
+      <Logo icon={"logo"} sizeLogo={35} sizeText={50} />
+      {/* </div> */}
+      <form className={s.box_form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={s.input_box}>
+          <Icon className={s.icon} name="email" size={24} />
 
-            <input
-              {...register("email", { required: true })}
-              placeholder="E-mail"
-              className={s.input}
-            />
-            {errors.email && <p className={s.error}>{errors.email.message}</p>}
-          </div>
-          <div className={s.input_box}>
-            <Icon className={s.icon} name="lock" />
-            <input
-              {...register("password", { required: true })}
-              placeholder="Password"
-              className={s.input}
-            />
-            {errors.password && (
-              <p className={s.error}>{errors.password.message}</p>
-            )}
-          </div>
-        </form>
+          <input
+            {...register("email", { required: true })}
+            placeholder="E-mail"
+            className={s.input}
+          />
+          {errors.email && <p className={s.error}>{errors.email.message}</p>}
+        </div>
+        <div className={s.input_box}>
+          <Icon className={s.icon} name="lock" />
+          <input
+            {...register("password", { required: true })}
+            placeholder="Password"
+            className={s.input}
+          />
+          {errors.password && (
+            <p className={s.error}>{errors.password.message}</p>
+          )}
+        </div>
         <CustomButton
           elementLike={{ btnType: "submit", onClick: handleSubmit(onSubmit) }}
           btnStyle="colorful"
@@ -73,7 +71,7 @@ const LoginForm: React.FC = () => {
         <CustomButton elementLike={{ linkTo: "/register" }} btnStyle="mono">
           REGISTER
         </CustomButton>
-      </CustomModal>
+      </form>
     </div>
   );
 };

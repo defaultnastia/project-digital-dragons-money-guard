@@ -1,5 +1,19 @@
+.icon {
+  fill: var(--white-40-color);
+  left: 31px;
+  position: absolute;
+}
 .input {
-  border-bottom: 1px solid var(--white-40-color);
+  width: 280px;
+  width: auto;
   background: none;
+  border-bottom: 1px solid var(--white-40-color);
+  padding-left: 60px;
+  padding-bottom: 8px;
   outline: none;
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+.customClass {
 }

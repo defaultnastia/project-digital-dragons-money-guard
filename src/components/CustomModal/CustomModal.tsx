@@ -38,6 +38,10 @@ type Props = {
 const CustomModal = ({ isOpen, onClose, type, children }: Props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
+  if (type === "auth") {
+    customStyles.overlay.backgroundColor = "transparent";
+    customStyles.overlay.backdropFilter = "none";
+  }
   if (isMobile) {
     customStyles.content.borderRadius = "0";
   } else {
@@ -61,7 +65,7 @@ const CustomModal = ({ isOpen, onClose, type, children }: Props) => {
           </button>
         )}
 
-        <div className={clsx(s.childrenWrapper, "relative w-[100%]")}>
+        <div className={clsx(s.childrenWrapper, "relative w-[100%] h-[100%]")}>
           {children}
         </div>
       </div>

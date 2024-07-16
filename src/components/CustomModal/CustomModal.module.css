@@ -3,7 +3,6 @@
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  background-color: var(--background-blue-color);
 
   @media screen and (max-width: 767px) {
     flex-flow: column;
