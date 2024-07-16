@@ -53,16 +53,19 @@ const CurrencyTab: React.FC = () => {
           <thead className="text-[16px] bg-[rgba(255,255,255,0.20)] w-full">
             <tr>
               <th
-                className="pt-[13px] pb-[13px] pl-[20px] xl:pl-[96px]"
+                className="pt-[12px] md:pt-[13px] xl:pt-[16px] pb-[12px] md:pb-[13px] xl:pb-[16px] pl-[20px] xl:pl-[96px]"
                 align="left"
               >
                 Currency
               </th>
-              <th className="pt-[13px] pb-[13px]" align="center">
+              <th
+                className="pt-[12px] md:pt-[13px] xl:pt-[16px] pb-[12px] md:pb-[13px] xl:pb-[16px]"
+                align="center"
+              >
                 Purchase
               </th>
               <th
-                className="pt-[13px] pb-[13px] pr-[20px] xl:pr-[96px]"
+                className="pt-[12px] md:pt-[13px] xl:pt-[16px] pb-[12px] md:pb-[13px] xl:pb-[16px] pr-[20px] xl:pr-[96px]"
                 align="right"
               >
                 Sale
@@ -70,7 +73,7 @@ const CurrencyTab: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="h-[8px] bg-transparent"></tr>
+            <tr className="h-[8px] xl:h-[24px] bg-transparent"></tr>
             {currencyRates?.map((rate, index) => (
               <tr key={index} className={index === 1 ? s.noPaddingBottom : ""}>
                 <td
