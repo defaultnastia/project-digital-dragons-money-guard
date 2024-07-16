@@ -1,5 +1,3 @@
-import clsx from "clsx";
-
 const LogoutForm = ({ onSubmit, onClose }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();

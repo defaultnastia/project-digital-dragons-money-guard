@@ -5,8 +5,10 @@ import { signOut } from "../../redux/user/operations";
 import CustomModal from "../CustomModal/CustomModal";
 import LogoutForm from "../LogoutForm/LogoutForm";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import "../../assets/icons.svg";
+import "../../images/icons.svg";
 import s from "./Header.module.css";
+import MyLogo from "../../pages/DashboardPage/MyLogo";
+import { MyIcon } from "../../pages/DashboardPage/MyIcon";
 
 const Header = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -34,14 +36,11 @@ const Header = () => {
   return (
     <header className={s.header}>
       <div className="flex flex-col items-center">
-        <img src="logo" alt="logo_money_guard" className="h-6 w-auto mr-2" />
-        <p>Money Guard</p>
+        <MyLogo sizeLogo={24} sizeText={17} className="h-6 w-auto mr-2" />
       </div>
       <div className="flex gap-3">
-        <div className="username">{userData.username} Andrew</div>
-        <svg className="h-5 w-5 mr-2 stroke-white">
-          <use xlinkHref="icons.svg#icon-exit" />
-        </svg>
+        <div className="username">{userData.username}</div>
+        <MyIcon name="icon-exit" size={18} className="exit" />
         <button onClick={openModal}>Exit</button>
       </div>
       <CustomModal isOpen={modalIsOpen} onClose={closeModal} type="auth">

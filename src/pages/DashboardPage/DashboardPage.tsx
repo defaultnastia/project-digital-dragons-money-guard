@@ -24,7 +24,7 @@ const DashboardPage = () => {
         <CurrencyTab />
       </div>
       <div>
-        {/* {isDesktopOrLaptop && <div>Desktop content</div>}
+        {/* {isDesktop && <div>Desktop content</div>}
         {isTablet && <div>Tablet content</div>}
         {isMobile && <div>Mobile content</div>} */}
         <HomeTab />
