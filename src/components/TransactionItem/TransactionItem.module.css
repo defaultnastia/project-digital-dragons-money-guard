@@ -1,18 +1,3 @@
-.headerTable {
-  @apply rounded-[8px];
-
-  background-color: rgba(82, 59, 126, 0.6);
-  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
-
-  .cell {
-    @apply font-bold text-[16px];
-  }
-}
-
-.tableBody {
-  max-height: 496px;
-}
-
 .row {
   @apply py-[12px] pl-[15px] pr-[20px] flex justify-between md:justify-start md:py-[16px] md:pl-[20px] md:pr-[6px];
 
@@ -20,7 +5,7 @@
     @apply border-b-[1px] border-[var(--form-color-color)];
 
     &:last-of-type {
-      border-bottom: none;
+      @apply border-b-0;
     }
   }
 
@@ -80,7 +65,7 @@
     @apply border-b-[1px] border-[var(--form-color-color)];
 
     &:last-of-type {
-      border-bottom: none;
+      @apply border-b-0;
     }
   }
 
@@ -114,11 +99,5 @@
 }
 
 .btnDelete {
-  @apply text-[14px] py-[4px] px-[12px] rounded-[20px];
-}
-
-.btnAddTransaction {
-  @apply fixed bottom-[20px] right-[20px] w-[44px] h-[44px] rounded-[50%] flex justify-center items-center md:bottom-[40px] md:right-[40px];
-
-  margin: 0;
+  @apply text-[14px] py-[4px] px-[12px] rounded-[20px] font-normal;
 }

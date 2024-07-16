@@ -10,7 +10,7 @@
 }
 
 .tableBody {
-  max-height: 496px;
+  @apply max-h-[496px];
 }
 
 .row {
@@ -20,7 +20,7 @@
     @apply border-b-[1px] border-[var(--form-color-color)];
 
     &:last-of-type {
-      border-bottom: none;
+      @apply border-b-0;
     }
   }
 }
@@ -55,16 +55,4 @@
   &.cellBtn {
     @apply w-[17%] justify-end;
   }
-}
-
-.btnEdit {
-  @apply flex justify-center items-center gap-[4px] md:w-[20px] md:h-[20px];
-
-  span {
-    @apply text-[var(--white-60-color)];
-  }
-}
-
-.btnDelete {
-  @apply text-[14px] py-[4px] px-[12px] rounded-[20px];
 }
