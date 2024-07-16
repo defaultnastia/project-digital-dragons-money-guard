@@ -4,6 +4,7 @@ import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import expenseIcon from "../../../public/AddTransactionForm/expense.svg";
 import incomeIcon from "../../../public/AddTransactionForm/income.svg";
+import sprite from "../../images/icons.svg";
 
 const CustomSwitch = styled(Switch)(({ theme }) => ({
   width: 80,
@@ -58,8 +59,16 @@ const SwitcherComponent = ({ isChecked, handleChange }) => {
         checked={isChecked}
         onChange={handleChange}
         color="primary"
-        icon={<img src={incomeIcon} alt="Income Icon" />}
-        checkedIcon={<img src={expenseIcon} alt="Expense Icon" />}
+        icon={
+          <svg width="44" height="44" style={{ fill: "#FFB627" }}>
+            <use xlinkHref={`${sprite}#icon-plus`}></use>
+          </svg>
+        }
+        checkedIcon={
+          <svg width="44" height="44" style={{ fill: "#FF868D" }}>
+            <use xlinkHref={`${sprite}#icon-minus_btn`}></use>
+          </svg>
+        }
       />
       <Typography
         variant="body1"
