@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PatchData, RangeType, UserTransaction } from "../data.types";
 import { walletInstance } from "../../services/axiosInstance";
 import { AxiosError } from "axios";
+import toast from "react-hot-toast";
 
 export const getAllTransactions = createAsyncThunk(
   "transactions/getAllTransactions",
@@ -10,6 +11,7 @@ export const getAllTransactions = createAsyncThunk(
       const response = await walletInstance.get("/transactions");
       return response.data;
     } catch (error) {
+      toast.error("Couldn't fetch the transactions, please try again.");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
   }
@@ -22,6 +24,7 @@ export const addTransaction = createAsyncThunk(
       const response = await walletInstance.post("/transactions", transaction);
       return response.data;
     } catch (error) {
+      toast.error("Couldn't add the transaction, please try again.");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
   }
@@ -37,6 +40,7 @@ export const updateTransaction = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
+      toast.error("Couldn't update the transaction, please try again.");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
   }
@@ -49,6 +53,7 @@ export const deleteTransaction = createAsyncThunk(
       const response = await walletInstance.delete(`/transactions/${transId}`);
       return response.data;
     } catch (error) {
+      toast.error("Couldn't delete the transaction, please try again.");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
   }
@@ -68,6 +73,7 @@ export const getTransactionsSummary = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
+      toast.error("Couldn't fetch the statistics, please try again.");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
   }
@@ -80,6 +86,7 @@ export const getTransactionsCategories = createAsyncThunk(
       const response = await walletInstance.get("/transaction-categories");
       return response.data;
     } catch (error) {
+      toast.error("Couldn't fetch the categories, please try again.");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
   }
