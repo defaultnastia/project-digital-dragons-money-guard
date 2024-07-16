@@ -3,16 +3,16 @@ import CustomModal from "../CustomModal/CustomModal";
 import { Controller, useForm } from "react-hook-form";
 import { TransactionType, UserTransaction } from "../../redux/data.types";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
 // import { useAppDispatch } from "../../redux/hooks";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+import sprite from "../../img/icons.svg";
+
 type EditModalPropsType = {
-  UserTransaction?: UserTransaction;
+  userTransaction: UserTransaction;
   openModal: boolean;
   closeModal: () => void;
-  type: TransactionType; // Temporary
 };
 
 const schema = yup.object().shape({
@@ -28,13 +28,13 @@ const schema = yup.object().shape({
     .number()
     .min(1, "Have to be at list 1 symbol")
     .required("required field"),
+  comment: yup.string(),
 });
 
 export const ModalEditTransaction = ({
-  //   UserTransaction: { transactionDate, comment, amount },
+  userTransaction: { amount, transactionDate, comment, type },
   openModal,
   closeModal,
-  type,
 }: EditModalPropsType) => {
   const {
     handleSubmit,
@@ -43,12 +43,12 @@ export const ModalEditTransaction = ({
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      //   numberInput: "",
-      datePicker: new Date(),
-      //   commentInput: "",
+      category: "car",
+      amount: amount,
+      datePicker: new Date(transactionDate),
+      comment: comment,
     },
   });
-  const [startDate, setStartDate] = useState(new Date());
 
   const onSubmit = (obj: object): void => {
     console.log(obj);
@@ -57,13 +57,27 @@ export const ModalEditTransaction = ({
   };
 
   return (
-    <CustomModal isOpen={openModal} onClose={closeModal} type="transaction">
+    <CustomModal
+      isOpen={openModal}
+      onClose={closeModal}
+      type="transaction"
+      //   shouldCloseOnOverlayClick={true}
+      //   shouldCloseOnEsc={true}
+    >
       <h2 className="block text-[30px] text-center mb-[40px]">
         Edit transaction
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="w-[100%]">
-        <div>
-          <span>Income</span> / <span>Expense</span>
+        <div className="flex justify-center gap-5 mb-10">
+          <span className={type === "INCOME" ? "text-[#ff868d]" : "text-white"}>
+            Income
+          </span>
+          /
+          <span
+            className={type === "EXPENSE" ? "text-[#ff868d]" : "text-white"}
+          >
+            Expense
+          </span>
         </div>
         <div className="">
           {type === "EXPENSE" && (
@@ -79,7 +93,7 @@ export const ModalEditTransaction = ({
               )}
             />
           )}
-          <div className="w-full relative">
+          <div className="md:flex row">
             <Controller
               name="amount"
               control={control}
@@ -91,37 +105,45 @@ export const ModalEditTransaction = ({
                 />
               )}
             />
-            <Controller
-              name="datePicker"
-              control={control}
-              render={({ field }) => (
-                <DatePicker
-                  selected={field.value ? field.value : new Date()}
-                  onChange={(date) => field.onChange(date)}
-                  dateFormat="dd.MM.yyyy"
-                  className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-                  wrapperClassName="w-full"
-                />
+            <div className="w-full relative">
+              <Controller
+                name="datePicker"
+                control={control}
+                render={({ field }) => (
+                  <DatePicker
+                    selected={field.value ? field.value : new Date()}
+                    onChange={(date) => field.onChange(date)}
+                    dateFormat="dd.MM.yyyy"
+                    className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+                    wrapperClassName="w-full"
+                  />
+                )}
+              />
+              <svg
+                className="w-6 h-6 absolute"
+                style={{ top: "8px", right: "17px", fill: "#734AEF" }}
+                width="24"
+                height="24"
+              >
+                <use href={`${sprite}#icon-ate_range`}></use>
+              </svg>
+              {errors.datePicker && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.datePicker.message}
+                </p>
               )}
-            />
-            <svg
-              className="w-6 h-6 absolute"
-              style={{ top: "8px", right: "17px", fill: "#734AEF" }}
-              width="24"
-              height="24"
-            >
-              <use href="../../images/icons.svg#icon-ate_range"></use>
-            </svg>
-            {errors.datePicker && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.datePicker.message}
-              </p>
-            )}
+            </div>
           </div>
 
-          <input
-            type="text"
-            className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+          <Controller
+            name="comment"
+            control={control}
+            render={({ field }) => (
+              <textarea
+                {...field}
+                className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+              />
+            )}
           />
         </div>
 
