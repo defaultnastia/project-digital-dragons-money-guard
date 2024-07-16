@@ -17,46 +17,71 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
 
   return (
-    <div className="">
-      <nav>
-        <ul className="pt-[40px] pl-[16px]">
-          <li
-            onClick={() => setActiveTab("home")}
-            className={clsx(activeTab === "home" && s.active, s.defaultLink)}
+    <nav>
+      <ul
+        className={clsx(
+          {
+            "pt-[40px] pl-[16px]": isDesktop || isTablet,
+          },
+          { "flex flex-row gap-[32px] justify-center py-[12px]": isMobile }
+        )}
+      >
+        <li
+          onClick={() => setActiveTab("home")}
+          className={clsx(activeTab === "home" && s.active, s.defaultLink)}
+        >
+          <Icon
+            name="home"
+            size={24}
+            fill="rgba(255,255,255,0.4)"
+            className={clsx({ "size-[44px]": isMobile })}
+          />
+          <NavLink
+            to="/dashboard/home"
+            className={clsx({
+              "text-[18px] ml-[20px] mb-[12px]": isDesktop || isTablet,
+            })}
           >
-            <Icon name="home" size={24} fill="rgba(255,255,255,0.4)" />
-            <NavLink
-              to="/dashboard/home"
-              className="text-[18px] ml-[20px] mb-[12px]"
-            >
-              {(isDesktop || isTablet) && "Home"}
-            </NavLink>
-          </li>
+            {(isDesktop || isTablet) && "Home"}
+          </NavLink>
+        </li>
+        <li
+          className={clsx(
+            activeTab === "statistics" && s.active,
+            s.defaultLink
+          )}
+          onClick={() => setActiveTab("statistics")}
+        >
+          <Icon
+            name="timeline"
+            size={24}
+            fill="rgba(255,255,255,0.4)"
+            className={clsx({ "size-[44px]": isMobile })}
+          />
+          <NavLink
+            to="/dashboard/statistics"
+            className={clsx({
+              "text-[18px] ml-[20px]": isDesktop || isTablet,
+            })}
+          >
+            {(isDesktop || isTablet) && "Statistics"}
+          </NavLink>
+        </li>
+        {isMobile && (
           <li
             className={clsx(
-              activeTab === "statistics" && s.active,
+              activeTab === "currency" && s.active,
               s.defaultLink
             )}
-            onClick={() => setActiveTab("statistics")}
+            onClick={() => setActiveTab("currency")}
           >
-            <Icon name="timeline" size={24} fill="rgba(255,255,255,0.4)" />
-            <NavLink
-              to="/dashboard/statistics"
-              className="text-[18px] ml-[20px]"
-            >
-              {(isDesktop || isTablet) && "Statistics"}
+            <NavLink to="/dashboard/currency">
+              <Icon name="home" size={44} fill="rgba(255,255,255,0.4)" />
             </NavLink>
           </li>
-          {isMobile && (
-            <li>
-              <NavLink to="/currency">
-                <Icon name="" size={24} fill="rgba(255,255,255,0.4)" />
-              </NavLink>
-            </li>
-          )}
-        </ul>
-      </nav>
-    </div>
+        )}
+      </ul>
+    </nav>
   );
 };
 

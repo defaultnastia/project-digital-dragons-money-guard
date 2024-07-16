@@ -1,8 +1,13 @@
 import { CustomButton } from "../CustomButton/CustomButton";
 import Logo from "../Logo/Logo";
 
-const LogoutForm = ({ onSubmit, onClose }) => {
-  const handleSubmit = async (event) => {
+interface LogoutFormProps {
+  onSubmit: () => void;
+  onClose: () => void;
+}
+
+const LogoutForm: React.FC<LogoutFormProps> = ({ onSubmit, onClose }) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     onSubmit();
   };
