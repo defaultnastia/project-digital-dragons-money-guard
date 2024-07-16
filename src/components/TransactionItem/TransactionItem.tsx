@@ -156,10 +156,11 @@ const TransactionItem = ({ transaction, scrollable }: Props) => {
         <span
           className={clsx(
             s.cellRight,
-            transaction.type === "INCOME" ? s.incomeType : s.expenseType
+            transaction.type === "INCOME" ? s.incomeType : s.expenseType,
+            "font-semibold"
           )}
         >
-          {transaction.amount.toFixed(2)}
+          {Math.abs(transaction.amount).toFixed(2)}
         </span>
       </div>
       <div className={clsx(s.row)}>
