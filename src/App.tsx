@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
@@ -7,8 +6,6 @@ import { refreshUser } from "./redux/user/operations";
 import { selectLoadingState } from "./redux/user/selectors";
 import React, { Suspense, useEffect } from "react";
 import { lazy } from "react";
-
-//! ADD LAZY LOAD
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));

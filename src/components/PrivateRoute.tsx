@@ -1,5 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { useAppSelector } from "../redux/hooks";
+import { selectIsLoggedIn } from "../redux/user/selectors";
 
 type Props = {
   children: React.ReactNode;
@@ -7,7 +9,8 @@ type Props = {
 };
 
 const PrivateRoute = ({ children, redirectTo = "/login" }: Props) => {
-  const isLoggedIn = false; //mocked
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
   return isLoggedIn ? children : <Navigate to={redirectTo} />;
 };
 
