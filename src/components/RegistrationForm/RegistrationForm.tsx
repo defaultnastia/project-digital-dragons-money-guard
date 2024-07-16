@@ -1,6 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { registerFormSchema } from "../../schema/schema";
 import CustomModal from "../CustomModal/CustomModal";
 import Logo from "../Logo/Logo";
@@ -36,7 +35,7 @@ const RegistrationForm: React.FC = () => {
       <CustomModal
         isOpen={true}
         onSubmit={handleSubmit(onSubmit)}
-        type="register"
+        type="auth"
         firstBtnText="REGISTER"
         secondBtnText="LOG IN"
       >

@@ -52,13 +52,7 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className={s.wrapper}>
-      <CustomModal
-        isOpen={true}
-        onSubmit={handleSubmit(onSubmit)}
-        type="login"
-        firstBtnText="LOG IN"
-        secondBtnText="REGISTER"
-      >
+      <CustomModal isOpen={true} type="auth">
         <div className={s.box_logo}>
           <Logo sizeLogo={26} sizeText={19} />
         </div>

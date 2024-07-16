@@ -1,7 +1,9 @@
+/* For testing only (remove before deployment) */
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import CustomModal from "../../components/CustomModal/CustomModal";
+/* End of removal */
 
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
@@ -33,7 +35,6 @@ import {
 } from "../../redux/transactions/operations";
 import {
   selectCategories,
-  selectLoading,
   selectStatistics,
   selectTransactions,
 } from "../../redux/transactions/selectors";
@@ -46,8 +47,6 @@ const PageNotFound = () => {
   const error = useAppSelector(selectErrorCode);
 
   const transactions = useAppSelector(selectTransactions);
-  const loadingTrans = useAppSelector(selectLoading);
-  const errorTrans = useAppSelector(selectErrorCode);
 
   const categories = useAppSelector(selectCategories);
   const statistics = useAppSelector(selectStatistics);
@@ -164,64 +163,65 @@ const PageNotFound = () => {
   return (
     <div className="text-center p-5 w-full flex-col">
       <div className="p-5 border-b-2">
-        <p>Test modal for everything</p>
+        {/* For testing only (remove before deployment) */}
+        <p>Test modal for everything (MOCKS)</p>
         <p>.</p>
-
         <button
           onClick={openModal}
           className="py-[6px] px-[12px] border-solid border-[1px] border-[var(--white-color)] rounded-[8px] mt-[10px]"
         >
           Open modal
         </button>
-
         <CustomModal
           isOpen={isOpenModal}
           onClose={closeModal}
-          headerText="Add transaction"
-          type="add"
-          firstBtnText="Add"
-          secondBtnText="Cancel"
-          onSubmit={handleSubmit(onSubmit)}
+          type="transaction"
         >
-          <>
-            <input
-              type="text"
-              {...register("test1")}
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <input
-              type="text"
-              placeholder="Enter your text ..."
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            />
-            <select
-              {...register("test-select")}
-              id="test-select"
-              defaultValue="Select value"
-              className="mt-[10px] w-[100%] text-[var(--text-button-color)]"
-            >
-              <option value="Select value" disabled hidden>
-                Select value
-              </option>
-              <option value="car">Car</option>
-              <option value="toy">Toy</option>
-              <option value="furniture">Furniture</option>
-              <option value="food">Food</option>
-              <option value="education">Education</option>
-            </select>
-          </>
+          <h2 className="block text-[30px] text-center mb-[40px]">
+            Add transaction
+          </h2>
+          <form onSubmit={handleSubmit(onSubmit)} className="w-[100%]">
+            <div className="overflow-y-auto">
+              <input
+                type="text"
+                {...register("test1")}
+                placeholder="Enter your text ..."
+                className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+              />
+              <select
+                {...register("test-select")}
+                id="test-select"
+                defaultValue="Select value"
+                className="mt-[10px] w-[100%] text-[var(--text-button-color)]"
+              >
+                <option value="Select value" disabled hidden>
+                  Select value
+                </option>
+                <option value="car">Car</option>
+                <option value="toy">Toy</option>
+                <option value="furniture">Furniture</option>
+                <option value="food">Food</option>
+                <option value="education">Education</option>
+              </select>
+            </div>
+
+            <div className="w-[100%] mt-[40px]">
+              <button
+                type="submit"
+                className="block mx-auto w-[100%] bg-gradient-to-r from-[#ffc727] from-0% via-[#9e40ba] via-61% to-[#7000ff] to-90% uppercase text-[18px] tracking-[0.1em] rounded-[20px] py-[13px] px-[20px] mb-[20px] md:w-[300px]"
+              >
+                Add
+              </button>
+              <button
+                onClick={closeModal}
+                className="block mx-auto w-[100%] uppercase text-[18px] tracking-[0.1em] rounded-[20px] py-[13px] px-[20px] mb-[20px] bg-[var(--white-color)] text-[var(--text-button-color)] md:w-[300px]"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
         </CustomModal>
+        {/* End of removal */}
 
         <p>.</p>
         <p>USER AND AUTH MOCKS:</p>
@@ -276,7 +276,7 @@ const PageNotFound = () => {
         <p>TRANSACTIONS MOCKS:</p>
         <p>.</p>
         <p>.</p>
-        <p>{loadingTrans ? "loading" : "loading finished"}</p>
+        <p>{loading ? "loading" : "loading finished"}</p>
         <p>.</p>
         <button className="border p-1" onClick={handleGetAllTrans}>
           Get Transactions
@@ -299,7 +299,7 @@ const PageNotFound = () => {
           Delete Transaction
         </button>
         <p>.</p>
-        <p>{errorTrans ? `Error is ${errorTrans}` : "No errors happened"}</p>
+        <p>{error ? `Error is ${error}` : "No errors happened"}</p>
         <p>.</p>
         <p>.</p>
         <p>.</p>
@@ -318,7 +318,7 @@ const PageNotFound = () => {
         <pre>{beautifyArr(categories)}</pre>
         <p>.</p>
         <p>Please select range</p>
-        <div className="flex justify-center gap-10">
+        <div className="flex justify-center gap-10 flex-wrap">
           <button
             className="border p-1"
             onClick={() => {

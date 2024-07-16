@@ -1,9 +1,3 @@
-.modal {
-  @media screen and (max-width: 767px) {
-    width: 100%;
-  }
-}
-
 .bgModal {
   position: relative;
   padding: 20px;
@@ -21,9 +15,8 @@
     left: 50%;
     top: 50%;
     box-shadow: 0 0 50px 20px rgba(47, 21, 176, 0.73),
-      /* Внутрішній шар (більш яскравий) */ 0 0 500px 180px
-        rgba(47, 21, 176, 0.4),
-      /* Середній шар */ 0 0 500px 60px rgba(47, 21, 176, 0.1);
+      /* Inner layer (brighter) */ 0 0 500px 180px rgba(47, 21, 176, 0.5),
+      /* Middle layer */ 0 0 500px 60px rgba(47, 21, 176, 0.1);
     transform: translate(-50%, -50%);
     border-radius: 100%;
     z-index: -1;
