@@ -114,7 +114,11 @@ const RegistrationForm: React.FC = () => {
           )}
         </div>
         <div className={s.strengthBarContainer}>
-          <PasswordStrengthBar password={password} className={s.strengthBar} />
+          <PasswordStrengthBar
+            password={password}
+            className={s.strengthBar}
+            minLength={5}
+          />
         </div>
         <CustomButton elementLike={{ btnType: "submit" }} btnStyle="colorful">
           REGISTER

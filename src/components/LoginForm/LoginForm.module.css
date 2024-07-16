@@ -74,23 +74,23 @@
 /* transition: background-position 0.8s ease; */
 /* } */
 .strengthBarContainer {
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
-  width: 280px; /* Змініть це значення відповідно до необхідної ширини */
+  /* display: inline-block; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: 280px;
   margin-top: 8px;
   margin-bottom: 40px;
+  padding-left: 10px;
 }
 
 .strengthBar {
-  height: 10px; /* Висота полоски */
-  /* background-color: #e0e0e0; Колір фону полоски */
-  border-radius: 5px; /* Заокруглені кути */
+  /* height: 12px; */
+  border-radius: 5px;
   /* overflow: hidden; */
 }
 
 .strengthBar div {
-  height: 100%; /* Висота всередині полоски */
-  transition: width 0.3s; /* Плавна анімація зміни ширини */
+  /* height: 100%; Висота всередині полоски */
+  transition: width 0.5s; /* Плавна анімація зміни ширини */
   border-radius: 5px; /* Заокруглені кути */
 }

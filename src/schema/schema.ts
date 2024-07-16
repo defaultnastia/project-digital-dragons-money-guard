@@ -2,14 +2,14 @@ import * as yup from "yup";
 
 const emailSchema = yup
   .string()
-  .email("Введіть коректний email")
-  .required("Email є обов'язковим полем");
+  .email("Enter a valid email address")
+  .required("Email is a required field");
 
 const passwordSchema = yup
   .string()
-  .required("Пароль є обов'язковим полем")
-  .min(6, "Пароль повинен містити щонайменше 6 символів")
-  .max(12, "Пароль повинен містити не більше 12 символів");
+  .required("Password is a required field")
+  .min(6, "The password must contain at least 6 characters")
+  .max(12, "The password should contain no more than 12 characters");
 
 export const loginFormSchema = yup.object().shape({
   email: emailSchema,
@@ -19,12 +19,12 @@ export const loginFormSchema = yup.object().shape({
 export const registerFormSchema = yup.object().shape({
   username: yup
     .string()
-    .required("Імя є обов'язковим полем")
-    .min(3, "Імя занадто коротке"),
+    .required("Name is a required field")
+    .min(3, "The name is too short"),
   email: emailSchema,
   password: passwordSchema,
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password")], "Паролі повинні співпадати")
-    .required("Підтвердження пароля є обов'язковим полем"),
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required("Password confirmation is a required field"),
 });
