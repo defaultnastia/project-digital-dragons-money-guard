@@ -166,7 +166,7 @@ const PageNotFound = () => {
     <div className="text-center p-5 w-full flex-col">
       <div className="p-5 border-b-2">
         <p>Logo Component:</p>
-        <Logo />
+        <Logo icon="user" />
       </div>
       <div className="p-5 border-b-2">
         {/* For testing only (remove before deployment) */}
