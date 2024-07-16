@@ -87,6 +87,7 @@ const PageNotFound = () => {
 
   const userToSignIn: Omit<UserCredentials, "username"> = {
     email: "Postman15@post.com",
+    // password: "&jf7jm!jeodd", //incorrect password
     password: "&jf7jm!jeo",
   };
 
