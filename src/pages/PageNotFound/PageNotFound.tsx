@@ -39,6 +39,7 @@ import {
   selectTransactions,
 } from "../../redux/transactions/selectors";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
+import Logo from "../../components/Logo/Logo";
 
 const PageNotFound = () => {
   const dispatch = useAppDispatch();
@@ -163,6 +164,10 @@ const PageNotFound = () => {
 
   return (
     <div className="text-center p-5 w-full flex-col">
+      <div className="p-5 border-b-2">
+        <p>Logo Component:</p>
+        <Logo icon="user" />
+      </div>
       <div className="p-5 border-b-2">
         {/* For testing only (remove before deployment) */}
         <p>Test modal for everything (MOCKS)</p>
