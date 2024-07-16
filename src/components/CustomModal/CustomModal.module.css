@@ -1,5 +1,8 @@
 .bgModal {
-  @apply w-[100vw] p-[20px] h-screen flex justify-center items-center overflow-hidden md:flex-row md:flex-wrap md:max-w-[533px] md:h-auto md:py-[40px] md:px-[73px] relative flex flex-wrap;
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
 
   @media screen and (max-width: 767px) {
     flex-flow: column;
@@ -20,12 +23,20 @@
   }
 }
 
-.btnClose {
-  @apply absolute top-[20px] right-[20px];
+.btnConfirm {
+  background: linear-gradient(
+    /* 167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54% */ 97deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
+  );
 }
 
-/* .childrenWrapper {
+.childrenWrapper {
   @media screen and (max-width: 767px) {
     max-height: calc(100vh - 282px);
   }
-} */
+}
