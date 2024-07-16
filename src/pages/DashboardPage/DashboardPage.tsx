@@ -1,4 +1,4 @@
-import TransactionsTab from "../../components/TransactionsTab/TransactionsTab";
+import HomeTab from "../../components/HomeTab/HomeTab";
 
 const DashboardPage = () => {
   return (
@@ -6,7 +6,7 @@ const DashboardPage = () => {
       <div className="text-3xl font-bold underline">DashboardPage</div>
 
       {/* Uncomment the code below for testing */}
-      {/* <TransactionsTab /> */}
+      <HomeTab />
       {/* End of comment */}
     </>
   );
