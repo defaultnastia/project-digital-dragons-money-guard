@@ -57,10 +57,6 @@
   }
 }
 
-.cellLeft {
-  @apply font-[""];
-}
-
 .btnEdit {
   @apply flex justify-center items-center gap-[4px] md:w-[20px] md:h-[20px];
 
