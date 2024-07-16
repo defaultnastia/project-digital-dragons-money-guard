@@ -39,7 +39,11 @@ import {
   selectTransactions,
 } from "../../redux/transactions/selectors";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
+<<<<<<< Updated upstream
 import Logo from "../../components/Logo/Logo";
+=======
+import { ModalEditTransaction } from "../../components/ModalEditTransaction/ModalEditTransaction";
+>>>>>>> Stashed changes
 
 const PageNotFound = () => {
   const dispatch = useAppDispatch();
@@ -61,6 +65,8 @@ const PageNotFound = () => {
   };
 
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+
   const { register, handleSubmit } = useForm();
 
   const openModal = (): void => {
@@ -69,6 +75,14 @@ const PageNotFound = () => {
 
   const closeModal = (): void => {
     setIsOpenModal(false);
+  };
+
+  const openUpdateModal = (): void => {
+    setIsUpdateOpen(true);
+  };
+
+  const closeUpdateModal = (): void => {
+    setIsUpdateOpen(false);
   };
 
   const onSubmit = (obj: object): void => {
@@ -127,6 +141,7 @@ const PageNotFound = () => {
     dispatch(addTransaction(transactionToAdd));
     setTimeout(handleGetAllTrans, 1000);
   };
+
   const handleUpdateTrans = () => {
     const updTransaction: Omit<Transaction, "id"> = {
       transactionDate: transactions[0].transactionDate,
@@ -140,6 +155,7 @@ const PageNotFound = () => {
     dispatch(updateTransaction(patchData));
     setTimeout(handleGetAllTrans, 1000);
   };
+
   const handleDeleteTrans = () => {
     const transId = transactions[0].id;
     dispatch(deleteTransaction(transId));
@@ -297,9 +313,16 @@ const PageNotFound = () => {
           Add Transaction
         </button>
         <p>.</p>
-        <button className="border p-1" onClick={handleUpdateTrans}>
+        <button className="border p-1" onClick={openUpdateModal}>
           Update Transaction
         </button>
+        {isUpdateOpen && (
+          <ModalEditTransaction
+            openModal={isUpdateOpen}
+            closeModal={closeUpdateModal}
+            type="INCOME"
+          />
+        )}
         <p>.</p>
         <button className="border p-1" onClick={handleDeleteTrans}>
           Delete Transaction
