@@ -8,6 +8,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
 
+import sprite from "../../images/icons.svg";
+
 const schema = yup.object().shape({
   selectOption: yup.string().required("Please select a category"),
   datePicker: yup.date(),
@@ -187,7 +189,7 @@ const AddTransactionForm = ({ closeModal }) => {
           )}
         </div>
 
-        <div className="w-full">
+        <div className="w-full relative">
           <Controller
             name="datePicker"
             control={control}
@@ -197,11 +199,19 @@ const AddTransactionForm = ({ closeModal }) => {
                 selected={field.value ? field.value : new Date()}
                 onChange={(date) => field.onChange(date)}
                 dateFormat="dd.MM.yyyy"
-                className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
+                className=" w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
                 wrapperClassName="w-full"
               />
             )}
           />
+          <svg
+            className="w-6 h-6 absolute"
+            style={{ top: "8px", right: "17px", fill: "#734AEF" }}
+            width="24"
+            height="24"
+          >
+            <use xlinkHref={`${sprite}#icon-ate_range`}></use>
+          </svg>
           {errors.datePicker && (
             <p className="text-red-500 text-sm mt-1">
               {errors.datePicker.message}
