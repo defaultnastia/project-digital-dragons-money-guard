@@ -38,6 +38,7 @@ import {
   selectStatistics,
   selectTransactions,
 } from "../../redux/transactions/selectors";
+import { CustomButton } from "../../components/CustomButton/CustomButton";
 
 const PageNotFound = () => {
   const dispatch = useAppDispatch();
@@ -206,18 +207,18 @@ const PageNotFound = () => {
             </div>
 
             <div className="w-[100%] mt-[40px]">
-              <button
-                type="submit"
-                className="block mx-auto w-[100%] bg-gradient-to-r from-[#ffc727] from-0% via-[#9e40ba] via-61% to-[#7000ff] to-90% uppercase text-[18px] tracking-[0.1em] rounded-[20px] py-[13px] px-[20px] mb-[20px] md:w-[300px]"
+              <CustomButton
+                elementLike={{ btnType: "submit" }}
+                btnStyle="colorful"
               >
                 Add
-              </button>
-              <button
-                onClick={closeModal}
-                className="block mx-auto w-[100%] uppercase text-[18px] tracking-[0.1em] rounded-[20px] py-[13px] px-[20px] mb-[20px] bg-[var(--white-color)] text-[var(--text-button-color)] md:w-[300px]"
+              </CustomButton>
+              <CustomButton
+                elementLike={{ btnType: "button", onClick: closeModal }}
+                btnStyle="mono"
               >
                 Cancel
-              </button>
+              </CustomButton>
             </div>
           </form>
         </CustomModal>
