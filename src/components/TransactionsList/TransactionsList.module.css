@@ -1,0 +1,74 @@
+.headerTable {
+  @apply rounded-[8px];
+
+  background-color: rgba(82, 59, 126, 0.6);
+  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+
+  .cell {
+    @apply font-bold text-[16px];
+  }
+}
+
+.tableBody {
+  max-height: 496px;
+}
+
+.row {
+  @apply py-[12px] px-[20px] flex justify-between md:justify-start md:py-[16px] md:pr-[6px];
+
+  &.rowBody {
+    @apply border-b-[1px] border-[var(--form-color-color)];
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+}
+
+.scrollableWrapper {
+  @apply overflow-y-auto;
+}
+
+.cell {
+  @apply flex text-[14px] items-center font-black;
+
+  &.cellDate {
+    @apply w-[12%];
+  }
+
+  &.cellType {
+    @apply w-[17%] justify-center;
+  }
+
+  &.cellCategory {
+    @apply w-[21%];
+  }
+
+  &.cellComment {
+    @apply w-[18%];
+  }
+
+  &.cellSum {
+    @apply w-[15%] justify-end;
+  }
+
+  &.cellBtn {
+    @apply w-[17%] justify-end;
+  }
+}
+
+.cellLeft {
+  @apply font-bold;
+}
+
+.btnEdit {
+  @apply flex justify-center items-center gap-[4px] md:w-[20px] md:h-[20px];
+
+  span {
+    @apply text-[var(--white-60-color)];
+  }
+}
+
+.btnDelete {
+  @apply text-[14px] py-[4px] px-[12px] rounded-[20px];
+}

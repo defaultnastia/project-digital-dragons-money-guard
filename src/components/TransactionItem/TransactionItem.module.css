@@ -1,0 +1,112 @@
+.headerTable {
+  @apply rounded-[8px];
+
+  background-color: rgba(82, 59, 126, 0.6);
+  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+
+  .cell {
+    @apply font-bold text-[16px];
+  }
+}
+
+.tableBody {
+  max-height: 496px;
+}
+
+.row {
+  @apply py-[12px] flex justify-between md:justify-start md:py-[16px] md:pl-[20px] md:pr-[6px];
+
+  &.rowBody {
+    @apply border-b-[1px] border-[var(--form-color-color)];
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+
+  &.scrollable {
+    @apply md:pr-[16px];
+  }
+}
+
+.scrollableWrapper {
+  @apply overflow-y-auto;
+}
+
+.cell {
+  @apply flex text-[14px] items-center;
+
+  &.cellDate {
+    @apply w-[12%];
+  }
+
+  &.cellType {
+    @apply w-[17%] justify-center;
+  }
+
+  &.cellCategory {
+    @apply w-[21%];
+  }
+
+  &.cellComment {
+    @apply w-[18%];
+  }
+
+  &.cellSum {
+    @apply w-[15%] justify-end;
+  }
+
+  &.cellBtn {
+    @apply w-[17%] justify-end;
+  }
+
+  &.cellCategory {
+    text-transform: capitalize;
+  }
+}
+
+.incomeType {
+  @apply text-[var(--yellow-color)];
+}
+
+.expenseType {
+  @apply text-[var(--dashboard-text-color)];
+}
+
+.mobileTransaction {
+  @apply bg-[var(--form-color-color)] mb-[8px] rounded-[10px] border-l-[5px] px-[20px];
+
+  &:last-of-type {
+    @apply mb-[85px];
+  }
+
+  &.incomeTypeTransaction {
+    @apply border-[var(--yellow-color)];
+  }
+
+  &.expenseTypeTransaction {
+    @apply border-[var(--dashboard-text-color)];
+  }
+}
+
+.cellLeft {
+  @apply font-bold;
+}
+
+.btnEdit {
+  @apply flex justify-center items-center gap-[4px] md:w-[20px] md:h-[20px];
+
+  span {
+    @apply text-[var(--white-60-color)];
+  }
+}
+
+.btnDelete {
+  @apply text-[14px] py-[4px] px-[12px] rounded-[20px];
+}
+
+.btnAddTransaction {
+  @apply fixed bottom-[20px] right-[20px] w-[44px] h-[44px] rounded-[50%] flex justify-center items-center md:bottom-[40px] md:right-[40px];
+
+  margin: 0;
+}
