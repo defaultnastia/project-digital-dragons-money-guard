@@ -8,6 +8,10 @@ import RestrictedRoute from "./components/RestrictedRoute";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import { useAppDispatch } from "./redux/hooks";
+import { useEffect } from "react";
+import { refreshUser } from "./redux/user/operations";
+import { Toaster } from "react-hot-toast";
 
 //! ADD LAZY LOAD
 
@@ -20,6 +24,8 @@ function App() {
 
   return (
     <>
+      <Toaster />
+
       <Routes>
         <Route
           path="/dashboard"
