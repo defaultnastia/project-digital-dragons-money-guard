@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Select from "react-select";
+import toast from "react-hot-toast";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
@@ -92,7 +93,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
       dispatch(addTransaction(formattedData));
       closeModal();
     } catch (error) {
-      // toast.error("Error adding transaction. Please try again.");
+      toast.error("Failed to add transaction. Please try again");
     }
   };
 
