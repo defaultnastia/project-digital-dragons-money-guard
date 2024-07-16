@@ -5,30 +5,32 @@
   box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
 
   .cell {
-    @apply font-bold text-[16px];
+    @apply font-semibold text-[16px];
   }
 }
 
-.row {
-  @apply py-[16px] px-[20px] flex justify-around;
+.tableBody {
+  @apply max-h-[496px];
+}
 
-  padding-right: 6px;
+.row {
+  @apply py-[12px] px-[20px] flex justify-between md:justify-start md:py-[16px] md:pr-[6px];
 
   &.rowBody {
     @apply border-b-[1px] border-[var(--form-color-color)];
+
+    &:last-of-type {
+      @apply border-b-0;
+    }
   }
+}
+
+.scrollableWrapper {
+  @apply overflow-y-auto;
 }
 
 .cell {
   @apply flex text-[14px] items-center;
-
-  &.incomeType {
-    @apply text-[var(--yellow-color)];
-  }
-
-  &.expenseType {
-    @apply text-[var(--dashboard-text-color)];
-  }
 
   &.cellDate {
     @apply w-[12%];
@@ -53,16 +55,4 @@
   &.cellBtn {
     @apply w-[17%] justify-end;
   }
-
-  &.cellCategory {
-    text-transform: capitalize;
-  }
-}
-
-.btnEdit {
-  @apply w-[20px] h-[20px] flex justify-center items-center;
-}
-
-.btnDelete {
-  @apply text-[14px] py-[4px] px-[12px] rounded-[20px];
 }
