@@ -19,16 +19,15 @@ const LogoutForm: React.FC<LogoutFormProps> = ({ onSubmit, onClose }) => {
         <h2 className="mx-auto mt-[52px] mb-[52px] text-[18px] w-[300px]">
           Are you sure you want to log out?
         </h2>
-        <CustomButton
-          elementLike={{ btnType: "submit" }}
-          btnStyle="colorful"
-          children="Logout"
-        />
+        <CustomButton elementLike={{ btnType: "submit" }} btnStyle="colorful">
+          Logout
+        </CustomButton>
         <CustomButton
           elementLike={{ btnType: "button", onClick: onClose }}
           btnStyle="mono"
-          children="cancel"
-        />
+        >
+          Cancel
+        </CustomButton>
       </div>
     </form>
   );

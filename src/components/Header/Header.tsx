@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { selectUserData } from "../../redux/user/selectors";
 import { signOut } from "../../redux/user/operations";
 import CustomModal from "../CustomModal/CustomModal";
@@ -15,7 +14,6 @@ import clsx from "clsx";
 const Header = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const userData = useAppSelector(selectUserData);
 
   const closeModal = () => {
@@ -29,9 +27,8 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await dispatch(signOut());
-      navigate("/login");
     } catch (error) {
-      console.error("Failed to log out:", error);
+      alert("Failed to log out. Please try again.");
     }
   };
 
