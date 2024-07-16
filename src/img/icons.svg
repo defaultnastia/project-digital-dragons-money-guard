@@ -58,5 +58,9 @@
 <path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.9143" d="M16.457 8.229v9.143"></path>
 <path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.9143" d="M11.886 12.8h9.143"></path>
 </symbol>
+<symbol id="icon_plus" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10 0V20" stroke-width="2"/>
+<path d="M0 10L20 10" stroke-width="2"/>
+</symbol>
 </defs>
 </svg>
