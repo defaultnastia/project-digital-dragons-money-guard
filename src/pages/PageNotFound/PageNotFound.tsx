@@ -118,7 +118,7 @@ const PageNotFound = () => {
   };
   const handleAddTrans = () => {
     const transactionToAdd: UserTransaction = {
-      transactionDate: "2023-09-09",
+      transactionDate: new Date(),
       type: "INCOME",
       categoryId: "063f1132-ba5d-42b4-951d-44011ca46262",
       comment: "Salary new",

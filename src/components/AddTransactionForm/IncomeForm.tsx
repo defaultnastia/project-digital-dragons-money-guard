@@ -4,54 +4,61 @@ import * as yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CustomButton } from "../CustomButton/CustomButton";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../redux/hooks";
 import { addTransaction } from "../../redux/transactions/operations";
-
 import sprite from "../../img/icons.svg";
+import { UserTransaction, TransactionType } from "../../redux/data.types";
 
 interface IncomeFormProps {
   closeModal: () => void;
 }
 
+interface FormInput {
+  amount: number;
+  transactionDate: Date;
+  comment: string;
+}
+
 const schema = yup.object().shape({
-  datePicker: yup
+  transactionDate: yup
     .date()
     .required("Please select a date")
     .min(new Date("2020-01-01"), "Date cannot be before 2020"),
-  numberInput: yup
+  amount: yup
     .number()
     .typeError("Please enter a number")
-    .required("Please enter a number"),
-  commentInput: yup.string().trim().required("Please enter a comment"),
+    .required("Please enter a number")
+    .positive("Income amount should be positive"),
+  comment: yup.string().trim().required("Please enter a comment"),
 });
 
 const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormInput>({
     resolver: yupResolver(schema),
     defaultValues: {
-      numberInput: "",
-      datePicker: new Date(),
-      commentInput: "",
+      amount: 0,
+      transactionDate: new Date(),
+      comment: "",
     },
   });
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = (data: Omit<UserTransaction, "type" | "categoryId">) => {
     const formattedData = {
-      transactionDate: data.datePicker,
-      type: "INCOME",
+      transactionDate: data.transactionDate,
+      type: "INCOME" as TransactionType,
       categoryId: "063f1132-ba5d-42b4-951d-44011ca46262",
-      comment: data.commentInput,
-      amount: parseFloat(data.numberInput),
+      comment: data.comment,
+      amount: data.amount,
     };
 
     try {
-      await dispatch(addTransaction(formattedData));
+      dispatch(addTransaction(formattedData));
       closeModal();
     } catch (error) {
       // toast.error("Error adding transaction. Please try again.");
@@ -65,32 +72,30 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
     >
       <div>
         <Controller
-          name="numberInput"
+          name="amount"
           control={control}
           render={({ field }) => (
             <input
               {...field}
+              value={field.value === 0 ? "" : field.value}
               type="text"
               placeholder="0.00"
               className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
             />
           )}
         />
-        {errors.numberInput && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.numberInput.message}
-          </p>
+        {errors.amount && (
+          <p className="text-red-500 text-sm mt-1">{errors.amount.message}</p>
         )}
       </div>
 
       <div className="w-full relative">
         <Controller
-          name="datePicker"
+          name="transactionDate"
           control={control}
           render={({ field }) => (
             <DatePicker
-              {...field}
-              selected={field.value ? field.value : new Date()}
+              selected={field.value}
               onChange={(date) => field.onChange(date)}
               dateFormat="dd.MM.yyyy"
               className=" w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
@@ -107,36 +112,34 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
         >
           <use xlinkHref={`${sprite}#icon-ate_range`}></use>
         </svg>
-        {errors.datePicker && (
+        {errors.transactionDate && (
           <p className="text-red-500 text-sm mt-1">
-            {errors.datePicker.message}
+            {errors.transactionDate.message}
           </p>
         )}
       </div>
 
       <div>
         <label
-          htmlFor="commentInput"
+          htmlFor="comment"
           className="text-white text-lg pl-[20px] text-opacity-60"
         >
           Comment
         </label>
         <Controller
-          name="commentInput"
+          name="comment"
           control={control}
           render={({ field }) => (
             <input
               {...field}
-              id="commentInput"
+              id="comment"
               type="text"
               className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
             />
           )}
         />
-        {errors.commentInput && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.commentInput.message}
-          </p>
+        {errors.comment && (
+          <p className="text-red-500 text-sm mt-1">{errors.comment.message}</p>
         )}
       </div>
 

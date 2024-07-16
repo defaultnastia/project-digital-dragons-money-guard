@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -14,6 +13,8 @@ import {
 } from "../../redux/transactions/operations";
 import { selectCategories } from "../../redux/transactions/selectors";
 import sprite from "../../img/icons.svg";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { UserTransaction, TransactionType } from "../../redux/data.types";
 
 interface ExpenseFormProps {
   closeModal: () => void;
@@ -24,22 +25,29 @@ interface Option {
   label: string;
 }
 
+interface FormInput {
+  categoryId: string;
+  amount: number;
+  transactionDate: Date;
+  comment: string;
+}
+
 const schema = yup.object().shape({
-  selectOption: yup.string().required("Please select a category"),
-  datePicker: yup
+  categoryId: yup.string().required("Please select a category"),
+  transactionDate: yup
     .date()
     .required("Please select a date")
     .min(new Date("2020-01-01"), "Date cannot be before 2020"),
-  numberInput: yup
+  amount: yup
     .number()
     .typeError("Please enter a number")
     .required("Please enter a number"),
-  commentInput: yup.string().trim().required("Please enter a comment"),
+  comment: yup.string().trim().required("Please enter a comment"),
 });
 
 const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
-  const dispatch = useDispatch();
-  const categories = useSelector(selectCategories);
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector(selectCategories);
   const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
@@ -61,29 +69,27 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<FormInput>({
     resolver: yupResolver(schema),
     defaultValues: {
-      selectOption: "",
-      numberInput: "",
-      datePicker: new Date(),
-      commentInput: "",
+      categoryId: "",
+      amount: 0,
+      transactionDate: new Date(),
+      comment: "",
     },
   });
 
-  const onSubmit = async (data: any) => {
-    const amount = parseFloat(data.numberInput);
-
+  const onSubmit = (data: Omit<UserTransaction, "type">) => {
     const formattedData = {
-      transactionDate: data.datePicker,
-      type: "EXPENSE",
-      categoryId: data.selectOption,
-      comment: data.commentInput,
-      amount: amount > 0 ? -amount : amount,
+      transactionDate: data.transactionDate,
+      type: "EXPENSE" as TransactionType,
+      categoryId: data.categoryId,
+      comment: data.comment,
+      amount: data.amount > 0 ? -data.amount : data.amount,
     };
 
     try {
-      await dispatch(addTransaction(formattedData));
+      dispatch(addTransaction(formattedData));
       closeModal();
     } catch (error) {
       // toast.error("Error adding transaction. Please try again.");
@@ -97,7 +103,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
     >
       <div>
         <Controller
-          name="selectOption"
+          name="categoryId"
           control={control}
           render={({ field }) => (
             <Select
@@ -185,40 +191,38 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
             />
           )}
         />
-        {errors.selectOption && (
+        {errors.categoryId && (
           <p className="text-red-500 text-sm mt-1">
-            {errors.selectOption.message}
+            {errors.categoryId.message}
           </p>
         )}
       </div>
 
       <div>
         <Controller
-          name="numberInput"
+          name="amount"
           control={control}
           render={({ field }) => (
             <input
               {...field}
+              value={field.value === 0 ? "" : field.value}
               type="text"
               placeholder="0.00"
               className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
             />
           )}
         />
-        {errors.numberInput && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.numberInput.message}
-          </p>
+        {errors.amount && (
+          <p className="text-red-500 text-sm mt-1">{errors.amount.message}</p>
         )}
       </div>
 
       <div className="w-full relative">
         <Controller
-          name="datePicker"
+          name="transactionDate"
           control={control}
           render={({ field }) => (
             <DatePicker
-              {...field}
               selected={field.value ? field.value : new Date()}
               onChange={(date) => field.onChange(date)}
               dateFormat="dd.MM.yyyy"
@@ -236,36 +240,34 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
         >
           <use xlinkHref={`${sprite}#icon-ate_range`}></use>
         </svg>
-        {errors.datePicker && (
+        {errors.transactionDate && (
           <p className="text-red-500 text-sm mt-1">
-            {errors.datePicker.message}
+            {errors.transactionDate.message}
           </p>
         )}
       </div>
 
       <div>
         <label
-          htmlFor="commentInput"
+          htmlFor="comment"
           className="text-white text-lg pl-[20px] text-opacity-60"
         >
           Comment
         </label>
         <Controller
-          name="commentInput"
+          name="comment"
           control={control}
           render={({ field }) => (
             <input
               {...field}
-              id="commentInput"
+              id="comment"
               type="text"
               className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
             />
           )}
         />
-        {errors.commentInput && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.commentInput.message}
-          </p>
+        {errors.comment && (
+          <p className="text-red-500 text-sm mt-1">{errors.comment.message}</p>
         )}
       </div>
 

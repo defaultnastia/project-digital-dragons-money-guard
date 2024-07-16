@@ -34,7 +34,7 @@ export interface RangeType {
 
 // to validate state of new/updated transaction
 export interface UserTransaction {
-  transactionDate: string;
+  transactionDate: Date;
   type: TransactionType;
   categoryId: string;
   comment: string;
