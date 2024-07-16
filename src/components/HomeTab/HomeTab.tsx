@@ -32,13 +32,13 @@ const HomeTab = () => {
 
   return (
     <>
-      {transactionsSorted.length > 0 && !loading ? (
-        <TransactionsList transactions={transactionsSorted} />
-      ) : (
+      {transactionsSorted.length === 0 && !loading ? (
         <p className="text-center mx-[20px]">
           There are no transactions yet. <br /> To add the first one, click on
           the + button below.
         </p>
+      ) : (
+        <TransactionsList transactions={transactionsSorted} />
       )}
 
       <button

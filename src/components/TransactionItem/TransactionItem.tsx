@@ -11,6 +11,7 @@ import {
 
 import icon from "../../img/icons.svg";
 import s from "./TransactionItem.module.css";
+import toast from "react-hot-toast";
 
 type Props = {
   transaction: Transaction;
@@ -56,7 +57,7 @@ const TransactionItem = ({ transaction, scrollable }: Props) => {
     dispatch(deleteTransaction(id))
       .unwrap()
       .then(() => {
-        console.log("Transaction has been deleted");
+        toast.success("Transaction was successfully deleted");
         dispatch(getAllTransactions());
       });
   };
