@@ -52,13 +52,11 @@
 <path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.9091" d="M2.909 2.909l26.182 26.182 26.182-26.182"></path>
 </symbol>
 <symbol id="icon-minus_btn" viewBox="0 0 32 32">
-<path d="M25.514 13.405c0 5.254-4.259 9.513-9.514 9.513s-9.514-4.259-9.514-9.514c0-5.254 4.259-9.514 9.514-9.514s9.514 4.259 9.514 9.514z"></path>
-<path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.8649" stroke="#fff" style="stroke: var(--color1, #fff)" d="M11.676 13.405h8.649"></path>
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.8649" d="M11.676 13.405h8.649"></path>
 </symbol>
 <symbol id="icon-plus" viewBox="0 0 34 32">
-<path d="M26.514 12.8c0 5.554-4.503 10.057-10.057 10.057s-10.057-4.503-10.057-10.057c0-5.554 4.503-10.057 10.057-10.057s10.057 4.503 10.057 10.057z"></path>
-<path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.9143" stroke="#fff" style="stroke: var(--color1, #fff)" d="M16.457 8.229v9.143"></path>
-<path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.9143" stroke="#fff" style="stroke: var(--color1, #fff)" d="M11.886 12.8h9.143"></path>
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.9143" d="M16.457 8.229v9.143"></path>
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="0.9143" d="M11.886 12.8h9.143"></path>
 </symbol>
 </defs>
 </svg>
