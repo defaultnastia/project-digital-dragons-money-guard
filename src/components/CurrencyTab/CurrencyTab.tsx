@@ -46,7 +46,7 @@ const CurrencyTab: React.FC = () => {
       ) : error ? (
         <p>Error fetching currency rates</p>
       ) : (
-        <table className="text-[16px] w-full table-fixed">
+        <table className="text-[16px] w-full table-fixed xl:mb-[15px]">
           <thead className="text-[16px] bg-[rgba(255,255,255,0.20)] w-full">
             <tr>
               <th className="pt-[13px] pb-[13px] pl-[20px]" align="left">
@@ -78,7 +78,7 @@ const CurrencyTab: React.FC = () => {
           </tbody>
         </table>
       )}
-      <div className="h-[97px] xl:min-h-[192px]">
+      <div className="h-[97px] xl:h-[192px]">
         <div className={s.chart}></div>
       </div>
     </div>
