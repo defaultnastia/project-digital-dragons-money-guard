@@ -41,7 +41,7 @@ const CurrencyTab: React.FC = () => {
   };
 
   return (
-    <div className="flex-col w-[336px] xl:w-[480px] bg-[rgba(74,86,226,0.1)] rounded-br-[8px] rounded-bl-[8px] xl:rounded-none overflow-hidden">
+    <div className="flex-col w-[320px] md:w-[336px] xl:w-[480px] bg-[rgba(74,86,226,0.1)] rounded-br-[8px] rounded-bl-[8px] xl:rounded-none overflow-hidden">
       {loading ? (
         <p className="flex items-center justify-center h-[109px]">Loading...</p>
       ) : error ? (
@@ -74,15 +74,18 @@ const CurrencyTab: React.FC = () => {
             {currencyRates?.map((rate, index) => (
               <tr key={index} className={index === 1 ? s.noPaddingBottom : ""}>
                 <td
-                  className={clsx("pb-[12px] pl-[20px] xl:pl-[96px]", {
-                    [s.noBottomPadding]: index === 1,
-                  })}
+                  className={clsx(
+                    "pb-[12px] xl:pb-[24px] pl-[20px] xl:pl-[96px]",
+                    {
+                      [s.noBottomPadding]: index === 1,
+                    }
+                  )}
                   align="left"
                 >
                   {getCurrencyName(rate.currencyCodeA)}
                 </td>
                 <td
-                  className={clsx("pb-[12px]", {
+                  className={clsx("pb-[12px] xl:pb-[24px]", {
                     [s.noBottomPadding]: index === 1,
                   })}
                   align="center"
@@ -90,9 +93,12 @@ const CurrencyTab: React.FC = () => {
                   {rate.rateBuy.toFixed(2)}
                 </td>
                 <td
-                  className={clsx("pb-[12px] pr-[20px] xl:pr-[96px]", {
-                    [s.noBottomPadding]: index === 1,
-                  })}
+                  className={clsx(
+                    "pb-[12px] xl:pb-[24px] pr-[20px] xl:pr-[96px]",
+                    {
+                      [s.noBottomPadding]: index === 1,
+                    }
+                  )}
                   align="right"
                 >
                   {rate.rateSell.toFixed(2)}
@@ -103,7 +109,18 @@ const CurrencyTab: React.FC = () => {
         </table>
       )}
       <div className="h-[97px] xl:h-[192px]">
-        <div className={s.chart}></div>
+        <div className={clsx("relative", s.chart)}>
+          {currencyRates && currencyRates[0] && (
+            <p className="hidden xl:block text-[#FF868D] text-[12px] absolute left-[47px] top-[12px]">
+              {currencyRates[0].rateBuy.toFixed(2)}
+            </p>
+          )}
+          {currencyRates && currencyRates[1] && (
+            <p className="hidden xl:block text-[#FF868D] text-[12px] absolute right-[96px] top-[-22px]">
+              {currencyRates[1].rateBuy.toFixed(2)}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
