@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
 
 const schema = yup.object().shape({
+  selectOption: yup.string().required("Please select a category"),
   datePicker: yup.date(),
   numberInput: yup
     .number()
@@ -26,6 +27,12 @@ const AddTransactionForm = ({ closeModal }) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      selectOption: "",
+      numberInput: "",
+      datePicker: new Date(),
+      commentInput: "",
+    },
   });
 
   const handleChange = (event) => {
@@ -37,6 +44,8 @@ const AddTransactionForm = ({ closeModal }) => {
       data.datePicker = new Date();
     }
     console.log(data);
+
+    closeModal();
   };
 
   return (
@@ -63,9 +72,17 @@ const AddTransactionForm = ({ closeModal }) => {
                       : null
                   }
                   options={[
-                    { value: "Option 1", label: "Option 1" },
-                    { value: "Option 2", label: "Option 2" },
-                    { value: "Option 3", label: "Option 3" },
+                    { value: "Main expenses", label: "Main expenses" },
+                    { value: "Products", label: "Products" },
+                    { value: "Car", label: "Car" },
+                    { value: "Self care", label: "Self care" },
+                    { value: "Child care", label: "Child care" },
+                    {
+                      value: "Household products",
+                      label: "Household products",
+                    },
+                    { value: "Education", label: "Education" },
+                    { value: "Leisure", label: "Leisure" },
                   ]}
                   placeholder="Select a category"
                   className="w-full border-b border-gray-300 border-opacity-60 focus:border-opacity-100"
@@ -78,10 +95,15 @@ const AddTransactionForm = ({ closeModal }) => {
                     DropdownIndicator: CustomDropdownIndicator,
                   }}
                   styles={{
-                    control: (provided) => ({
+                    control: (provided, state) => ({
                       ...provided,
                       background: "none",
                       border: "none",
+                      color: "white",
+                      boxShadow: state.isFocused ? "none" : provided.boxShadow,
+                      "&:hover": {
+                        borderColor: "none",
+                      },
                     }),
                     menu: (provided) => ({
                       ...provided,
@@ -103,7 +125,10 @@ const AddTransactionForm = ({ closeModal }) => {
                       fontStyle: "normal",
                       fontWeight: "400",
                       lineHeight: "normal",
-                      backgroundColor: state.isSelected ? "lightgray" : null,
+                      color: "white",
+                      backgroundColor: state.isSelected
+                        ? "rgba(255, 255, 255, 0.2)"
+                        : "transparent",
                       "&:hover": {
                         backgroundColor: "rgba(255, 255, 255, 0.10)",
                         color: "#FF868D",
@@ -119,6 +144,16 @@ const AddTransactionForm = ({ closeModal }) => {
                       fontWeight: "400",
                       lineHeight: "normal",
                       paddingLeft: "10px",
+                    }),
+                    singleValue: (provided) => ({
+                      ...provided,
+                      color: "white",
+                      paddingLeft: "10px",
+                      fontFamily: "Poppins",
+                      fontSize: "18px",
+                      fontStyle: "normal",
+                      fontWeight: "400",
+                      lineHeight: "normal",
                     }),
                   }}
                 />
@@ -189,7 +224,7 @@ const AddTransactionForm = ({ closeModal }) => {
                 {...field}
                 id="commentInput"
                 type="text"
-                className="w-full pl-[20px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
+                className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
               />
             )}
           />
