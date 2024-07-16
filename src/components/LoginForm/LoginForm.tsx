@@ -3,11 +3,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppDispatch } from "../../redux/hooks";
 import { UserCredentials } from "../../redux/data.types";
 import { loginFormSchema } from "../../schema/schema";
-import { Icon } from "../Icon/Icon";
 import { signIn } from "../../redux/user/operations";
-import Logo from "../Logo/Logo";
 import CustomModal from "../CustomModal/CustomModal";
 import { CustomButton } from "../CustomButton/CustomButton";
+import Logo from "../Logo/Logo";
+import { Icon } from "../Icon/Icon";
+
 import s from "./LoginForm.module.css";
 
 interface LoginFormInputs {
@@ -37,7 +38,7 @@ const LoginForm: React.FC = () => {
     <div className={s.wrapper}>
       <CustomModal isOpen={true} type="auth">
         <div className={s.box_logo}>
-          <Logo sizeLogo={26} sizeText={19} />
+          <Logo icon={"logo"} sizeLogo={26} sizeText={19} />
         </div>
         <form className={s.box_form} onSubmit={handleSubmit(onSubmit)}>
           <div className={s.form_mail}>
@@ -69,7 +70,7 @@ const LoginForm: React.FC = () => {
           LOG IN
         </CustomButton>
 
-        <CustomButton elementLike={{ linkTo: "your link" }} btnStyle="mono">
+        <CustomButton elementLike={{ linkTo: "/register" }} btnStyle="mono">
           REGISTER
         </CustomButton>
       </CustomModal>
