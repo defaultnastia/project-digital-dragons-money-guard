@@ -3,6 +3,11 @@ import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 
+interface SwitcherComponentProps {
+  isChecked: boolean;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
 const CustomSwitch = styled(Switch)(({ theme }) => ({
   width: 80,
   height: 40,
@@ -34,7 +39,10 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-const SwitcherComponent = ({ isChecked, handleChange }) => {
+const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
+  isChecked,
+  handleChange,
+}) => {
   const incomeColor = isChecked ? "rgba(255, 255, 255, 0.60)" : "#FFB627";
   const expenseColor = isChecked ? "#FF868D" : "rgba(255, 255, 255, 0.60)";
 

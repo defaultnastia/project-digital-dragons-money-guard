@@ -7,7 +7,11 @@ import { CustomButton } from "../CustomButton/CustomButton";
 import { useDispatch } from "react-redux";
 import { addTransaction } from "../../redux/transactions/operations";
 
-import sprite from "../../images/icons.svg";
+import sprite from "../../img/icons.svg";
+
+interface IncomeFormProps {
+  closeModal: () => void;
+}
 
 const schema = yup.object().shape({
   datePicker: yup
@@ -21,7 +25,7 @@ const schema = yup.object().shape({
   commentInput: yup.string().trim().required("Please enter a comment"),
 });
 
-const IncomeForm = ({ closeModal }) => {
+const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   const {
@@ -37,7 +41,7 @@ const IncomeForm = ({ closeModal }) => {
     },
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     const formattedData = {
       transactionDate: data.datePicker,
       type: "INCOME",

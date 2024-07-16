@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,10 +8,21 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
 import { CustomButton } from "../CustomButton/CustomButton";
-import sprite from "../../images/icons.svg";
-import { getTransactionsCategories } from "../../redux/transactions/operations";
+import {
+  getTransactionsCategories,
+  addTransaction,
+} from "../../redux/transactions/operations";
 import { selectCategories } from "../../redux/transactions/selectors";
-import { addTransaction } from "../../redux/transactions/operations";
+import sprite from "../../img/icons.svg";
+
+interface ExpenseFormProps {
+  closeModal: () => void;
+}
+
+interface Option {
+  value: string;
+  label: string;
+}
 
 const schema = yup.object().shape({
   selectOption: yup.string().required("Please select a category"),
@@ -26,10 +37,10 @@ const schema = yup.object().shape({
   commentInput: yup.string().trim().required("Please enter a comment"),
 });
 
-const ExpenseForm = ({ closeModal }) => {
+const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState<Option[]>([]);
 
   useEffect(() => {
     dispatch(getTransactionsCategories());
@@ -60,7 +71,7 @@ const ExpenseForm = ({ closeModal }) => {
     },
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     const amount = parseFloat(data.numberInput);
 
     const formattedData = {
@@ -100,7 +111,7 @@ const ExpenseForm = ({ closeModal }) => {
               placeholder="Select a category"
               className="w-full border-b border-gray-300 border-opacity-60 focus:border-opacity-100"
               onChange={(selectedOption) =>
-                field.onChange(selectedOption.value)
+                field.onChange(selectedOption?.value)
               }
               onBlur={field.onBlur}
               components={{

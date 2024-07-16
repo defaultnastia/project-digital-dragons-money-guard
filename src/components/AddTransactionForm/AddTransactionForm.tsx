@@ -3,10 +3,16 @@ import SwitcherComponent from "./SwitcherComponent";
 import IncomeForm from "./IncomeForm";
 import ExpenseForm from "./ExpenseForm";
 
-const AddTransactionForm = ({ closeModal }) => {
+interface AddTransactionFormProps {
+  closeModal: () => void;
+}
+
+const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
+  closeModal,
+}) => {
   const [isChecked, setIsChecked] = useState(true);
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
   };
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import CustomModal from "../CustomModal/CustomModal";
 import AddTransactionForm from "../AddTransactionForm/AddTransactionForm";
 
-export const ModalAddTransaction = () => {
+export const ModalAddTransaction: React.FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
