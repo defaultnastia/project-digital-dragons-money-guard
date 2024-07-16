@@ -5,6 +5,8 @@ import { TransactionType, UserTransaction } from "../../redux/data.types";
 import DatePicker from "react-datepicker";
 import { useState } from "react";
 // import { useAppDispatch } from "../../redux/hooks";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 type EditModalPropsType = {
   UserTransaction?: UserTransaction;
@@ -13,13 +15,39 @@ type EditModalPropsType = {
   type: TransactionType; // Temporary
 };
 
+const schema = yup.object().shape({
+  category: yup
+    .string()
+    .min(1, "Have to be at list 1 symbol")
+    .required("required field"),
+  datePicker: yup
+    .date()
+    .required("Please select a date")
+    .min(new Date("2020-01-01"), "Date cannot be before 2020"),
+  amount: yup
+    .number()
+    .min(1, "Have to be at list 1 symbol")
+    .required("required field"),
+});
+
 export const ModalEditTransaction = ({
-  //   UserTransaction,
+  //   UserTransaction: { transactionDate, comment, amount },
   openModal,
   closeModal,
   type,
 }: EditModalPropsType) => {
-  const { control, handleSubmit } = useForm();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      //   numberInput: "",
+      datePicker: new Date(),
+      //   commentInput: "",
+    },
+  });
   const [startDate, setStartDate] = useState(new Date());
 
   const onSubmit = (obj: object): void => {
@@ -37,24 +65,41 @@ export const ModalEditTransaction = ({
         <div>
           <span>Income</span> / <span>Expense</span>
         </div>
-        <div className="overflow-y-auto">
+        <div className="">
           {type === "EXPENSE" && (
-            <input
-              type="text"
-              className="w-[100%] p-[8px] text-[var(--white-color)] placeholder:text-[var(--white-60-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
-            ></input>
+            <Controller
+              name="category"
+              control={control}
+              render={({ field }) => (
+                <input
+                  type="text"
+                  {...field}
+                  className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+                />
+              )}
+            />
           )}
           <div className="w-full relative">
+            <Controller
+              name="amount"
+              control={control}
+              render={({ field }) => (
+                <input
+                  type="number"
+                  {...field}
+                  className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+                />
+              )}
+            />
             <Controller
               name="datePicker"
               control={control}
               render={({ field }) => (
                 <DatePicker
-                  {...field}
                   selected={field.value ? field.value : new Date()}
                   onChange={(date) => field.onChange(date)}
                   dateFormat="dd.MM.yyyy"
-                  className=" w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
+                  className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
                   wrapperClassName="w-full"
                 />
               )}
@@ -67,11 +112,11 @@ export const ModalEditTransaction = ({
             >
               <use href="../../images/icons.svg#icon-ate_range"></use>
             </svg>
-            {/* {errors.datePicker && (
+            {errors.datePicker && (
               <p className="text-red-500 text-sm mt-1">
                 {errors.datePicker.message}
               </p>
-            )} */}
+            )}
           </div>
 
           <input
