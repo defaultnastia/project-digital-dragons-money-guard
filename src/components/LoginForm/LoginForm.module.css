@@ -24,6 +24,7 @@
 
 .input_box {
   position: relative;
+  margin-bottom: 20px;
 }
 
 .icon {
@@ -93,4 +94,9 @@
   /* height: 100%; Висота всередині полоски */
   transition: width 0.5s; /* Плавна анімація зміни ширини */
   border-radius: 5px; /* Заокруглені кути */
+}
+.passwordToggle {
+  position: absolute;
+  top: 5px;
+  right: 60px;
 }

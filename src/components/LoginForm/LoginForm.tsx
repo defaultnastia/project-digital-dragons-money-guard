@@ -9,6 +9,7 @@ import Logo from "../Logo/Logo";
 import { Icon } from "../Icon/Icon";
 
 import s from "./LoginForm.module.css";
+import { useState } from "react";
 
 interface LoginFormInputs {
   email: string;
@@ -16,6 +17,8 @@ interface LoginFormInputs {
 }
 
 const LoginForm: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -31,6 +34,10 @@ const LoginForm: React.FC = () => {
     };
 
     dispatch(signIn(userToSignIn));
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -55,7 +62,20 @@ const LoginForm: React.FC = () => {
             {...register("password", { required: true })}
             placeholder="Password"
             className={s.input}
+            type={showPassword ? "text" : "password"}
           />
+          <button
+            type="button"
+            className={s.passwordToggle}
+            onClick={toggleShowPassword}
+          >
+            {showPassword ? (
+              <Icon className={s.icon} name="eye-hidden" size={24} />
+            ) : (
+              <Icon className={s.icon} name="eye" size={24} />
+            )}
+          </button>
+
           {errors.password && (
             <p className={s.error}>{errors.password.message}</p>
           )}

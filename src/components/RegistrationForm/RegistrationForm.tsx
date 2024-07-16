@@ -113,7 +113,11 @@ const RegistrationForm: React.FC = () => {
             className={css.passwordToggle}
             onClick={toggleShowPassword}
           >
-            {showPassword ? <FaEyeSlash /> : <FaEye />}
+            {showPassword ? (
+              <Icon className={s.icon} name="eye-hidden" size={24} />
+            ) : (
+              <Icon className={s.icon} name="eye" size={24} />
+            )}
           </button>
           {errors.password && (
             <p className={s.error}>{errors.password.message}</p>
@@ -133,7 +137,11 @@ const RegistrationForm: React.FC = () => {
             className={css.passwordToggle}
             onClick={toggleShowConfirmPassword}
           >
-            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            {showConfirmPassword ? (
+              <Icon className={s.icon} name="eye-hidden" size={24} />
+            ) : (
+              <Icon className={s.icon} name="eye" size={24} />
+            )}
           </button>
           {errors.confirmPassword && (
             <p className={s.error}>{errors.confirmPassword.message}</p>
