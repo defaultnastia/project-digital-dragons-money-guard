@@ -1,4 +1,4 @@
-.icon {
+/* .icon {
   fill: var(--white-40-color);
   left: 31px;
   position: absolute;
@@ -16,4 +16,12 @@
 }
 
 .customClass {
+} */
+.box_form {
+  position: relative;
+}
+.passwordToggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

@@ -10,6 +10,8 @@ import { UserCredentials } from "../../redux/data.types";
 import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
 import { useState } from "react";
 import s from "../LoginForm/LoginForm.module.css";
+import css from "./RegistrationForm.module.css";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface RegisterFormInputs {
   username: string;
@@ -20,6 +22,9 @@ interface RegisterFormInputs {
 
 const RegistrationForm: React.FC = () => {
   const [password, setPassword] = useState("");
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     register,
@@ -49,6 +54,13 @@ const RegistrationForm: React.FC = () => {
     setPassword(event.target.value);
   };
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
   // const passwordStrength = ({ password }) => {
   //   let strength = 0;
   //   if (password.length > 5) strength + 1;
@@ -93,9 +105,16 @@ const RegistrationForm: React.FC = () => {
             {...register("password", { required: true })}
             placeholder="Password"
             className={s.input}
-            // type="password"
+            type={showPassword ? "text" : "password"}
             onChange={handlePasswordChange}
           />
+          <button
+            type="button"
+            className={css.passwordToggle}
+            onClick={toggleShowPassword}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
           {errors.password && (
             <p className={s.error}>{errors.password.message}</p>
           )}
@@ -107,8 +126,15 @@ const RegistrationForm: React.FC = () => {
             {...register("confirmPassword", { required: true })}
             placeholder="Confirm password"
             className={s.input}
-            // type="password"
+            type={showConfirmPassword ? "text" : "password"}
           />
+          <button
+            type="button"
+            className={css.passwordToggle}
+            onClick={toggleShowConfirmPassword}
+          >
+            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
           {errors.confirmPassword && (
             <p className={s.error}>{errors.confirmPassword.message}</p>
           )}
