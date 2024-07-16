@@ -1,3 +1,5 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -7,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
 import { CustomButton } from "../CustomButton/CustomButton";
 import sprite from "../../images/icons.svg";
+import { getTransactionsCategories } from "../../redux/transactions/operations";
+import { selectCategories } from "../../redux/transactions/selectors";
 
 const schema = yup.object().shape({
   selectOption: yup.string().required("Please select a category"),
@@ -19,6 +23,25 @@ const schema = yup.object().shape({
 });
 
 const ExpenseForm = ({ closeModal }) => {
+  const dispatch = useDispatch();
+  const categories = useSelector(selectCategories);
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    dispatch(getTransactionsCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (categories) {
+      setOptions(
+        categories.map((category) => ({
+          value: category.name,
+          label: category.name,
+        }))
+      );
+    }
+  }, [categories]);
+
   const {
     handleSubmit,
     control,
@@ -57,16 +80,7 @@ const ExpenseForm = ({ closeModal }) => {
               value={
                 field.value ? { value: field.value, label: field.value } : null
               }
-              options={[
-                { value: "Main expenses", label: "Main expenses" },
-                { value: "Products", label: "Products" },
-                { value: "Car", label: "Car" },
-                { value: "Self care", label: "Self care" },
-                { value: "Child care", label: "Child care" },
-                { value: "Household products", label: "Household products" },
-                { value: "Education", label: "Education" },
-                { value: "Leisure", label: "Leisure" },
-              ]}
+              options={options}
               placeholder="Select a category"
               className="w-full border-b border-gray-300 border-opacity-60 focus:border-opacity-100"
               onChange={(selectedOption) =>
