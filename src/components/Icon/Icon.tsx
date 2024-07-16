@@ -1,6 +1,6 @@
-import Icons from "../../images/icons.svg";
+import Icons from "../../img/icons.svg";
 
-export type NameIcon = "lock" | "logo" | "email";
+export type NameIcon = string;
 
 interface Props {
   name: NameIcon;
