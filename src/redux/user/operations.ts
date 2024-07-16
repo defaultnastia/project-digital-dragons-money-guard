@@ -7,6 +7,7 @@ import {
   setAuthHeader,
   walletInstance,
 } from "../../services/axiosInstance";
+import toast from "react-hot-toast";
 
 export const signUp = createAsyncThunk(
   "user/signUp",
@@ -16,6 +17,7 @@ export const signUp = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
+      toast.error("Couldn't signup user, please check the credentials!");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
   }
@@ -29,6 +31,9 @@ export const signIn = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
+      toast.error(
+        "Couldn't sign in as this user, please check the credentials!"
+      );
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
   }
@@ -50,6 +55,9 @@ export const refreshUser = createAsyncThunk(
 
     const persistedToken = state.user.token;
     if (persistedToken === null) {
+      toast("Please sign in to continue!", {
+        icon: "✋",
+      });
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
 
@@ -60,6 +68,7 @@ export const refreshUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error instanceof Error) {
+        toast.error("Something went wrong!");
         return thunkAPI.rejectWithValue(error.message);
       }
     }
@@ -74,6 +83,7 @@ export const getBalance = createAsyncThunk(
       return response.data.balance;
     } catch (error) {
       if (error instanceof Error) {
+        toast.error("Couldn't update balance, try again.");
         return thunkAPI.rejectWithValue(error.message);
       }
     }
