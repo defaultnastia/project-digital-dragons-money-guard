@@ -9,7 +9,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker-custom.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
 import { CustomButton } from "../CustomButton/CustomButton";
-import { addTransaction } from "../../redux/transactions/operations";
+import {
+  addTransaction,
+  getAllTransactions,
+} from "../../redux/transactions/operations";
 import { selectCategories } from "../../redux/transactions/selectors";
 import sprite from "../../img/icons.svg";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -93,6 +96,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
     try {
       await dispatch(addTransaction(formattedData));
       await dispatch(getBalance());
+      await dispatch(getAllTransactions());
       closeModal();
     } catch (error) {
       toast.error("Failed to add transaction. Please try again");
@@ -151,9 +155,8 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
                     ...provided,
                     zIndex: 9999,
                     borderRadius: "8px",
-                    backgroundColor:
-                      "linear-gradient(0deg, rgba(83, 61, 186, 0.70) 0%, rgba(80, 48, 154, 0.70) 43.14%, rgba(106, 70, 165, 0.52) 73.27%, rgba(133, 93, 175, 0.13) 120.03%);",
-                    boxShadow: "0px 4px 60px 0px rgba(0, 0, 0, 0.25)",
+                    background:
+                      "linear-gradient(0deg, rgba(83, 61, 186, 1) 0%, rgba(80, 48, 154, 1) 43.14%, rgba(106, 70, 165, 1) 73.27%, rgba(133, 93, 175, 1) 120.03%)",
                     backdropFilter: "blur(50px)",
                   }),
                   option: (provided, state) => ({
@@ -258,6 +261,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
                   placeholderText="Select a date"
                   calendarStartDay={1}
                   maxDate={new Date()}
+                  calendarClassName="react-datepicker"
                   ref={datePickerRef}
                 />
               )}

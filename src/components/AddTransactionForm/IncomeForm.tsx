@@ -8,7 +8,10 @@ import "./datepicker-custom.css";
 import toast from "react-hot-toast";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { useAppDispatch } from "../../redux/hooks";
-import { addTransaction } from "../../redux/transactions/operations";
+import {
+  addTransaction,
+  getAllTransactions,
+} from "../../redux/transactions/operations";
 import sprite from "../../img/icons.svg";
 import { UserTransaction, TransactionType } from "../../redux/data.types";
 import { getBalance } from "../../redux/user/operations";
@@ -72,6 +75,7 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
     try {
       await dispatch(addTransaction(formattedData));
       await dispatch(getBalance());
+      await dispatch(getAllTransactions());
       closeModal();
     } catch (error) {
       toast.error("Failed to add transaction. Please try again");
