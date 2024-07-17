@@ -1,0 +1,103 @@
+.wrapper {
+  /* @apply w-[320px] h-[568px]; */
+  /* background-size: cover;
+  display: flex;
+  flex-direction: column; */
+}
+@media screen {
+}
+
+.box_logo {
+  /* @apply flex flex-col items-center  mb-[53px]; */
+}
+
+.box_form {
+  @apply flex flex-col;
+  display: flex;
+  align-items: center;
+  margin-top: 53px;
+  gap: 40px;
+}
+
+.logo_text {
+  font-size: 19px;
+}
+
+.input_box {
+  position: relative;
+  /* margin-bottom:` 20px; */
+}
+
+.icon {
+  fill: var(--white-40-color);
+  left: 31px;
+  position: absolute;
+}
+.input {
+  width: 280px;
+  /* width: auto; */
+  background: none;
+  border-bottom: 1px solid var(--white-40-color);
+  padding-left: 60px;
+  padding-bottom: 8px;
+  outline: none;
+  font-size: 18px;
+  margin-left: 20px;
+  /* margin-bottom: 52px; */
+}
+@media screen {
+}
+.error {
+  color: var(--dashboard-text-color);
+  font-size: 10px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* .btn_log { */
+/* margin-bottom: 20px;
+  width: 280px;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 20px;
+  font-size: 18px;
+  letter-spacing: 1.8px;
+
+  color: white;
+
+  background: linear-gradient(
+    97deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
+  );
+  box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2); */
+
+/* transition: background-position 0.8s ease; */
+/* } */
+.strengthBarContainer {
+  /* display: inline-block; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  width: 280px;
+  margin-top: 8px;
+  margin-bottom: 40px;
+  padding-left: 10px;
+}
+
+.strengthBar {
+  /* height: 12px; */
+  border-radius: 5px;
+  /* overflow: hidden; */
+}
+
+.strengthBar div {
+  /* height: 100%; Висота всередині полоски */
+  transition: width 0.5s; /* Плавна анімація зміни ширини */
+  border-radius: 5px; /* Заокруглені кути */
+}
+.passwordToggle {
+  position: absolute;
+  top: 5px;
+  right: 60px;
+}

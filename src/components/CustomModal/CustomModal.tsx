@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { useMediaQuery } from "react-responsive";
 
 import s from "./CustomModal.module.css";
+import { Icon } from "../Icon/Icon";
 
 const customStyles = {
   content: {
@@ -45,19 +46,21 @@ const CustomModal = ({ isOpen, onClose, type, children }: Props) => {
   }
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} style={customStyles}>
-      <div
-        className={clsx(
-          s.bgModal,
-          "w-[100vw] py-[20px] px-[20px] h-screen flex justify-center items-center overflow-hidden md:flex-row md:flex-wrap md:max-w-[533px] md:h-auto md:py-[40px] md:px-[73px]"
-        )}
-      >
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      style={customStyles}
+      shouldCloseOnOverlayClick={true}
+      shouldCloseOnEsc={true}
+    >
+      <div className={clsx(s.bgModal)}>
         {!isMobile && type === "transaction" && (
-          <button
-            onClick={onClose}
-            className="absolute top-[15px] right-[15px] text-black"
-          >
-            X
+          <button onClick={onClose} className={clsx(s.btnClose)}>
+            <Icon
+              name="close"
+              size={16}
+              className="hover:stroke-[var(--dashboard-text-color)]"
+            />
           </button>
         )}
 

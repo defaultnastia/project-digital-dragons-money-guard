@@ -1,69 +1,83 @@
 import { Route, Routes } from "react-router-dom";
-import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import PrivateRoute from "./components/PrivateRoute";
-import HomeTab from "./components/HomeTab/HomeTab";
-import StatisticsTab from "./components/StatisticsTab/StatisticsTab";
-import CurrencyTab from "./components/CurrencyTab/CurrencyTab";
 import RestrictedRoute from "./components/RestrictedRoute";
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
-import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import { useAppDispatch } from "./redux/hooks";
-import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { refreshUser } from "./redux/user/operations";
+import { selectIsRefreshing } from "./redux/user/selectors";
+import React, { Suspense, useEffect } from "react";
+import { lazy } from "react";
+import { Toaster } from "react-hot-toast";
 
-//! ADD LAZY LOAD
+const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+const RegistrationPage = lazy(
+  () => import("./pages/RegistrationPage/RegistrationPage")
+);
+const PageNotFound = lazy(() => import("./pages/PageNotFound/PageNotFound"));
+const HomeTab = lazy(() => import("./components/HomeTab/HomeTab"));
+const StatisticsTab = lazy(
+  () => import("./components/StatisticsTab/StatisticsTab")
+);
+const CurrencyTab = lazy(() => import("./components/CurrencyTab/CurrencyTab"));
 
-function App() {
-  const dispatcher = useAppDispatch();
+// const App: React.FC = () => {
+const App = () => {
+  const dispatch = useAppDispatch();
+  const userRefreshing = useAppSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatcher(refreshUser());
-  }, [dispatcher]);
+    dispatch(refreshUser());
+  }, [dispatch]);
 
-  return (
+  return userRefreshing ? (
+    <p>Refreshing user...</p>
+  ) : (
+    // return (
     <>
-      <Routes>
-        <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <DashboardPage />
-            </PrivateRoute>
-          }
-        >
-          <Route path="home" element={<HomeTab />} />
-          <Route path="statistics" element={<StatisticsTab />} />
-          <Route path="currency" element={<CurrencyTab />} />
-        </Route>
-        <Route
-          path="/login"
-          element={
-            <RestrictedRoute>
-              <LoginPage />
-            </RestrictedRoute>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <DashboardPage />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <RestrictedRoute>
-              <RegistrationPage />
-            </RestrictedRoute>
-          }
-        />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+      <Toaster />
+      <Suspense fallback={null}>
+        <Routes>
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <DashboardPage />
+              </PrivateRoute>
+            }
+          >
+            <Route path="home" element={<HomeTab />} />
+            <Route path="statistics" element={<StatisticsTab />} />
+            <Route path="currency" element={<CurrencyTab />} />
+          </Route>
+          <Route
+            path="/login"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <RestrictedRoute>
+                <LoginPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <RestrictedRoute>
+                <RegistrationPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+      </Suspense>
     </>
   );
-}
+};
 
 export default App;
