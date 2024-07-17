@@ -293,7 +293,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
                 id="comment"
                 type="text"
                 placeholder="Comment"
-                className="w-full pl-[20px] pb-[8px] md:pl-[9px] md:pb-[52px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 "
+                className="w-full pl-[20px] pb-[52px] md:pl-[9px] md:pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 "
               />
             )}
           />
