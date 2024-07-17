@@ -33,12 +33,12 @@ const StatisticsTab = () => {
       <h2 className="text-[1.875rem] mb-5 min-[1280px]:ml-[15px] max-[1279px]:hidden">
         Statistics
       </h2>
-      <div className="min-[768px]:flex gap-8">
+      <div className="min-[768px]:flex gap-8 justify-center">
         <div>
           <h2 className="text-[1.875rem] mb-2 min-[768px]:mb-5 min-[1280px]:hidden ">Statistics</h2>
           <Chart dataTransaction={statistics} balance={balance} />
         </div>
-        <div className="w-full min-[768px]:mt-[25px] min-[1280px]:mt-0">
+        <div className="w-full min-[768px]:mt-[25px] min-[1280px]:mt-0 min-[768px]:w-[336px]">
           <StatisticsDashboard onFilterChange={handleFilterChange} />
           <StatisticsTable dataTransaction={statistics} />
         </div>

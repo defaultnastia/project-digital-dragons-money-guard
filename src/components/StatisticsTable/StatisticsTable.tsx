@@ -16,7 +16,7 @@ const StatisticsTable = ({dataTransaction}: ChartProps) => {
     dataTransaction.expenseSummary !== undefined ? -dataTransaction.expenseSummary : 0;
   const incomeSum = dataTransaction.incomeSummary;
   return (
-    <div className="">
+    <div>
       {categoriesSummary.length !== 0 && (
         <div>
           <div className="flex justify-between p-4 bg-[rgba(82,59,126,0.60)] rounded-lg mb-[14px]">
