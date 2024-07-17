@@ -54,7 +54,7 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
         style={{
           color: incomeColor,
           fontFamily: "Poppins",
-          fontWeight: 500,
+          fontWeight: 600,
           lineHeight: "normal",
         }}
       >
@@ -116,7 +116,7 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
         style={{
           color: expenseColor,
           fontFamily: "Poppins",
-          fontWeight: 500,
+          fontWeight: 600,
           lineHeight: "normal",
         }}
       >

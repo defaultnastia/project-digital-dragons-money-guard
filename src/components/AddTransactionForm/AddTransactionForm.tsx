@@ -18,7 +18,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
 
   return (
     <>
-      <h2 className="w-280 h-31 text-2xl mb-[32px] text-center">
+      <h2 className="mb-[32px] text-center text-[24px] md:text-[30px]">
         Add transaction
       </h2>
       <SwitcherComponent isChecked={isChecked} handleChange={handleChange} />
