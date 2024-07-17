@@ -76,7 +76,7 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
             onClick={() => setActiveTab("currency")}
           >
             <NavLink to="/dashboard/currency">
-              <Icon name="home" size={44} fill="rgba(255, 255, 255, 0.6)" />
+              <Icon name="dollar" size={44} fill="rgba(255, 255, 255, 0.6)" />
             </NavLink>
           </li>
         )}
