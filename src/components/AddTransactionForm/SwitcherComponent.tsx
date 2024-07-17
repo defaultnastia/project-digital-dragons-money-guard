@@ -48,11 +48,10 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
   const expenseColor = isChecked ? "#FF868D" : "rgba(255, 255, 255, 0.60)";
 
   return (
-    <Box display="flex" alignItems="center" justifyContent="center">
+    <Box display="flex" alignItems="center" justifyContent="center" gap="20px">
       <Typography
         variant="body1"
         style={{
-          marginRight: 20,
           color: incomeColor,
           fontFamily: "Poppins",
           fontWeight: 500,
@@ -115,7 +114,6 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
       <Typography
         variant="body1"
         style={{
-          marginLeft: 20,
           color: expenseColor,
           fontFamily: "Poppins",
           fontWeight: 500,
