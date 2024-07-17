@@ -1,0 +1,27 @@
+.pageNotFound {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--white-color);
+  text-align: center;
+  color: #180243;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.pageNotFound > div {
+  margin: auto;
+}
+
+.pageNotFound > div > p:first-of-type {
+  -webkit-text-fill-color: transparent;
+}
+
+h2 {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.helpText {
+  max-width: 600px;
+}
