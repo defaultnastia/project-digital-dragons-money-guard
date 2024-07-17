@@ -61,7 +61,7 @@ const Header = () => {
               { "border-none pl-0": isMobile }
             )}
           >
-            <Icon name="exit" size={18} fill="rgba(255, 255, 255, 0.6)" />
+            <Icon name="exit" size={18} />
             {(isDesktop || isTablet) && "Exit"}
           </button>
         </div>
