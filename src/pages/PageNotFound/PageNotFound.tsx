@@ -39,11 +39,8 @@ import {
   selectTransactions,
 } from "../../redux/transactions/selectors";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
-<<<<<<< Updated upstream
 import Logo from "../../components/Logo/Logo";
-=======
-import { ModalEditTransaction } from "../../components/ModalEditTransaction/ModalEditTransaction";
->>>>>>> Stashed changes
+import { EditTransactionForm } from "../../components/EditTransactionForm/EditTransactionForm";
 
 const PageNotFound = () => {
   const dispatch = useAppDispatch();
@@ -317,11 +314,16 @@ const PageNotFound = () => {
           Update Transaction
         </button>
         {isUpdateOpen && (
-          <ModalEditTransaction
-            openModal={isUpdateOpen}
-            closeModal={closeUpdateModal}
-            type="INCOME"
-          />
+          <CustomModal
+            isOpen={isUpdateOpen}
+            onClose={closeModal}
+            type="transaction"
+          >
+            <EditTransactionForm
+              userTransaction={transactions[0]}
+              closeModal={closeUpdateModal}
+            />
+          </CustomModal>
         )}
         <p>.</p>
         <button className="border p-1" onClick={handleDeleteTrans}>

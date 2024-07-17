@@ -1,22 +1,18 @@
 import { CustomButton } from "../CustomButton/CustomButton";
-import CustomModal from "../CustomModal/CustomModal";
 import { Controller, useForm } from "react-hook-form";
-import {
-  PatchData,
-  Transaction,
-  UserTransaction,
-} from "../../redux/data.types";
+import { Transaction } from "../../redux/data.types";
 import DatePicker from "react-datepicker";
-// import { useAppDispatch } from "../../redux/hooks";
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import sprite from "../../img/icons.svg";
 import { useAppDispatch } from "../../redux/hooks";
 import { updateTransaction } from "../../redux/transactions/operations";
+import toast from "react-hot-toast";
 
-type EditModalPropsType = {
-  userTransaction: UserTransaction;
+type EditFormPropsType = {
+  userTransaction: Transaction;
   closeModal: () => void;
 };
 
@@ -33,11 +29,12 @@ const schema = yup.object().shape({
   comment: yup.string(),
 });
 
-export const EditTransaction = ({
+export const EditTransactionForm = ({
   userTransaction: { id, amount, transactionDate, comment, type, categoryId },
-  openModal,
   closeModal,
-}: EditModalPropsType) => {
+}: EditFormPropsType) => {
+  const dispatch = useAppDispatch();
+
   const {
     handleSubmit,
     control,
@@ -52,22 +49,21 @@ export const EditTransaction = ({
     },
   });
 
-  const dispatch = useAppDispatch();
-
-  const onSubmit = (data: object): void => {
-    const updTransaction: Omit<Transaction, "id"> = {
-      type,
-      ...data,
+  const onSubmit = (data: Omit<Transaction, "id">): void => {
+    const updTransaction = {
+      transactionDate: data.transactionDate,
+      comment: data.comment,
+      amount: data.amount,
       categoryId,
+      type,
     };
-    const transId = id;
-    const patchData = { updTransaction, transId };
-    dispatch(updateTransaction(patchData));
 
-    const patchData: PatchData = { updTransaction: { ...data, type }, transId };
-    console.log(patchData);
-
-    // dispatch(updateTransaction(patchData));
+    try {
+      dispatch(updateTransaction({ updTransaction, transId: id }));
+      closeModal();
+    } catch (error) {
+      toast.error("Failed to update transaction. Please try again");
+    }
   };
 
   return (
@@ -75,7 +71,7 @@ export const EditTransaction = ({
       <h2 className="block text-[30px] text-center mb-[40px]">
         Edit transaction
       </h2>
-      <div className="flex justify-center gap-5 mb-10">
+      <div className="flex justify-center gap-5 mb-[60px]">
         <span className={type === "INCOME" ? "text-[#ff868d]" : "text-white"}>
           Income
         </span>
@@ -94,12 +90,12 @@ export const EditTransaction = ({
                 <input
                   type="text"
                   {...field}
-                  className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+                  className="w-[100%] p-[8px] mb-[40px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
                 />
               )}
             />
           )}
-          <div className="md:flex row">
+          <div className="md:flex row gap-[32px]">
             <Controller
               name="amount"
               control={control}
@@ -107,11 +103,11 @@ export const EditTransaction = ({
                 <input
                   type="number"
                   {...field}
-                  className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+                  className="mb:w-[181px] w-full p-2 s:pl-[20px] mb-[40px] text-start md:text-center border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
                 />
               )}
             />
-            <div className="w-full relative">
+            <div className=" w-full relative">
               <Controller
                 name="transactionDate"
                 control={control}
@@ -119,9 +115,11 @@ export const EditTransaction = ({
                   <DatePicker
                     selected={field.value ? field.value : new Date()}
                     onChange={(date) => field.onChange(date)}
+                    id="transactionDate"
                     dateFormat="dd.MM.yyyy"
-                    className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+                    className="md:w-[181px] w-full p-2 pl-[20px] pb-[8px] mb-[40px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
                     wrapperClassName="w-full"
+                    maxDate={new Date()}
                   />
                 )}
               />
@@ -147,7 +145,7 @@ export const EditTransaction = ({
             render={({ field }) => (
               <textarea
                 {...field}
-                className="w-[100%] p-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+                className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
               />
             )}
           />
