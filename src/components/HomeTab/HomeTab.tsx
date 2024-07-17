@@ -2,26 +2,29 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 import TransactionsList from "../TransactionsList/TransactionsList";
+import { EditTransactionForm } from "../EditTransactionForm/EditTransactionForm";
+import AddTransactionForm from "../AddTransactionForm/AddTransactionForm";
+import CustomModal from "../CustomModal/CustomModal";
 
 import { selectTransactions } from "../../redux/transactions/selectors";
-import {
-  getAllTransactions,
-  getTransactionsCategories,
-} from "../../redux/transactions/operations";
+import { getAllTransactions } from "../../redux/transactions/operations";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectLoadingState } from "../../redux/user/selectors";
+import { Transaction } from "../../redux/data.types";
 
 import icon from "../../img/icons.svg";
 import s from "./HomeTab.module.css";
-import { selectLoadingState } from "../../redux/user/selectors";
-import CustomModal from "../CustomModal/CustomModal";
-import AddTransactionForm from "../AddTransactionForm/AddTransactionForm";
+import Balance from "../Balance/Balance";
+import { useMediaQuery } from "react-responsive";
 
 const HomeTab = () => {
   const dispatch = useAppDispatch();
   const transactions = useAppSelector(selectTransactions);
   const loading = useAppSelector(selectLoadingState);
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [editTransaction, setEditTransaction] = useState<Transaction>();
+  const [modalAddIsOpen, setModalAddIsOpen] = useState(false);
+  const [modalEditIsOpen, setModalEditIsOpen] = useState(false);
+  const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
 
   const transactionsSorted = Object.freeze(transactions)
     .slice()
@@ -29,17 +32,20 @@ const HomeTab = () => {
       (a, b) => Date.parse(a.transactionDate) - Date.parse(b.transactionDate)
     );
 
-  const openModal = () => {
-    setModalIsOpen(true);
+  const openAddTransactionModal = () => {
+    setModalAddIsOpen(true);
   };
 
-  const closeModal = () => {
-    setModalIsOpen(false);
+  const closeAddTransactionModal = () => {
+    setModalAddIsOpen(false);
+  };
+
+  const closeEditTransactionModal = () => {
+    setModalEditIsOpen(false);
   };
 
   useEffect(() => {
     dispatch(getAllTransactions());
-    dispatch(getTransactionsCategories());
   }, [dispatch]);
 
   return (
@@ -50,7 +56,19 @@ const HomeTab = () => {
           the + button below.
         </p>
       ) : (
-        <TransactionsList transactions={transactionsSorted} />
+        <>
+          {isMobile && (
+            <div className={s.balanceWrapper}>
+              <Balance />
+            </div>
+          )}
+
+          <TransactionsList
+            transactions={transactionsSorted}
+            setEditTransaction={setEditTransaction}
+            setModalEditIsOpen={setModalEditIsOpen}
+          />
+        </>
       )}
 
       <button
@@ -58,14 +76,30 @@ const HomeTab = () => {
           s.btnAddTransaction,
           "bg-gradient-to-r from-[#ffc727] from-0% via-[#9e40ba] via-61% to-[#7000ff] to-91%"
         )}
-        onClick={openModal}
+        onClick={openAddTransactionModal}
       >
         <svg width="20px" height="20px" stroke="var(--white-color)">
           <use href={`${icon}#icon-plus`} />
         </svg>
       </button>
-      <CustomModal isOpen={modalIsOpen} onClose={closeModal} type="transaction">
-        <AddTransactionForm closeModal={closeModal} />
+
+      <CustomModal
+        isOpen={modalAddIsOpen}
+        onClose={closeAddTransactionModal}
+        type="transaction"
+      >
+        <AddTransactionForm closeModal={closeAddTransactionModal} />
+      </CustomModal>
+
+      <CustomModal
+        isOpen={modalEditIsOpen}
+        onClose={closeEditTransactionModal}
+        type="transaction"
+      >
+        <EditTransactionForm
+          closeModal={closeEditTransactionModal}
+          userTransaction={editTransaction as Transaction}
+        />
       </CustomModal>
     </>
   );

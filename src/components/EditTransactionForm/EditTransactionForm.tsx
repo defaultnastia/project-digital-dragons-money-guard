@@ -9,8 +9,12 @@ import * as yup from "yup";
 
 import sprite from "../../img/icons.svg";
 import { useAppDispatch } from "../../redux/hooks";
-import { updateTransaction } from "../../redux/transactions/operations";
+import {
+  getAllTransactions,
+  updateTransaction,
+} from "../../redux/transactions/operations";
 import toast from "react-hot-toast";
+import { getBalance } from "../../redux/user/operations";
 
 type EditFormPropsType = {
   userTransaction: Transaction;
@@ -69,9 +73,14 @@ export const EditTransactionForm = ({
     };
 
     try {
-      dispatch(updateTransaction({ updTransaction, transId: id as string }));
+      dispatch(updateTransaction({ updTransaction, transId: id as string }))
+        .unwrap()
+        .then(() => {
+          dispatch(getAllTransactions());
+          dispatch(getBalance());
+          toast.success("Transaction was successfully updated");
+        });
       closeModal();
-      toast.success("Transaction was successfully updated");
     } catch (error) {
       toast.error("Failed to update transaction. Please try again");
     }
