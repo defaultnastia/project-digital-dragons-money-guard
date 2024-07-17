@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useMediaQuery } from "react-responsive";
+import toast from "react-hot-toast";
 
 import { Category, Transaction } from "../../redux/data.types";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -8,17 +9,24 @@ import {
   deleteTransaction,
   getAllTransactions,
 } from "../../redux/transactions/operations";
+import { getBalance } from "../../redux/user/operations";
 
 import icon from "../../img/icons.svg";
 import s from "./TransactionItem.module.css";
-import toast from "react-hot-toast";
 
 type Props = {
   transaction: Transaction;
   scrollable?: boolean;
+  setEditTransaction: (data: Transaction) => void;
+  setModalEditIsOpen: (data: boolean) => void;
 };
 
-const TransactionItem = ({ transaction, scrollable }: Props) => {
+const TransactionItem = ({
+  transaction,
+  scrollable,
+  setEditTransaction,
+  setModalEditIsOpen,
+}: Props) => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategories);
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -32,23 +40,8 @@ const TransactionItem = ({ transaction, scrollable }: Props) => {
   };
 
   const onUpdateTransaction = (obj: Transaction): undefined => {
-    // console.log(obj);
-    // const transactionToUpdate: PatchData = {
-    //   transId: obj.id,
-    //   updTransaction: {
-    //     transactionDate: "2023-09-09",
-    //     type: "EXPENSE",
-    //     categoryId: "27eb4b75-9a42-4991-a802-4aefe21ac3ce",
-    //     comment: "Milk & Butter",
-    //     amount: -30,
-    //   },
-    // };
-    // dispatch(updateTransaction(transactionToUpdate))
-    //   .unwrap()
-    //   .then((data: any) => {
-    //     console.log(data);
-    //     dispatch(getAllTransactions());
-    //   });
+    setEditTransaction(obj);
+    setModalEditIsOpen(true);
   };
 
   const onDeleteTransaction = (id: string): void => {
@@ -57,6 +50,7 @@ const TransactionItem = ({ transaction, scrollable }: Props) => {
       .then(() => {
         toast.success("Transaction was successfully deleted");
         dispatch(getAllTransactions());
+        dispatch(getBalance());
       });
   };
 
