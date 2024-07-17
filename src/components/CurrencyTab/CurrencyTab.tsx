@@ -51,7 +51,7 @@ const CurrencyTab: React.FC = () => {
           Error fetching currency rates
         </p>
       ) : (
-        <div className="flex-col w-[320px] md:w-[336px] xl:w-[480px] bg-[rgba(74,86,226,0.1)] rounded-br-[8px] rounded-bl-[8px] xl:rounded-none overflow-hidden">
+        <div className="flex-col w-[320px] md:w-[336px] xl:w-[480px] bg-[rgba(74,86,226,0.1)] rounded-br-[8px] rounded-bl-[8px] xl:rounded-none overflow-hidden mx-auto">
           <table className="text-[16px] w-full table-fixed xl:mb-[36px]">
             <thead className="text-[16px] bg-[rgba(255,255,255,0.20)] w-full">
               <tr>
