@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
-import { useAppDispatch, useAppSelector } from "./redux/hooks";
+import { useAppDispatch } from "./redux/hooks";
 import { refreshUser } from "./redux/user/operations";
-import { selectLoadingState } from "./redux/user/selectors";
+// import { selectLoadingState } from "./redux/user/selectors";
 import React, { Suspense, useEffect } from "react";
 import { lazy } from "react";
 import { Toaster } from "react-hot-toast";
@@ -20,17 +20,19 @@ const StatisticsTab = lazy(
 );
 const CurrencyTab = lazy(() => import("./components/CurrencyTab/CurrencyTab"));
 
-const App: React.FC = () => {
+// const App: React.FC = () => {
+const App = () => {
   const dispatch = useAppDispatch();
-  const userRefreshing = useAppSelector(selectLoadingState);
+  // const userRefreshing = useAppSelector(selectLoadingState);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return userRefreshing ? (
-    <p>Refreshing user...</p>
-  ) : (
+  // return userRefreshing ? (
+  //   <p>Refreshing user...</p>
+  // ) : (
+  return (
     <>
       <Toaster />
       <Suspense fallback={null}>

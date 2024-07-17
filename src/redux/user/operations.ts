@@ -55,9 +55,6 @@ export const refreshUser = createAsyncThunk(
 
     const persistedToken = state.user.token;
     if (persistedToken === null) {
-      toast("Please sign in to continue!", {
-        icon: "✋",
-      });
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
 

@@ -32,8 +32,7 @@ const TransactionItem = ({ transaction, scrollable }: Props) => {
   };
 
   const onUpdateTransaction = (obj: Transaction): undefined => {
-    console.log(obj);
-
+    // console.log(obj);
     // const transactionToUpdate: PatchData = {
     //   transId: obj.id,
     //   updTransaction: {
@@ -44,7 +43,6 @@ const TransactionItem = ({ transaction, scrollable }: Props) => {
     //     amount: -30,
     //   },
     // };
-
     // dispatch(updateTransaction(transactionToUpdate))
     //   .unwrap()
     //   .then((data: any) => {
