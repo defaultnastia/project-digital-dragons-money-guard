@@ -1,13 +1,15 @@
 import { CustomButton } from "../CustomButton/CustomButton";
 import CustomModal from "../CustomModal/CustomModal";
 import { Controller, useForm } from "react-hook-form";
-import { TransactionType, UserTransaction } from "../../redux/data.types";
+import { PatchData, UserTransaction } from "../../redux/data.types";
 import DatePicker from "react-datepicker";
 // import { useAppDispatch } from "../../redux/hooks";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import sprite from "../../img/icons.svg";
+import { useAppDispatch } from "../../redux/hooks";
+import { updateTransaction } from "../../redux/transactions/operations";
 
 type EditModalPropsType = {
   userTransaction: UserTransaction;
@@ -20,19 +22,16 @@ const schema = yup.object().shape({
     .string()
     .min(1, "Have to be at list 1 symbol")
     .required("required field"),
-  datePicker: yup
+  transactionDate: yup
     .date()
     .required("Please select a date")
     .min(new Date("2020-01-01"), "Date cannot be before 2020"),
-  amount: yup
-    .number()
-    .min(1, "Have to be at list 1 symbol")
-    .required("required field"),
+  amount: yup.number().required("required field"),
   comment: yup.string(),
 });
 
 export const ModalEditTransaction = ({
-  userTransaction: { amount, transactionDate, comment, type },
+  userTransaction: { id, amount, transactionDate, comment, type },
   openModal,
   closeModal,
 }: EditModalPropsType) => {
@@ -45,15 +44,20 @@ export const ModalEditTransaction = ({
     defaultValues: {
       category: "car",
       amount: amount,
-      datePicker: new Date(transactionDate),
+      transactionDate: new Date(transactionDate),
       comment: comment,
     },
   });
 
-  const onSubmit = (obj: object): void => {
-    console.log(obj);
+  const dispatch = useAppDispatch();
 
-    console.log("The form has been submitted");
+  const onSubmit = (data: object): void => {
+    const transId = id;
+
+    const patchData: PatchData = { updTransaction: { ...data, type }, transId };
+    console.log(patchData);
+
+    // dispatch(updateTransaction(patchData));
   };
 
   return (
@@ -107,7 +111,7 @@ export const ModalEditTransaction = ({
             />
             <div className="w-full relative">
               <Controller
-                name="datePicker"
+                name="transactionDate"
                 control={control}
                 render={({ field }) => (
                   <DatePicker
