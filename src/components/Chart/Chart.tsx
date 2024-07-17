@@ -16,7 +16,7 @@ const Chart = ({dataTransaction, balance}: ChartProps) => {
     labels: categoriesSummary.map((data) => data.name),
     datasets: [
       {
-        data: categoriesSummary.map((data) => -data.total),
+        data: categoriesSummary.map((data) => (data.type === "INCOME" ? data.total : -data.total)),
         backgroundColor: colorsStatistics,
         borderColor: colorsStatistics,
         borderWidth: 1,
