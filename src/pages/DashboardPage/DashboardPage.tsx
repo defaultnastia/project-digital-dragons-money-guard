@@ -7,6 +7,7 @@ import CurrencyTab from "../../components/CurrencyTab/CurrencyTab";
 import Balance from "../../components/Balance/Balance";
 import { useState } from "react";
 import clsx from "clsx";
+import s from "./DashboardPage.module.css";
 
 const DashboardPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -18,14 +19,15 @@ const DashboardPage = () => {
   const [activeTab, setActiveTab] = useState<string>("home");
 
   return (
-    <div>
+    <div className="min-h-[100vh]">
       <Header />
       <div
         className={clsx(
-          "flex bg-custom-svg bg-[523B7E]",
-          { "px-[32px]": isDesktop },
+          "flex min-h-screen",
+          s.background,
+          { "": isDesktop },
           {
-            "flex-col": isTablet,
+            "flex-col px-[32px]": isTablet,
           },
           { "flex-col px-[20px]": isMobile }
         )}
@@ -56,7 +58,7 @@ const DashboardPage = () => {
           </div>
           {(isDesktop || isTablet) && <CurrencyTab />}
         </div>
-        <div>
+        <div className="pl-[69px] pt-[46px] flex-1 pr-[16px] h-[100vh]">
           {activeTab === "home" && <HomeTab />}
           {activeTab === "statistics" && <StatisticsTab />}
           {isMobile && activeTab === "currency" && <CurrencyTab />}
