@@ -1,0 +1,103 @@
+.row {
+  @apply py-[12px] pl-[15px] pr-[20px] flex justify-between md:justify-start md:py-[16px] md:pl-[20px] md:pr-[6px];
+
+  &.rowBody {
+    @apply border-b-[1px] border-[var(--form-color-color)];
+
+    &:last-of-type {
+      @apply border-b-0;
+    }
+  }
+
+  &.scrollable {
+    @apply md:pr-[16px];
+  }
+}
+
+.scrollableWrapper {
+  @apply overflow-y-auto;
+}
+
+.cell {
+  @apply flex text-[14px] items-center;
+
+  &.cellDate {
+    @apply w-[12%];
+  }
+
+  &.cellType {
+    @apply w-[17%] justify-center;
+  }
+
+  &.cellCategory {
+    @apply w-[21%];
+  }
+
+  &.cellComment {
+    @apply w-[18%];
+  }
+
+  &.cellSum {
+    @apply w-[15%] justify-end font-semibold;
+  }
+
+  &.cellBtn {
+    @apply w-[17%] justify-end;
+  }
+
+  &.cellCategory {
+    @apply capitalize;
+  }
+}
+
+.incomeType {
+  @apply text-[var(--yellow-color)];
+}
+
+.expenseType {
+  @apply text-[var(--dashboard-text-color)];
+}
+
+.mobileTransaction {
+  @apply bg-[var(--form-color-color)] mb-[8px] rounded-[10px] border-l-[5px];
+
+  .row {
+    @apply border-b-[1px] border-[var(--form-color-color)];
+
+    &:last-of-type {
+      @apply border-b-0;
+    }
+  }
+
+  &:last-of-type {
+    @apply mb-[85px];
+  }
+
+  &.incomeTypeTransaction {
+    @apply border-[var(--yellow-color)];
+  }
+
+  &.expenseTypeTransaction {
+    @apply border-[var(--dashboard-text-color)];
+  }
+}
+
+.cellLeft {
+  @apply font-semibold;
+}
+
+.cellRight {
+  @apply max-w-[60%] text-right;
+}
+
+.btnEdit {
+  @apply flex justify-center items-center gap-[4px] md:w-[20px] md:h-[20px];
+
+  span {
+    @apply text-[var(--white-60-color)];
+  }
+}
+
+.btnDelete {
+  @apply text-[14px] py-[4px] px-[12px] rounded-[20px] font-normal;
+}

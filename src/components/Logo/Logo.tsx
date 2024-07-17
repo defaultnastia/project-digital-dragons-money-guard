@@ -4,6 +4,7 @@ interface Props {
   sizeLogo?: number;
   sizeText?: number;
   icon: NameIcon;
+  className?: string;
 }
 
 const Logo = ({ sizeLogo, sizeText, icon }: Props) => {
