@@ -15,7 +15,7 @@ const LogoutForm: React.FC<LogoutFormProps> = ({ onSubmit, onClose }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="p-[20px]">
-        <Logo sizeLogo={36} sizeText={26} icon="logo" />
+        <Logo sizeLogo={36} sizeText={26} icon="logo" className="text-[26px]" />
         <h2 className="mx-auto mt-[52px] mb-[52px] text-[18px] w-[300px]">
           Are you sure you want to log out?
         </h2>

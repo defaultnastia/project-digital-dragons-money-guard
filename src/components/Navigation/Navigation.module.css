@@ -1,7 +1,6 @@
 .active {
   @apply font-black;
   display: flex;
-  color: #734aef;
 
   svg {
     fill: #734aef;

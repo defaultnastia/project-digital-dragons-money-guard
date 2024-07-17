@@ -80,6 +80,6 @@ export interface TransactionsState {
 }
 
 export interface PatchData {
-  updTransaction: Omit<Transaction, "id">;
+  updTransaction: Omit<UserTransaction, "id">;
   transId: string;
 }

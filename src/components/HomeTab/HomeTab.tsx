@@ -64,15 +64,9 @@ const HomeTab = () => {
           <use href={`${icon}#icon-plus`} />
         </svg>
       </button>
-      {modalIsOpen && (
-        <CustomModal
-          isOpen={modalIsOpen}
-          onClose={closeModal}
-          type="transaction"
-        >
-          <AddTransactionForm closeModal={closeModal} />
-        </CustomModal>
-      )}
+      <CustomModal isOpen={modalIsOpen} onClose={closeModal} type="transaction">
+        <AddTransactionForm closeModal={closeModal} />
+      </CustomModal>
     </>
   );
 };

@@ -40,6 +40,7 @@ import {
 } from "../../redux/transactions/selectors";
 import { CustomButton } from "../../components/CustomButton/CustomButton";
 import Logo from "../../components/Logo/Logo";
+import { EditTransactionForm } from "../../components/EditTransactionForm/EditTransactionForm";
 
 const PageNotFound = () => {
   const dispatch = useAppDispatch();
@@ -61,6 +62,8 @@ const PageNotFound = () => {
   };
 
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
+
   const { register, handleSubmit } = useForm();
 
   const openModal = (): void => {
@@ -69,6 +72,14 @@ const PageNotFound = () => {
 
   const closeModal = (): void => {
     setIsOpenModal(false);
+  };
+
+  const openUpdateModal = (): void => {
+    setIsUpdateOpen(true);
+  };
+
+  const closeUpdateModal = (): void => {
+    setIsUpdateOpen(false);
   };
 
   const onSubmit = (obj: object): void => {
@@ -127,6 +138,7 @@ const PageNotFound = () => {
     dispatch(addTransaction(transactionToAdd));
     setTimeout(handleGetAllTrans, 1000);
   };
+
   const handleUpdateTrans = () => {
     const updTransaction: Omit<Transaction, "id"> = {
       transactionDate: transactions[0].transactionDate,
@@ -137,9 +149,10 @@ const PageNotFound = () => {
     };
     const transId = transactions[0].id;
     const patchData = { updTransaction, transId };
-    dispatch(updateTransaction(patchData));
+    // dispatch(updateTransaction(patchData));
     setTimeout(handleGetAllTrans, 1000);
   };
+
   const handleDeleteTrans = () => {
     const transId = transactions[0].id;
     dispatch(deleteTransaction(transId));
@@ -297,9 +310,21 @@ const PageNotFound = () => {
           Add Transaction
         </button>
         <p>.</p>
-        <button className="border p-1" onClick={handleUpdateTrans}>
+        <button className="border p-1" onClick={openUpdateModal}>
           Update Transaction
         </button>
+        {isUpdateOpen && (
+          <CustomModal
+            isOpen={isUpdateOpen}
+            onClose={closeModal}
+            type="transaction"
+          >
+            <EditTransactionForm
+              userTransaction={transactions[5]}
+              closeModal={closeUpdateModal}
+            />
+          </CustomModal>
+        )}
         <p>.</p>
         <button className="border p-1" onClick={handleDeleteTrans}>
           Delete Transaction
