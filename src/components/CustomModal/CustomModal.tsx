@@ -60,6 +60,7 @@ const CustomModal = ({ isOpen, onClose, type, children }: Props) => {
               name="close"
               size={16}
               className="hover:stroke-[var(--dashboard-text-color)]"
+              stroke="var(--white-color)"
             />
           </button>
         )}
