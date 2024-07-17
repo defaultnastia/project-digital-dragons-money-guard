@@ -8,10 +8,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
 import { CustomButton } from "../CustomButton/CustomButton";
-import {
-  getTransactionsCategories,
-  addTransaction,
-} from "../../redux/transactions/operations";
+import { addTransaction } from "../../redux/transactions/operations";
 import { selectCategories } from "../../redux/transactions/selectors";
 import sprite from "../../img/icons.svg";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -50,10 +47,6 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategories);
   const [options, setOptions] = useState<Option[]>([]);
-
-  useEffect(() => {
-    dispatch(getTransactionsCategories());
-  }, [dispatch]);
 
   useEffect(() => {
     if (categories) {

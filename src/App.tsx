@@ -7,6 +7,8 @@ import { selectIsRefreshing } from "./redux/user/selectors";
 import React, { Suspense, useEffect } from "react";
 import { lazy } from "react";
 import { Toaster } from "react-hot-toast";
+import ModalAddTransaction from "./components/ModalAddTransaction/ModalAddTransaction";
+import { getTransactionsCategories } from "./redux/transactions/operations";
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
@@ -20,19 +22,18 @@ const StatisticsTab = lazy(
 );
 const CurrencyTab = lazy(() => import("./components/CurrencyTab/CurrencyTab"));
 
-// const App: React.FC = () => {
-const App = () => {
+const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const userRefreshing = useAppSelector(selectIsRefreshing);
 
   useEffect(() => {
     dispatch(refreshUser());
+    dispatch(getTransactionsCategories());
   }, [dispatch]);
 
   return userRefreshing ? (
     <p>Refreshing user...</p>
   ) : (
-    // return (
     <>
       <Toaster />
       <Suspense fallback={null}>
