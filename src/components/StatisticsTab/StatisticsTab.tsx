@@ -33,7 +33,7 @@ const StatisticsTab = () => {
       <h2 className="text-[1.875rem] mb-5 min-[1280px]:ml-[15px] max-[1279px]:hidden">
         Statistics
       </h2>
-      <div className="min-[768px]:flex gap-8 justify-center">
+      <div className="min-[768px]:flex gap-8">
         <div>
           <h2 className="text-[1.875rem] mb-2 min-[768px]:mb-5 min-[1280px]:hidden ">Statistics</h2>
           <Chart dataTransaction={statistics} balance={balance} />
