@@ -26,7 +26,7 @@ type CustomButtonPropsType = {
 
 const style = {
   colorful:
-    "transition-all duration-300 ease-in-out block mx-auto w-[100%] uppercase text-center text-[18px] tracking-[0.1em] rounded-[20px] py-[13px] px-[20px] mb-[20px] md:w-[300px] bg-gradient-to-r from-[#ffc727] from-0% via-[#9e40ba] via-61% to-[#7000ff] to-99% hover:bg-gradient-to-r hover:from-[#ffc527de] hover:via-[#9d40bada] hover:to-[#6f00ffd0] focus:bg-gradient-to-r focus:from-[#ffc527de] focus:via-[#9d40bada] focus:to-[#6f00ffd0] drop-shadow-xl",
+    "transition-all duration-300 ease-in-out block mx-auto w-[100%] uppercase text-center text-[18px] tracking-[0.1em] rounded-[20px] py-[13px] px-[20px] mb-[20px] md:w-[300px] bg-gradient-to-r from-[#ffc727] from-0% via-[#9e40ba] via-61% to-[#7000ff] to-90% hover:bg-gradient-to-r hover:from-[#ffc527de] hover:via-[#9d40bada] hover:to-[#6f00ffd0] focus:bg-gradient-to-r focus:from-[#ffc527de] focus:via-[#9d40bada] focus:to-[#6f00ffd0] drop-shadow-xl",
   mono: "block mx-auto w-[100%] uppercase text-center text-[18px] tracking-[0.1em] rounded-[20px] py-[13px] px-[20px] mb-[20px] bg-[var(--white-color)] hover:bg-gray-300 focus:bg-gray-300 transition duration-300 ease-in-out text-[var(--text-button-color)] md:w-[300px]",
 };
 
