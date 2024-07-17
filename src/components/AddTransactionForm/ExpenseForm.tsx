@@ -69,6 +69,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
       categoryId: "",
       transactionDate: new Date(),
       comment: "",
+      amount: 0,
     },
   });
 
@@ -200,7 +201,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
             <input
               {...field}
               id="amount"
-              value={field.value}
+              value={field.value === 0 ? "" : field.value}
               type="number"
               placeholder="0.00"
               className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"

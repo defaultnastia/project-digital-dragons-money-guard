@@ -2,6 +2,7 @@ import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { Icon } from "../Icon/Icon";
 
 interface SwitcherComponentProps {
   isChecked: boolean;
@@ -79,7 +80,12 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
               fontWeight: "bold",
             }}
           >
-            +
+            <Icon
+              name="plus"
+              size={16}
+              className="hover:stroke-[var(--dashboard-text-color)]"
+              stroke="var(--white-color)"
+            />
           </Box>
         }
         checkedIcon={
@@ -97,7 +103,12 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
               fontWeight: "bold",
             }}
           >
-            -
+            <Icon
+              name="minus"
+              size={16}
+              className="hover:stroke-[var(--dashboard-text-color)]"
+              stroke="var(--white-color)"
+            />
           </Box>
         }
       />
