@@ -6,19 +6,11 @@ interface Props {
   name: NameIcon;
   size?: number;
   className?: string;
-  stroke?: string;
-  fill?: string;
 }
 
-export const Icon = ({ name, size = 24, className, fill, stroke }: Props) => {
+export const Icon = ({ name, size = 24, className }: Props) => {
   return (
-    <svg
-      className={` ${className}`}
-      width={size}
-      height={size}
-      fill={fill}
-      stroke={stroke}
-    >
+    <svg className={` ${className}`} width={size} height={size}>
       <use href={`${Icons}#icon-${name}`} />
     </svg>
   );
