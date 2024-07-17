@@ -5,8 +5,10 @@ import HomeTab from "../../components/HomeTab/HomeTab";
 import StatisticsTab from "../../components/StatisticsTab/StatisticsTab";
 import CurrencyTab from "../../components/CurrencyTab/CurrencyTab";
 import Balance from "../../components/Balance/Balance";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { useAppDispatch } from "../../redux/hooks";
+import { getTransactionsCategories } from "../../redux/transactions/operations";
 
 const DashboardPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -16,6 +18,12 @@ const DashboardPage = () => {
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
 
   const [activeTab, setActiveTab] = useState<string>("home");
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getTransactionsCategories());
+  }, [dispatch]);
 
   return (
     <div>
