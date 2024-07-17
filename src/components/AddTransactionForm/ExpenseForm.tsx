@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -6,6 +6,7 @@ import Select from "react-select";
 import toast from "react-hot-toast";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./datepicker-custom.css";
 import CustomDropdownIndicator from "./CustomDropdownIndicator";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { addTransaction } from "../../redux/transactions/operations";
@@ -53,6 +54,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(selectCategories);
   const [options, setOptions] = useState<Option[]>([]);
+  const datePickerRef = useRef<DatePicker | null>(null);
 
   useEffect(() => {
     if (categories) {
@@ -94,6 +96,12 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
       closeModal();
     } catch (error) {
       toast.error("Failed to add transaction. Please try again");
+    }
+  };
+
+  const handleIconClick = () => {
+    if (datePickerRef.current) {
+      datePickerRef.current.setFocus();
     }
   };
 
@@ -143,8 +151,8 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
                     ...provided,
                     zIndex: 9999,
                     borderRadius: "8px",
-                    background:
-                      "var(--Small-Form-color, linear-gradient(0deg, rgba(83, 61, 186, 0.70) 0%, rgba(80, 48, 154, 0.70) 43.14%, rgba(106, 70, 165, 0.52) 73.27%, rgba(133, 93, 175, 0.13) 120.03%))",
+                    backgroundColor:
+                      "linear-gradient(0deg, rgba(83, 61, 186, 0.70) 0%, rgba(80, 48, 154, 0.70) 43.14%, rgba(106, 70, 165, 0.52) 73.27%, rgba(133, 93, 175, 0.13) 120.03%);",
                     boxShadow: "0px 4px 60px 0px rgba(0, 0, 0, 0.25)",
                     backdropFilter: "blur(50px)",
                   }),
@@ -196,6 +204,11 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
                     fontWeight: "400",
                     lineHeight: "normal",
                   }),
+                  input: (provided) => ({
+                    ...provided,
+                    color: "white",
+                    caretColor: "transparent",
+                  }),
                 }}
               />
             )}
@@ -245,14 +258,16 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
                   placeholderText="Select a date"
                   calendarStartDay={1}
                   maxDate={new Date()}
+                  ref={datePickerRef}
                 />
               )}
             />
             <svg
-              className="absolute sb right-[16px] top-[3px] md:right-[10px] md:top-[1px]"
+              className="absolute sb right-[16px] top-[3px] md:right-[10px] md:top-[1px] cursor-pointer"
               style={{ fill: "#734AEF" }}
               width="24"
               height="24"
+              onClick={handleIconClick}
             >
               <use xlinkHref={`${sprite}#icon-ate_range`}></use>
             </svg>

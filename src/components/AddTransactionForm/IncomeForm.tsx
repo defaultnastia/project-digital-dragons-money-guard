@@ -1,8 +1,10 @@
 import { useForm, Controller } from "react-hook-form";
+import { useRef } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import "./datepicker-custom.css";
 import toast from "react-hot-toast";
 import { CustomButton } from "../CustomButton/CustomButton";
 import { useAppDispatch } from "../../redux/hooks";
@@ -41,6 +43,7 @@ const schema = yup.object().shape({
 
 const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
   const dispatch = useAppDispatch();
+  const datePickerRef = useRef<DatePicker | null>(null);
 
   const {
     handleSubmit,
@@ -72,6 +75,12 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
       closeModal();
     } catch (error) {
       toast.error("Failed to add transaction. Please try again");
+    }
+  };
+
+  const handleIconClick = () => {
+    if (datePickerRef.current) {
+      datePickerRef.current.setFocus();
     }
   };
 
@@ -119,14 +128,17 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
                   placeholderText="Select a date"
                   calendarStartDay={1}
                   maxDate={new Date()}
+                  calendarClassName="react-datepicker"
+                  ref={datePickerRef}
                 />
               )}
             />
             <svg
-              className="absolute sb right-[16px] top-[3px] md:right-[10px] md:top-[1px]"
+              className="absolute sb right-[16px] top-[3px] md:right-[10px] md:top-[1px] cursor-pointer"
               style={{ fill: "#734AEF" }}
               width="24"
               height="24"
+              onClick={handleIconClick}
             >
               <use xlinkHref={`${sprite}#icon-ate_range`}></use>
             </svg>
