@@ -9,7 +9,7 @@ const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const dispatch = useAppDispatch();
-  const minYear = 2010;
+  const minYear = 2020;
 
   const handleMonthChange = (values: OptionType[]) => {
     const month = values[0]?.value as number;
@@ -51,7 +51,6 @@ const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
           },
         ]}
         onChange={handleMonthChange}
-        className={css.select}
       />
 
       <Select
