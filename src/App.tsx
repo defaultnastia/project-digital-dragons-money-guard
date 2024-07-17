@@ -27,7 +27,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     dispatch(refreshUser());
-    dispatch(getTransactionsCategories());
   }, [dispatch]);
 
   return userRefreshing ? (
