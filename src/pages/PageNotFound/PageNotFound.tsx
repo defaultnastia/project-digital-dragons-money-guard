@@ -72,9 +72,8 @@ const PageNotFound = () => {
   };
 
   const onSubmit = (obj: object): void => {
-    console.log(obj);
-
-    console.log("The form has been submitted");
+    // console.log(obj);
+    // console.log("The form has been submitted");
   };
 
   // #region USER and AUTH server interactions
