@@ -1,7 +1,11 @@
 import { CustomButton } from "../CustomButton/CustomButton";
 import CustomModal from "../CustomModal/CustomModal";
 import { Controller, useForm } from "react-hook-form";
-import { PatchData, UserTransaction } from "../../redux/data.types";
+import {
+  PatchData,
+  Transaction,
+  UserTransaction,
+} from "../../redux/data.types";
 import DatePicker from "react-datepicker";
 // import { useAppDispatch } from "../../redux/hooks";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,7 +17,6 @@ import { updateTransaction } from "../../redux/transactions/operations";
 
 type EditModalPropsType = {
   userTransaction: UserTransaction;
-  openModal: boolean;
   closeModal: () => void;
 };
 
@@ -30,8 +33,8 @@ const schema = yup.object().shape({
   comment: yup.string(),
 });
 
-export const ModalEditTransaction = ({
-  userTransaction: { id, amount, transactionDate, comment, type },
+export const EditTransaction = ({
+  userTransaction: { id, amount, transactionDate, comment, type, categoryId },
   openModal,
   closeModal,
 }: EditModalPropsType) => {
@@ -52,7 +55,14 @@ export const ModalEditTransaction = ({
   const dispatch = useAppDispatch();
 
   const onSubmit = (data: object): void => {
+    const updTransaction: Omit<Transaction, "id"> = {
+      type,
+      ...data,
+      categoryId,
+    };
     const transId = id;
+    const patchData = { updTransaction, transId };
+    dispatch(updateTransaction(patchData));
 
     const patchData: PatchData = { updTransaction: { ...data, type }, transId };
     console.log(patchData);
@@ -61,28 +71,20 @@ export const ModalEditTransaction = ({
   };
 
   return (
-    <CustomModal
-      isOpen={openModal}
-      onClose={closeModal}
-      type="transaction"
-      //   shouldCloseOnOverlayClick={true}
-      //   shouldCloseOnEsc={true}
-    >
+    <div>
       <h2 className="block text-[30px] text-center mb-[40px]">
         Edit transaction
       </h2>
+      <div className="flex justify-center gap-5 mb-10">
+        <span className={type === "INCOME" ? "text-[#ff868d]" : "text-white"}>
+          Income
+        </span>
+        /
+        <span className={type === "EXPENSE" ? "text-[#ff868d]" : "text-white"}>
+          Expense
+        </span>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className="w-[100%]">
-        <div className="flex justify-center gap-5 mb-10">
-          <span className={type === "INCOME" ? "text-[#ff868d]" : "text-white"}>
-            Income
-          </span>
-          /
-          <span
-            className={type === "EXPENSE" ? "text-[#ff868d]" : "text-white"}
-          >
-            Expense
-          </span>
-        </div>
         <div className="">
           {type === "EXPENSE" && (
             <Controller
@@ -131,9 +133,9 @@ export const ModalEditTransaction = ({
               >
                 <use href={`${sprite}#icon-ate_range`}></use>
               </svg>
-              {errors.datePicker && (
+              {errors.transactionDate && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.datePicker.message}
+                  {errors.transactionDate.message}
                 </p>
               )}
             </div>
@@ -163,6 +165,6 @@ export const ModalEditTransaction = ({
           </CustomButton>
         </div>
       </form>
-    </CustomModal>
+    </div>
   );
 };
