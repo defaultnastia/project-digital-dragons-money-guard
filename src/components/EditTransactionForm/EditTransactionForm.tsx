@@ -21,7 +21,12 @@ type formElementsType = {
   transactionDate: string;
   comment: string;
   amount: number;
-  category: string;
+};
+
+type DataConvert = {
+  transactionDate: Date;
+  comment: string;
+  amount: number;
 };
 
 const schema = yup.object().shape({
@@ -34,7 +39,10 @@ const schema = yup.object().shape({
     .number()
     .typeError("Please enter a number")
     .required("Please enter a number"),
-  comment: yup.string().min(1, "leave a comment"),
+  comment: yup
+    .string()
+    .min(1, "leave a comment")
+    .required("Please leave a comment"),
 });
 
 export const EditTransactionForm = ({
@@ -57,9 +65,21 @@ export const EditTransactionForm = ({
     },
   });
 
-  const onSubmit = (data: formElementsType): void => {
-    console.log("Here");
+  const dateConvert = (data: DataConvert) => {
+    const date = data.transactionDate.toString();
 
+    const updTransaction = {
+      transactionDate: date,
+      comment: data.comment,
+      amount: data.amount,
+      categoryId,
+      type,
+    };
+
+    onSubmit(updTransaction);
+  };
+
+  const onSubmit = (data: formElementsType): void => {
     const updTransaction = {
       transactionDate: data.transactionDate,
       comment: data.comment,
@@ -90,7 +110,7 @@ export const EditTransactionForm = ({
           Expense
         </span>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-[100%]">
+      <form onSubmit={handleSubmit(dateConvert)} className="w-[100%]">
         <div className="flex flex-col gap-[40px] w-full mt-[40px]">
           {type === "EXPENSE" && (
             <Controller
