@@ -11,7 +11,7 @@ import { Toaster } from "react-hot-toast";
 const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const RegistrationPage = lazy(
-  () => import("./pages/PageNotFound/PageNotFound")
+  () => import("./pages/RegistrationPage/RegistrationPage")
 );
 const PageNotFound = lazy(() => import("./pages/PageNotFound/PageNotFound"));
 const HomeTab = lazy(() => import("./components/HomeTab/HomeTab"));
