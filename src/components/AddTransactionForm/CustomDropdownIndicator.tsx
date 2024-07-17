@@ -1,5 +1,3 @@
-// import sprite from "../../img/icons.svg";
-
 export const CustomDropdownIndicator: React.FC = () => {
   return (
     <div className="mr-[20px] ">
@@ -12,9 +10,6 @@ export const CustomDropdownIndicator: React.FC = () => {
       >
         <path d="M1 1L10 10L19 1" stroke="#FBFBFB" />
       </svg>
-      {/* <svg style={{ top: "8px", right: "17px" }} width="40" height="20">
-        <use xlinkHref={`${sprite}#`}></use>
-      </svg> */}
     </div>
   );
 };

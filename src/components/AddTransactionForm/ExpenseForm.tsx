@@ -13,6 +13,7 @@ import { selectCategories } from "../../redux/transactions/selectors";
 import sprite from "../../img/icons.svg";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { UserTransaction, TransactionType } from "../../redux/data.types";
+import { getBalance } from "../../redux/user/operations";
 
 interface ExpenseFormProps {
   closeModal: () => void;
@@ -39,8 +40,13 @@ const schema = yup.object().shape({
   amount: yup
     .number()
     .typeError("Please enter a number")
-    .required("Please enter a number"),
-  comment: yup.string().trim().required("Please enter a comment"),
+    .required("Please enter a number")
+    .max(1000000, "Amount cannot exceed 1,000,000"),
+  comment: yup
+    .string()
+    .trim()
+    .required("Please enter a comment")
+    .max(30, "Comment cannot exceed 30 symbols"),
 });
 
 const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
@@ -73,7 +79,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
     },
   });
 
-  const onSubmit = (data: Omit<UserTransaction, "type">) => {
+  const onSubmit = async (data: Omit<UserTransaction, "type">) => {
     const formattedData = {
       transactionDate: data.transactionDate,
       type: "EXPENSE" as TransactionType,
@@ -83,7 +89,8 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
     };
 
     try {
-      dispatch(addTransaction(formattedData));
+      await dispatch(addTransaction(formattedData));
+      await dispatch(getBalance());
       closeModal();
     } catch (error) {
       toast.error("Failed to add transaction. Please try again");
@@ -204,7 +211,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
               value={field.value === 0 ? "" : field.value}
               type="number"
               placeholder="0.00"
-              className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
+              className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 no-arrows"
             />
           )}
         />
