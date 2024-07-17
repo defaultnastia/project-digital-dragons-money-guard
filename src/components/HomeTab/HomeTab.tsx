@@ -35,7 +35,6 @@ const HomeTab = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
-    console.log(2);
   };
 
   useEffect(() => {
