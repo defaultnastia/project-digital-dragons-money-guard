@@ -16,6 +16,7 @@
   display: flex;
   align-items: center;
   margin-top: 53px;
+  gap: 40px;
 }
 
 .logo_text {
@@ -24,7 +25,7 @@
 
 .input_box {
   position: relative;
-  margin-bottom: 20px;
+  /* margin-bottom:` 20px; */
 }
 
 .icon {

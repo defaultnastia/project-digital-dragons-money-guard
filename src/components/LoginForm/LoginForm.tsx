@@ -80,16 +80,18 @@ const LoginForm: React.FC = () => {
             <p className={s.error}>{errors.password.message}</p>
           )}
         </div>
-        <CustomButton
-          elementLike={{ btnType: "submit", onClick: handleSubmit(onSubmit) }}
-          btnStyle="colorful"
-        >
-          LOG IN
-        </CustomButton>
+        <div>
+          <CustomButton
+            elementLike={{ btnType: "submit", onClick: handleSubmit(onSubmit) }}
+            btnStyle="colorful"
+          >
+            LOG IN
+          </CustomButton>
 
-        <CustomButton elementLike={{ linkTo: "/register" }} btnStyle="mono">
-          REGISTER
-        </CustomButton>
+          <CustomButton elementLike={{ linkTo: "/register" }} btnStyle="mono">
+            REGISTER
+          </CustomButton>
+        </div>
       </form>
     </div>
   );

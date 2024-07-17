@@ -154,12 +154,14 @@ const RegistrationForm: React.FC = () => {
             minLength={5}
           />
         </div>
-        <CustomButton elementLike={{ btnType: "submit" }} btnStyle="colorful">
-          REGISTER
-        </CustomButton>
-        <CustomButton elementLike={{ linkTo: "/login" }} btnStyle="mono">
-          LOG IN
-        </CustomButton>
+        <div>
+          <CustomButton elementLike={{ btnType: "submit" }} btnStyle="colorful">
+            REGISTER
+          </CustomButton>
+          <CustomButton elementLike={{ linkTo: "/login" }} btnStyle="mono">
+            LOG IN
+          </CustomButton>
+        </div>
       </form>
     </div>
   );
