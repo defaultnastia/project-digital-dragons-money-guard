@@ -25,6 +25,10 @@ const HomeTab = () => {
       (a, b) => Date.parse(a.transactionDate) - Date.parse(b.transactionDate)
     );
 
+  const addTransaction = () => {
+    console.log("Click");
+  };
+
   useEffect(() => {
     dispatch(getAllTransactions());
     dispatch(getTransactionsCategories());
@@ -46,9 +50,10 @@ const HomeTab = () => {
           s.btnAddTransaction,
           "bg-gradient-to-r from-[#ffc727] from-0% via-[#9e40ba] via-61% to-[#7000ff] to-91%"
         )}
+        onClick={addTransaction}
       >
-        <svg width="20px" height="20px" stroke="white">
-          <use href={`${icon}#icon_plus`} />
+        <svg width="20px" height="20px" stroke="var(--white-color)">
+          <use href={`${icon}#icon-plus`} />
         </svg>
       </button>
     </>
