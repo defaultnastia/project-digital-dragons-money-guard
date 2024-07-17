@@ -7,7 +7,6 @@ import { selectIsRefreshing } from "./redux/user/selectors";
 import React, { Suspense, useEffect } from "react";
 import { lazy } from "react";
 import { Toaster } from "react-hot-toast";
-import ModalAddTransaction from "./components/ModalAddTransaction/ModalAddTransaction";
 import { getTransactionsCategories } from "./redux/transactions/operations";
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
