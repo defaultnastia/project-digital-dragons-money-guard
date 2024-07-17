@@ -71,6 +71,7 @@ export const EditTransactionForm = ({
     try {
       dispatch(updateTransaction({ updTransaction, transId: id as string }));
       closeModal();
+      toast.success("Transaction was successfully updated");
     } catch (error) {
       toast.error("Failed to update transaction. Please try again");
     }
