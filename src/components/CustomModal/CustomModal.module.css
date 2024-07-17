@@ -1,8 +1,5 @@
 .bgModal {
-  position: relative;
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
+  @apply w-[100vw] p-[20px] h-screen flex justify-center items-center overflow-hidden md:flex-row md:flex-wrap md:max-w-[533px] md:h-auto md:py-[40px] md:px-[73px] relative flex flex-wrap;
 
   @media screen and (max-width: 767px) {
     flex-flow: column;
@@ -21,6 +18,10 @@
     border-radius: 100%;
     z-index: -1;
   }
+}
+
+.btnClose {
+  @apply absolute top-[20px] right-[20px];
 }
 
 /* .childrenWrapper {

@@ -86,21 +86,21 @@ const PageNotFound = () => {
   };
 
   const onSubmit = (obj: object): void => {
-    console.log(obj);
-
-    console.log("The form has been submitted");
+    // console.log(obj);
+    // console.log("The form has been submitted");
   };
 
   // #region USER and AUTH server interactions
 
   const userToSignUp: UserCredentials = {
-    username: "Postman21",
-    email: "Postman21@post.com",
+    username: "Postman23",
+    email: "Postman23@post.com",
     password: "&jf7jm!jeo",
   };
 
   const userToSignIn: Omit<UserCredentials, "username"> = {
     email: "Postman15@post.com",
+    // password: "&jf7jm!jeodd", //incorrect password
     password: "&jf7jm!jeo",
   };
 
