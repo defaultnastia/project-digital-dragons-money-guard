@@ -25,8 +25,11 @@ const schema = yup.object().shape({
     .date()
     .required("Please select a date")
     .min(new Date("2020-01-01"), "Date cannot be before 2020"),
-  amount: yup.number().required("required field"),
-  comment: yup.string(),
+  amount: yup
+    .number()
+    .typeError("Please enter a number")
+    .required("Please enter a number"),
+  comment: yup.string().min(1, "leave a comment"),
 });
 
 export const EditTransactionForm = ({
@@ -42,14 +45,14 @@ export const EditTransactionForm = ({
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      category: "car",
-      amount: amount,
+      category: "Need to add category",
+      amount,
       transactionDate: new Date(transactionDate),
-      comment: comment,
+      comment,
     },
   });
 
-  const onSubmit = (data: Omit<Transaction, "id">): void => {
+  const onSubmit = (data: Omit<Transaction, "id" | "categoryId">): void => {
     const updTransaction = {
       transactionDate: data.transactionDate,
       comment: data.comment,
@@ -81,7 +84,7 @@ export const EditTransactionForm = ({
         </span>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="w-[100%]">
-        <div className="">
+        <div className="flex flex-col gap-[40px] w-full mt-[40px]">
           {type === "EXPENSE" && (
             <Controller
               name="category"
@@ -90,12 +93,12 @@ export const EditTransactionForm = ({
                 <input
                   type="text"
                   {...field}
-                  className="w-[100%] p-[8px] mb-[40px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+                  className="w-[100%] p-[8px] pl-[20px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
                 />
               )}
             />
           )}
-          <div className="md:flex row gap-[32px]">
+          <div className="flex max-[767px]:flex-col max-[767px]:gap-[40px] md:row md:gap-[32px]">
             <Controller
               name="amount"
               control={control}
@@ -103,11 +106,11 @@ export const EditTransactionForm = ({
                 <input
                   type="number"
                   {...field}
-                  className="mb:w-[181px] w-full p-2 s:pl-[20px] mb-[40px] text-start md:text-center border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
+                  className="mb:w-[181px] w-full md:p-2 pl-[20px] pb-[8px] text-start md:text-center border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
                 />
               )}
             />
-            <div className=" w-full relative">
+            <div className="w-full relative">
               <Controller
                 name="transactionDate"
                 control={control}
@@ -117,7 +120,7 @@ export const EditTransactionForm = ({
                     onChange={(date) => field.onChange(date)}
                     id="transactionDate"
                     dateFormat="dd.MM.yyyy"
-                    className="md:w-[181px] w-full p-2 pl-[20px] pb-[8px] mb-[40px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
+                    className="md:w-[181px] w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
                     wrapperClassName="w-full"
                     maxDate={new Date()}
                   />
@@ -139,16 +142,23 @@ export const EditTransactionForm = ({
             </div>
           </div>
 
-          <Controller
-            name="comment"
-            control={control}
-            render={({ field }) => (
-              <textarea
-                {...field}
-                className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
-              />
+          <div>
+            <Controller
+              name="comment"
+              control={control}
+              render={({ field }) => (
+                <textarea
+                  {...field}
+                  className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg  focus:outline-none focus:border-opacity-100 resize-none"
+                />
+              )}
+            />
+            {errors.comment && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.comment.message}
+              </p>
             )}
-          />
+          </div>
         </div>
 
         <div className="w-[100%] mt-[40px]">

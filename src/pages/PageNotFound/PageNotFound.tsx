@@ -320,7 +320,7 @@ const PageNotFound = () => {
             type="transaction"
           >
             <EditTransactionForm
-              userTransaction={transactions[0]}
+              userTransaction={transactions[5]}
               closeModal={closeUpdateModal}
             />
           </CustomModal>
