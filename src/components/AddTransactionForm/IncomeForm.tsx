@@ -78,6 +78,7 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
           render={({ field }) => (
             <input
               {...field}
+              id="amount"
               value={field.value === 0 ? "" : field.value}
               type="text"
               placeholder="0.00"
@@ -97,6 +98,7 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
           render={({ field }) => (
             <DatePicker
               selected={field.value}
+              id="transactionDate"
               onChange={(date) => field.onChange(date)}
               dateFormat="dd.MM.yyyy"
               className=" w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
