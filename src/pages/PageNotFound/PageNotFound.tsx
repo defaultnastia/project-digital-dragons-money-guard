@@ -149,7 +149,7 @@ const PageNotFound = () => {
     };
     const transId = transactions[0].id;
     const patchData = { updTransaction, transId };
-    dispatch(updateTransaction(patchData));
+    // dispatch(updateTransaction(patchData));
     setTimeout(handleGetAllTrans, 1000);
   };
 

@@ -18,12 +18,6 @@ type EditFormPropsType = {
 };
 
 type formElementsType = {
-  transactionDate: string;
-  comment: string;
-  amount: number;
-};
-
-type DataConvert = {
   transactionDate: Date;
   comment: string;
   amount: number;
@@ -65,20 +59,6 @@ export const EditTransactionForm = ({
     },
   });
 
-  const dateConvert = (data: DataConvert) => {
-    const date = data.transactionDate.toString();
-
-    const updTransaction = {
-      transactionDate: date,
-      comment: data.comment,
-      amount: data.amount,
-      categoryId,
-      type,
-    };
-
-    onSubmit(updTransaction);
-  };
-
   const onSubmit = (data: formElementsType): void => {
     const updTransaction = {
       transactionDate: data.transactionDate,
@@ -89,7 +69,7 @@ export const EditTransactionForm = ({
     };
 
     try {
-      dispatch(updateTransaction({ updTransaction, transId: id }));
+      dispatch(updateTransaction({ updTransaction, transId: id as string }));
       closeModal();
     } catch (error) {
       toast.error("Failed to update transaction. Please try again");
@@ -110,7 +90,7 @@ export const EditTransactionForm = ({
           Expense
         </span>
       </div>
-      <form onSubmit={handleSubmit(dateConvert)} className="w-[100%]">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-[100%]">
         <div className="flex flex-col gap-[40px] w-full mt-[40px]">
           {type === "EXPENSE" && (
             <Controller
