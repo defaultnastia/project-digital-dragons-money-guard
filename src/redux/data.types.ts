@@ -12,6 +12,7 @@ export interface UserState {
   loading: boolean;
   errorCode: string | null;
   isLoggedIn: boolean;
+  isRefreshing: boolean;
 }
 
 // to be used when user enters credentials

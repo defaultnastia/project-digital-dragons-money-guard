@@ -5,6 +5,7 @@ import {
   getTransactionsCategories,
   getTransactionsSummary,
 } from "./operations";
+import { signOut } from "../user/operations";
 
 const initialState: TransactionsState = {
   transactions: [],
@@ -20,6 +21,9 @@ const transactionSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(signOut.pending, () => {
+        return initialState;
+      })
       .addCase(getAllTransactions.fulfilled, (state, action) => {
         state.transactions = action.payload;
       })
