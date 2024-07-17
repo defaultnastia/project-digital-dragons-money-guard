@@ -73,5 +73,5 @@ interface Statistics {
 
 type ChartProps = {
   dataTransaction?: Statistics | null;
-  balance: number | null;
+  balance?: number | null;
 };
