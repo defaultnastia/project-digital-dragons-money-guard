@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 import TransactionsList from "../TransactionsList/TransactionsList";
@@ -13,17 +13,29 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import icon from "../../img/icons.svg";
 import s from "./HomeTab.module.css";
 import { selectLoadingState } from "../../redux/user/selectors";
+import CustomModal from "../CustomModal/CustomModal";
+import AddTransactionForm from "../AddTransactionForm/AddTransactionForm";
 
 const HomeTab = () => {
   const dispatch = useAppDispatch();
   const transactions = useAppSelector(selectTransactions);
   const loading = useAppSelector(selectLoadingState);
 
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const transactionsSorted = Object.freeze(transactions)
     .slice()
     .sort(
       (a, b) => Date.parse(a.transactionDate) - Date.parse(b.transactionDate)
     );
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
 
   useEffect(() => {
     dispatch(getAllTransactions());
@@ -46,11 +58,21 @@ const HomeTab = () => {
           s.btnAddTransaction,
           "bg-gradient-to-r from-[#ffc727] from-0% via-[#9e40ba] via-61% to-[#7000ff] to-91%"
         )}
+        onClick={openModal}
       >
-        <svg width="20px" height="20px" stroke="white">
-          <use href={`${icon}#icon_plus`} />
+        <svg width="20px" height="20px" stroke="var(--white-color)">
+          <use href={`${icon}#icon-plus`} />
         </svg>
       </button>
+      {modalIsOpen && (
+        <CustomModal
+          isOpen={modalIsOpen}
+          onClose={closeModal}
+          type="transaction"
+        >
+          <AddTransactionForm closeModal={closeModal} />
+        </CustomModal>
+      )}
     </>
   );
 };
