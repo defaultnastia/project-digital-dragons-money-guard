@@ -74,7 +74,6 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
     resolver: yupResolver(schema),
     defaultValues: {
       categoryId: "",
-      amount: 0,
       transactionDate: new Date(),
       comment: "",
     },
@@ -208,8 +207,8 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
             <input
               {...field}
               id="amount"
-              value={field.value === 0 ? "" : field.value}
-              type="text"
+              value={field.value}
+              type="number"
               placeholder="0.00"
               className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
             />
@@ -233,6 +232,8 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
               className=" w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
               wrapperClassName="w-full"
               placeholderText="Select a date"
+              calendarStartDay={1}
+              maxDate={new Date()}
             />
           )}
         />

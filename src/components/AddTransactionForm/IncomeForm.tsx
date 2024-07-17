@@ -43,7 +43,6 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
   } = useForm<FormInput>({
     resolver: yupResolver(schema),
     defaultValues: {
-      amount: 0,
       transactionDate: new Date(),
       comment: "",
     },
@@ -79,8 +78,8 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
             <input
               {...field}
               id="amount"
-              value={field.value === 0 ? "" : field.value}
-              type="text"
+              value={field.value}
+              type="number"
               placeholder="0.00"
               className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
             />
@@ -104,6 +103,8 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
               className=" w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
               wrapperClassName="w-full"
               placeholderText="Select a date"
+              calendarStartDay={1}
+              maxDate={new Date()}
             />
           )}
         />
