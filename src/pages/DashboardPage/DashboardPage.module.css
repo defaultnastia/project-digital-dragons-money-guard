@@ -60,3 +60,19 @@
       hsla(241.24999999999997, 51.06382978723404%, 36.86274509803922%, 0) 100%
     );
 }
+
+@media only screen and (min-width: 1280px) {
+  .background {
+    height: calc(100vh - 80px);
+  }
+}
+
+.height {
+  height: calc(100vh - 80px);
+}
+
+@media only screen and (max-width: 767px) {
+  .height {
+    height: calc(100vh - 72px);
+  }
+}

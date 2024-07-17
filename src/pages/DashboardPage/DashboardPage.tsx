@@ -5,8 +5,10 @@ import HomeTab from "../../components/HomeTab/HomeTab";
 import StatisticsTab from "../../components/StatisticsTab/StatisticsTab";
 import CurrencyTab from "../../components/CurrencyTab/CurrencyTab";
 import Balance from "../../components/Balance/Balance";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { useAppDispatch } from "../../redux/hooks";
+import { getTransactionsCategories } from "../../redux/transactions/operations";
 import s from "./DashboardPage.module.css";
 
 const DashboardPage = () => {
@@ -18,13 +20,25 @@ const DashboardPage = () => {
 
   const [activeTab, setActiveTab] = useState<string>("home");
 
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getTransactionsCategories());
+  }, [dispatch]);
+
   return (
     <div className="min-h-[100vh]">
       <Header />
       <div
         className={clsx(
-          "flex min-h-screen",
+          "flex",
           s.background,
+          (isTablet && activeTab === "home") ||
+            ((isMobile || isTablet) && activeTab === "currency") ||
+            ((isMobile || isTablet) && activeTab === "statistics")
+            ? s.height
+            : "",
+          isMobile && activeTab === "currency" && "px-0",
           { "": isDesktop },
           {
             "flex-col px-[32px]": isTablet,
@@ -34,9 +48,10 @@ const DashboardPage = () => {
       >
         <div
           className={clsx(
+            s.sidebar,
             "flex",
             {
-              "flex-col gap-[32px] w-[480px] border-r-[1px] border-[rgba(255,255,255,0.6)] shadow-[1px_4px_1px_0_rgba(0,0,0,0.25)]":
+              "flex-col gap-[32px] w-[480px] border-r-[1px] border-[rgba(255,255,255,0.6)] shadow-[1px_4px_1px_0_rgba(0,0,0,0.25)],":
                 isDesktop,
             },
             {
@@ -56,9 +71,17 @@ const DashboardPage = () => {
             <Navigation setActiveTab={setActiveTab} activeTab={activeTab} />
             {(isDesktop || isTablet) && <Balance />}
           </div>
-          {(isDesktop || isTablet) && <CurrencyTab />}
+          {(isDesktop || isTablet) && (
+            <div className="mt-auto">
+              <CurrencyTab />
+            </div>
+          )}
         </div>
-        <div className="pl-[69px] pt-[46px] flex-1 pr-[16px] h-[100vh]">
+        <div
+          className={clsx({
+            "pl-[69px] pt-[46px] flex-1 pr-[16px] h-[100%]": isDesktop,
+          })}
+        >
           {activeTab === "home" && <HomeTab />}
           {activeTab === "statistics" && <StatisticsTab />}
           {isMobile && activeTab === "currency" && <CurrencyTab />}
