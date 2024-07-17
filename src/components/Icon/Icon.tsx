@@ -6,8 +6,8 @@ interface Props {
   name: NameIcon;
   size?: number;
   className?: string;
-  stroke?: string;
   fill?: string;
+  stroke?: string;
 }
 
 export const Icon = ({ name, size = 24, className, fill, stroke }: Props) => {
