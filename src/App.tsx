@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
-import { useAppDispatch } from "./redux/hooks";
+import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { refreshUser } from "./redux/user/operations";
-// import { selectLoadingState } from "./redux/user/selectors";
+import { selectIsRefreshing } from "./redux/user/selectors";
 import React, { Suspense, useEffect } from "react";
 import { lazy } from "react";
 import { Toaster } from "react-hot-toast";
+import { getTransactionsCategories } from "./redux/transactions/operations";
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
@@ -20,19 +21,18 @@ const StatisticsTab = lazy(
 );
 const CurrencyTab = lazy(() => import("./components/CurrencyTab/CurrencyTab"));
 
-// const App: React.FC = () => {
-const App = () => {
+const App: React.FC = () => {
   const dispatch = useAppDispatch();
-  // const userRefreshing = useAppSelector(selectLoadingState);
+  const userRefreshing = useAppSelector(selectIsRefreshing);
 
   useEffect(() => {
     dispatch(refreshUser());
+    dispatch(getTransactionsCategories());
   }, [dispatch]);
 
-  // return userRefreshing ? (
-  //   <p>Refreshing user...</p>
-  // ) : (
-  return (
+  return userRefreshing ? (
+    <p>Refreshing user...</p>
+  ) : (
     <>
       <Toaster />
       <Suspense fallback={null}>

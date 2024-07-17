@@ -42,9 +42,10 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk("user/signOut", async (_, thunkAPI) => {
   try {
     await walletInstance.delete("/auth/sign-out");
-    clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
+  } finally {
+    clearAuthHeader();
   }
 });
 
