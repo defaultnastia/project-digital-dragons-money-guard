@@ -2,6 +2,7 @@ import { CustomButton } from "../CustomButton/CustomButton";
 import { Controller, useForm } from "react-hook-form";
 import { Transaction } from "../../redux/data.types";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -16,11 +17,15 @@ type EditFormPropsType = {
   closeModal: () => void;
 };
 
+type formElementsType = {
+  transactionDate: string;
+  comment: string;
+  amount: number;
+  category: string;
+};
+
 const schema = yup.object().shape({
-  category: yup
-    .string()
-    .min(1, "Have to be at list 1 symbol")
-    .required("required field"),
+  category: yup.string().min(1, "Have to be at list 1 symbol"),
   transactionDate: yup
     .date()
     .required("Please select a date")
@@ -52,7 +57,9 @@ export const EditTransactionForm = ({
     },
   });
 
-  const onSubmit = (data: Omit<Transaction, "id" | "categoryId">): void => {
+  const onSubmit = (data: formElementsType): void => {
+    console.log("Here");
+
     const updTransaction = {
       transactionDate: data.transactionDate,
       comment: data.comment,
@@ -89,6 +96,7 @@ export const EditTransactionForm = ({
             <Controller
               name="category"
               control={control}
+              disabled
               render={({ field }) => (
                 <input
                   type="text"
@@ -122,6 +130,7 @@ export const EditTransactionForm = ({
                     dateFormat="dd.MM.yyyy"
                     className="md:w-[181px] w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
                     wrapperClassName="w-full"
+                    calendarStartDay={1}
                     maxDate={new Date()}
                   />
                 )}
