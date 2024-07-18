@@ -12,6 +12,7 @@ export interface UserState {
   loading: boolean;
   errorCode: string | null;
   isLoggedIn: boolean;
+  isRefreshing: boolean;
 }
 
 // to be used when user enters credentials
@@ -34,7 +35,7 @@ export interface RangeType {
 
 // to validate state of new/updated transaction
 export interface UserTransaction {
-  transactionDate: string;
+  transactionDate: Date;
   type: TransactionType;
   categoryId: string;
   comment: string;
@@ -79,6 +80,6 @@ export interface TransactionsState {
 }
 
 export interface PatchData {
-  updTransaction: Omit<Transaction, "id">;
+  updTransaction: Omit<UserTransaction, "id">;
   transId: string;
 }

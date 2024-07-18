@@ -19,6 +19,7 @@ const initialState: UserState = {
   loading: false,
   errorCode: null,
   isLoggedIn: false,
+  isRefreshing: false,
 };
 
 const userSlice = createSlice({
@@ -27,19 +28,25 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(signOut.fulfilled, (state) => {
-        state.user = initialState.user;
-        state.token = null;
-        state.isLoggedIn = false;
+      .addCase(signOut.pending, () => {
+        return initialState;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.user.balance = action.payload.balance.toFixed(2);
         state.isLoggedIn = true;
+        state.isRefreshing = false;
       })
       .addCase(getBalance.fulfilled, (state, action) => {
         state.user.balance = action.payload.toFixed(2);
       })
+      .addCase(refreshUser.pending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshUser.rejected, (state) => {
+        state.isRefreshing = false;
+      })
+
       .addMatcher(
         isAnyOf(signIn.fulfilled, signUp.fulfilled),
         (state, action) => {

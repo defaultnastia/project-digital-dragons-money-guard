@@ -4,13 +4,17 @@
   background-color: rgba(82, 59, 126, 0.6);
   box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
 
+  &.row {
+    @apply md:pr-[10px];
+  }
+
   .cell {
-    @apply font-semibold text-[16px];
+    @apply font-semibold text-[16px] pr-[10px];
   }
 }
 
 .tableBody {
-  @apply max-h-[496px];
+  @apply xl:max-h-[496px];
 }
 
 .row {

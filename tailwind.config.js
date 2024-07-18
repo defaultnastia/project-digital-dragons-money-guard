@@ -1,6 +1,6 @@
 import daisyui from "daisyui";
 
-/ @type {import('tailwindcss').Config} */;
+/** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -8,7 +8,28 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      backgroundImage: {
+        notFound: "url('../img/404_bg.jpg')",
+      },
     },
   },
-  plugins: [daisyui],
+  plugins: [
+    daisyui,
+    function ({ addUtilities }) {
+      addUtilities({
+        ".no-arrows": {
+          "-moz-appearance": "textfield",
+          appearance: "none",
+          "&::-webkit-outer-spin-button": {
+            "-webkit-appearance": "none",
+            margin: 0,
+          },
+          "&::-webkit-inner-spin-button": {
+            "-webkit-appearance": "none",
+            margin: 0,
+          },
+        },
+      });
+    },
+  ],
 };

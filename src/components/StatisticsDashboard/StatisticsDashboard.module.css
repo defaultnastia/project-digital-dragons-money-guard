@@ -1,0 +1,11 @@
+.select {
+  @apply border border-[rgba(255,255,255,0.60)] rounded-[8px] px-5 pt-3 pb-[14px] min-[768px]:w-[160px] min-[1280px]:w-[182px] !important;
+}
+
+.select svg {
+  transition: transform 500ms ease-in-out;
+}
+
+.select:focus-within svg {
+  transform: rotate(180deg);
+}

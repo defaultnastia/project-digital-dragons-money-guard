@@ -42,9 +42,10 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk("user/signOut", async (_, thunkAPI) => {
   try {
     await walletInstance.delete("/auth/sign-out");
-    clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
+  } finally {
+    clearAuthHeader();
   }
 });
 
@@ -55,9 +56,6 @@ export const refreshUser = createAsyncThunk(
 
     const persistedToken = state.user.token;
     if (persistedToken === null) {
-      toast("Please sign in to continue!", {
-        icon: "✋",
-      });
       return thunkAPI.rejectWithValue("Unable to fetch user");
     }
 

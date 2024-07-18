@@ -1,0 +1,3 @@
+.container {
+  @apply md:max-w-[768px] xl:max-w-[1280px] my-0 mx-auto;
+}

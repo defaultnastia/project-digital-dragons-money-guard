@@ -1,0 +1,12 @@
+.active {
+  @apply font-black;
+  display: flex;
+
+  svg {
+    fill: #734aef;
+  }
+}
+
+.defaultLink {
+  @apply flex;
+}
