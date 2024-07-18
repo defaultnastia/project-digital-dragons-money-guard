@@ -103,10 +103,16 @@ const DashboardPage = () => {
           </div>
 
           <div
-            className={clsx({
-              "pl-[69px] pt-[46px] flex-1 pr-[16px] h-[100%] overflow-y-auto":
-                isDesktop,
-            })}
+            className={clsx(
+              {
+                "pl-[69px] pt-[46px] flex-1 pr-[16px] h-[100%] overflow-y-auto":
+                  isDesktop && activeTab === "home",
+              },
+              {
+                "pl-[69px] pt-[32px] flex-1 pr-[16px] h-[100%] overflow-y-auto":
+                  isDesktop && activeTab === "statistics",
+              }
+            )}
           >
             {activeTab === "home" && <HomeTab />}
             {activeTab === "statistics" && <StatisticsTab />}

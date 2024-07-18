@@ -1,11 +1,23 @@
 .active {
   @apply font-black;
   display: flex;
+
   svg {
     fill: #734aef;
+    box-shadow: 0 3px 10px 0 rgba(74, 86, 226, 0.5);
+    background-color: #fff;
+    border-radius: 4px;
   }
 }
 
 .defaultLink {
   @apply flex gap-[20px];
+}
+
+@media only screen and (max-width: 767px) {
+  .active {
+    svg {
+      border-radius: 8px;
+    }
+  }
 }
