@@ -46,7 +46,7 @@ const schema = yup.object().shape({
     .max(1000000, "Amount cannot exceed 1,000,000"),
   comment: yup
     .string()
-    .min(1, "leave a comment")
+    .max(30, "Comment cannot exceed 30 symbols")
     .required("Please leave a comment"),
 });
 
@@ -195,6 +195,7 @@ export const EditTransactionForm = ({
               render={({ field }) => (
                 <input
                   type="text"
+
                   {...field}
                   className="w-full p-2 pl-[20px] pb-[52px] md:pb-[8px] md:pl-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg  focus:outline-none focus:border-opacity-100 resize-none"
                   placeholder="Comment"

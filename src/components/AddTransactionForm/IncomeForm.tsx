@@ -88,7 +88,7 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
 
     await dispatch(getBalance());
     await dispatch(getAllTransactions());
-    toast.success("Successfully added transaction.");
+    toast.success("Successfully added transaction");
     closeModal();
   };
 

@@ -113,7 +113,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
 
     await dispatch(getBalance());
     await dispatch(getAllTransactions());
-    toast.success("Successfully added transaction.");
+    toast.success("Successfully added transaction");
     closeModal();
   };
 

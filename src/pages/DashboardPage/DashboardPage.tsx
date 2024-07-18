@@ -65,7 +65,7 @@ const DashboardPage = () => {
             {
               "flex-col px-[20px]":
                 (isMobile && activeTab === "statistics") ||
-                activeTab === "home",
+                (isMobile && activeTab === "home"),
             },
             { "px-0 flex-col": isMobile && activeTab === "currency" }
           )}
