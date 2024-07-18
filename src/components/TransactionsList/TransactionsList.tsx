@@ -9,9 +9,15 @@ import s from "./TransactionsList.module.css";
 
 type Props = {
   transactions: Transaction[];
+  setEditTransaction: (data: Transaction) => void;
+  setModalEditIsOpen: (data: boolean) => void;
 };
 
-const TransactionsList = ({ transactions }: Props) => {
+const TransactionsList = ({
+  transactions,
+  setEditTransaction,
+  setModalEditIsOpen,
+}: Props) => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const isScrollable = transactions.length > 8;
 
@@ -32,6 +38,8 @@ const TransactionsList = ({ transactions }: Props) => {
               key={transaction.id}
               transaction={transaction}
               scrollable={isScrollable}
+              setEditTransaction={setEditTransaction}
+              setModalEditIsOpen={setModalEditIsOpen}
             />
           ))}
         </div>
@@ -40,7 +48,12 @@ const TransactionsList = ({ transactions }: Props) => {
   ) : (
     <div className={clsx(s.mobileWrapper)}>
       {transactions?.map((transaction: Transaction) => (
-        <TransactionItem key={transaction.id} transaction={transaction} />
+        <TransactionItem
+          key={transaction.id}
+          transaction={transaction}
+          setEditTransaction={setEditTransaction}
+          setModalEditIsOpen={setModalEditIsOpen}
+        />
       ))}
     </div>
   );

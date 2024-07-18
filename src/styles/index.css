@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 400px */
 @font-face {
   font-family: "Poppins";
   src: url(../fonts/Poppins/Poppins-Regular.ttf) format("truetype");
@@ -10,7 +9,6 @@
   font-style: 400;
 }
 
-/* 600px */
 @font-face {
   font-family: "Poppins";
   src: url(../fonts/Poppins/Poppins-SemiBold.ttf) format("truetype");
@@ -18,11 +16,17 @@
   font-style: normal;
 }
 
-/* 700px */
 @font-face {
   font-family: "Poppins";
   src: url(../fonts/Poppins/Poppins-Bold.ttf) format("truetype");
   font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(../fonts/Poppins/Poppins-Black.ttf) format("truetype");
+  font-weight: 900;
   font-style: normal;
 }
 
@@ -48,7 +52,7 @@
 #root {
   min-width: 320px;
   /* max-width: 375px; */
-  margin: 0 auto;
+  margin: 0;
   /* overflow: hidden; */
 }
 

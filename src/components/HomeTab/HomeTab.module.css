@@ -3,3 +3,7 @@
 
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
 }
+
+.balanceWrapper {
+  @apply mb-[32px];
+}

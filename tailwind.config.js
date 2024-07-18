@@ -8,6 +8,9 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      backgroundImage: {
+        notFound: "url('../img/404_bg.jpg')",
+      },
     },
   },
   plugins: [
