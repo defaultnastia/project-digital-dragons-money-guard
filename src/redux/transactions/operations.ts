@@ -3,6 +3,7 @@ import { PatchData, RangeType, UserTransaction } from "../data.types";
 import { walletInstance } from "../../services/axiosInstance";
 import { AxiosError } from "axios";
 import toast from "react-hot-toast";
+import { successSound, errorSound } from "../../sounds/playback";
 
 export const getAllTransactions = createAsyncThunk(
   "transactions/getAllTransactions",
@@ -22,8 +23,10 @@ export const addTransaction = createAsyncThunk(
   async (transaction: UserTransaction, thunkAPI) => {
     try {
       const response = await walletInstance.post("/transactions", transaction);
+      successSound.play();
       return response.data;
     } catch (error) {
+      errorSound.play();
       toast.error("Couldn't add the transaction, please try again");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
@@ -38,8 +41,10 @@ export const updateTransaction = createAsyncThunk(
         `/transactions/${transaction.transId}`,
         transaction.updTransaction
       );
+      successSound.play();
       return response.data;
     } catch (error) {
+      errorSound.play();
       toast.error("Couldn't update the transaction, please try again");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
@@ -51,8 +56,10 @@ export const deleteTransaction = createAsyncThunk(
   async (transId: string, thunkAPI) => {
     try {
       const response = await walletInstance.delete(`/transactions/${transId}`);
+      successSound.play();
       return response.data;
     } catch (error) {
+      errorSound.play();
       toast.error("Couldn't delete the transaction, please try again");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }

@@ -8,6 +8,11 @@ import {
   walletInstance,
 } from "../../services/axiosInstance";
 import toast from "react-hot-toast";
+import {
+  successAuthSound,
+  errorAuthSound,
+  logoutSound,
+} from "../../sounds/playback";
 
 export const signUp = createAsyncThunk(
   "user/signUp",
@@ -15,8 +20,10 @@ export const signUp = createAsyncThunk(
     try {
       const response = await walletInstance.post("/auth/sign-up", user);
       setAuthHeader(response.data.token);
+      successAuthSound.play();
       return response.data;
     } catch (error) {
+      errorAuthSound.play();
       toast.error("Couldn't signup user, please check the credentials");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
@@ -29,8 +36,10 @@ export const signIn = createAsyncThunk(
     try {
       const response = await walletInstance.post("/auth/sign-in", user);
       setAuthHeader(response.data.token);
+      successAuthSound.play();
       return response.data;
     } catch (error) {
+      errorAuthSound.play();
       toast.error(
         "Couldn't sign in as this user, please check the credentials!"
       );
@@ -42,7 +51,9 @@ export const signIn = createAsyncThunk(
 export const signOut = createAsyncThunk("user/signOut", async (_, thunkAPI) => {
   try {
     await walletInstance.delete("/auth/sign-out");
+    logoutSound.play();
   } catch (error) {
+    errorAuthSound.play();
     return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
   } finally {
     clearAuthHeader();
