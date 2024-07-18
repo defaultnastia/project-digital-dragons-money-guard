@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import sprite from "../../img/icons.svg";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   getAllTransactions,
   updateTransaction,
@@ -18,6 +18,8 @@ import { getBalance } from "../../redux/user/operations";
 
 import "../AddTransactionForm/datepicker-custom.css";
 import { useRef } from "react";
+import { selectCategories } from "../../redux/transactions/selectors";
+import { getTransactionCategory } from "../../helpers/getTransactionCategory";
 
 type EditFormPropsType = {
   userTransaction: Transaction;
@@ -54,6 +56,9 @@ export const EditTransactionForm = ({
 }: EditFormPropsType) => {
   const dispatch = useAppDispatch();
   const datePickerRef = useRef<DatePicker | null>(null);
+  const categories = useAppSelector(selectCategories);
+
+  const category = getTransactionCategory(categories, categoryId);
 
   const {
     handleSubmit,
@@ -62,7 +67,7 @@ export const EditTransactionForm = ({
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      category: "Car",
+      category: category?.name,
       amount: amount < 0 ? -amount : amount,
       transactionDate: new Date(transactionDate),
       comment,
@@ -79,7 +84,7 @@ export const EditTransactionForm = ({
     const updTransaction = {
       transactionDate: data.transactionDate,
       comment: data.comment,
-      amount: data.amount > 0 ? -data.amount : data.amount,
+      amount: type === "EXPENSE" ? -data.amount : data.amount,
       categoryId,
       type,
     };
