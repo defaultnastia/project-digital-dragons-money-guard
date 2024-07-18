@@ -5,7 +5,7 @@ import s from "./RegistrationPage.module.css";
 
 const RegistrationPage = () => {
   return (
-    <div className={s.wrapper}>
+    <div className={s.container}>
       <CustomAuthModal>
         <RegistrationForm />
       </CustomAuthModal>
