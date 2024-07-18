@@ -1,12 +1,14 @@
 .active {
-  @apply font-black;
+  @apply font-semibold;
   display: flex;
 
   svg {
-    fill: #734aef;
+    fill: #fff;
+    background-color: #734aef;
+    box-shadow: 0 3px 10px 0 rgba(74, 86, 226, 0.5);
   }
 }
 
 .defaultLink {
-  @apply flex;
+  @apply flex gap-[20px];
 }
