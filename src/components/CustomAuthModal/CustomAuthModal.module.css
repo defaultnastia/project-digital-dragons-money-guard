@@ -1,0 +1,21 @@
+.bgAuthModal {
+  @apply fixed top-0 left-0 w-[100%] h-[100%] z-10 flex justify-center items-center;
+}
+
+.authModal {
+  @apply w-[100vw] p-[20px] h-screen flex justify-center items-center overflow-hidden md:flex-row md:flex-wrap md:max-w-[533px] md:h-auto md:py-[40px] md:px-[73px] relative flex-wrap md:rounded-[8px] z-20 shadow-[0_4px_60px_0_rgba(0,0,0,0.25)];
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    box-shadow: 0 0 100px 40px rgba(47, 21, 176, 0.73),
+      /* Inner layer (brighter) */ 0 0 500px 200px rgba(47, 21, 176, 0.5),
+      /* Middle layer */ 0 0 500px 60px rgba(47, 21, 176, 0.1);
+    transform: translate(-50%, -50%);
+    border-radius: 100%;
+    z-index: -1;
+  }
+}

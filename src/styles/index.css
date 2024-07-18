@@ -32,7 +32,6 @@
 
 :root {
   /* fonts */
-
   font-family: "Poppins", sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -49,26 +48,8 @@
   --form-color-color: rgba(255, 255, 255, 0.1);
 }
 
-#root {
-  min-width: 320px;
-  /* max-width: 375px; */
-  margin: 0;
-  /* overflow: hidden; */
-}
-
-@media only screen and (min-width: 768px) {
-  #root {
-    max-width: 768px;
-  }
-}
-
-@media only screen and (min-width: 1280px) {
-  #root {
-    max-width: 1280px;
-  }
-}
-
 body {
+  min-width: 320px;
   color: var(--white-color);
   background-image: radial-gradient(
       at 87.72581455394035% 73.46293901033157%,
