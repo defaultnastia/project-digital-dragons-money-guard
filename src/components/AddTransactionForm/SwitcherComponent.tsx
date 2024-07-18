@@ -1,6 +1,7 @@
+import * as React from "react";
+import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
-import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { Icon } from "../Icon/Icon";
 
@@ -9,34 +10,52 @@ interface SwitcherComponentProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CustomSwitch = styled(Switch)(({ theme }) => ({
+const CustomSwitch = styled(Switch)(() => ({
   width: 80,
-  height: 40,
-  padding: 2,
+  height: 50,
+  padding: 7,
   "& .MuiSwitch-switchBase": {
-    padding: 2,
+    margin: 1,
+    padding: 0,
+    transform: "translateX(0px)",
     "&.Mui-checked": {
-      transform: "translateX(40px)",
-      color: "#fff",
+      transform: "translateX(35px)",
+      "& .MuiSwitch-thumb:before": {
+        content: "''",
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        left: 0,
+        top: 0,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      },
       "& + .MuiSwitch-track": {
-        backgroundColor: "#FFF",
         opacity: 1,
-        border: "none",
+        backgroundColor: "#FBFBFB",
       },
     },
   },
   "& .MuiSwitch-thumb": {
-    width: 36,
-    height: 36,
-    boxShadow: "none",
+    width: 44,
+    height: 44,
+    "&::before": {
+      content: "''",
+      position: "absolute",
+      width: "100%",
+      height: "100%",
+      left: 0,
+      top: 0,
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "center",
+    },
   },
   "& .MuiSwitch-track": {
-    borderRadius: 20,
-    backgroundColor: "#FFF",
     opacity: 1,
-    transition: theme.transitions.create(["background-color"], {
-      duration: 500,
-    }),
+    backgroundColor: "#FBFBFB",
+    borderRadius: 30,
+    width: 80,
+    height: 30,
   },
 }));
 
@@ -46,12 +65,6 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
 }) => {
   const incomeColor = isChecked ? "rgba(255, 255, 255, 0.60)" : "#FFB627";
   const expenseColor = isChecked ? "#FF868D" : "rgba(255, 255, 255, 0.60)";
-  const incomeTextShadow = !isChecked
-    ? "0px 0px 10px rgba(255, 182, 39, 0.7)"
-    : "none";
-  const expenseTextShadow = isChecked
-    ? "0px 0px 10px rgba(255, 134, 141, 0.7)"
-    : "none";
 
   return (
     <Box
@@ -63,12 +76,10 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
     >
       <Typography
         variant="body1"
-        style={{
+        sx={{
           color: incomeColor,
           fontFamily: "Poppins",
           fontWeight: 600,
-          lineHeight: "normal",
-          textShadow: incomeTextShadow,
         }}
       >
         Income
@@ -80,8 +91,8 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
         icon={
           <Box
             sx={{
-              width: 36,
-              height: 36,
+              width: 44,
+              height: 44,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -90,21 +101,17 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
               color: "#fff",
               fontSize: "20px",
               fontWeight: "bold",
+              boxShadow: "1px 2px 5px rgba(255, 182, 39, 0.6)",
             }}
           >
-            <Icon
-              name="plus"
-              size={16}
-              className="hover:stroke-[var(--dashboard-text-color)]"
-              stroke="var(--white-color)"
-            />
+            <Icon name="plus" size={16} stroke="var(--white-color)" />
           </Box>
         }
         checkedIcon={
           <Box
             sx={{
-              width: 36,
-              height: 36,
+              width: 44,
+              height: 44,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -113,25 +120,19 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
               color: "#fff",
               fontSize: "20px",
               fontWeight: "bold",
+              boxShadow: "-1px 2px 5px rgba(255, 134, 141, 0.6)",
             }}
           >
-            <Icon
-              name="minus"
-              size={16}
-              className="hover:stroke-[var(--dashboard-text-color)]"
-              stroke="var(--white-color)"
-            />
+            <Icon name="minus" size={16} stroke="var(--white-color)" />
           </Box>
         }
       />
       <Typography
         variant="body1"
-        style={{
+        sx={{
           color: expenseColor,
           fontFamily: "Poppins",
           fontWeight: 600,
-          lineHeight: "normal",
-          textShadow: expenseTextShadow,
         }}
       >
         Expense

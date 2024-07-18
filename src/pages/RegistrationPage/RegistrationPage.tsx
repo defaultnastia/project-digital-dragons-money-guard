@@ -1,13 +1,14 @@
-import CustomModal from "../../components/CustomModal/CustomModal";
+import CustomAuthModal from "../../components/CustomAuthModal/CustomAuthModal";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+
 import s from "./RegistrationPage.module.css";
 
 const RegistrationPage = () => {
   return (
-    <div className={s.wrapper}>
-      <CustomModal isOpen={true} type="auth" onClose={() => {}}>
+    <div className={s.container}>
+      <CustomAuthModal>
         <RegistrationForm />
-      </CustomModal>
+      </CustomAuthModal>
     </div>
   );
 };

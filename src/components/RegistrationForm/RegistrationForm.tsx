@@ -9,9 +9,8 @@ import { signUp } from "../../redux/user/operations";
 import { UserCredentials } from "../../redux/data.types";
 import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
 import { useState } from "react";
-import s from "../LoginForm/LoginForm.module.css";
+// import s from "../LoginForm/LoginForm.module.css";
 import css from "./RegistrationForm.module.css";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 interface RegisterFormInputs {
   username: string;
@@ -29,6 +28,7 @@ const RegistrationForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<RegisterFormInputs>({
     resolver: yupResolver(registerFormSchema),
@@ -47,6 +47,8 @@ const RegistrationForm: React.FC = () => {
       console.log(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      reset();
     }
   };
 
@@ -61,106 +63,105 @@ const RegistrationForm: React.FC = () => {
   const toggleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
-  // const passwordStrength = ({ password }) => {
-  //   let strength = 0;
-  //   if (password.length > 5) strength + 1;
-  //   if (password.match(/[a-z]+/)) strength + 1;
-  //   if (password.match(/[A-Z]+/)) strength + 1;
-  //   if (password.match(/[0-9]+/)) strength + 1;
-  //   if (password.match(/[^a-zA-Z0-9]+/)) strength + 1;
-  //   return strength;
-  // };
 
   return (
-    <div className="wrapper">
-      <Logo icon={"logo"} sizeLogo={26} sizeText={19} />
+    <div className={css.wrapper}>
+      <Logo icon={"logo"} sizeLogo={36} sizeText={27} />
+      <form
+        className={css.box_form}
+        onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
+      >
+        <div className={css.input_wrapper}>
+          <div className={css.input_box}>
+            <Icon className={css.icon} name="user" size={24} />
 
-      <form className={s.box_form} onSubmit={handleSubmit(onSubmit)}>
-        <div className={s.input_box}>
-          <Icon className={s.icon} name="user" size={24} />
-
-          <input
-            {...register("username", { required: true })}
-            placeholder="Name"
-            className={s.input}
-          />
-          {errors.username && (
-            <p className={s.error}>{errors.username.message}</p>
-          )}
-        </div>
-        <div className={s.input_box}>
-          <Icon className={s.icon} name="email" size={24} />
-
-          <input
-            {...register("email", { required: true })}
-            placeholder="E-mail"
-            className={s.input}
-          />
-          {errors.email && <p className={s.error}>{errors.email.message}</p>}
-        </div>
-        <div className={s.input_box}>
-          <Icon className={s.icon} name="lock" size={24} />
-
-          <input
-            {...register("password", { required: true })}
-            placeholder="Password"
-            className={s.input}
-            type={showPassword ? "text" : "password"}
-            onChange={handlePasswordChange}
-          />
-          <button
-            type="button"
-            className={css.passwordToggle}
-            onClick={toggleShowPassword}
-          >
-            {showPassword ? (
-              <Icon className={s.icon} name="eye-hidden" size={24} />
-            ) : (
-              <Icon className={s.icon} name="eye" size={24} />
+            <input
+              {...register("username", { required: true })}
+              placeholder="Name"
+              className={css.input}
+            />
+            {errors.username && (
+              <p className={css.error}>{errors.username.message}</p>
             )}
-          </button>
-          {errors.password && (
-            <p className={s.error}>{errors.password.message}</p>
-          )}
-        </div>
-        <div className={s.input_box}>
-          <Icon className={s.icon} name="lock" size={24} />
+          </div>
+          <div className={css.input_box}>
+            <Icon className={css.icon} name="email" size={24} />
 
-          <input
-            {...register("confirmPassword", { required: true })}
-            placeholder="Confirm password"
-            className={s.input}
-            type={showConfirmPassword ? "text" : "password"}
-          />
-          <button
-            type="button"
-            className={css.passwordToggle}
-            onClick={toggleShowConfirmPassword}
-          >
-            {showConfirmPassword ? (
-              <Icon className={s.icon} name="eye-hidden" size={24} />
-            ) : (
-              <Icon className={s.icon} name="eye" size={24} />
+            <input
+              {...register("email", { required: true })}
+              placeholder="E-mail"
+              className={css.input}
+            />
+            {errors.email && (
+              <p className={css.error}>{errors.email.message}</p>
             )}
-          </button>
-          {errors.confirmPassword && (
-            <p className={s.error}>{errors.confirmPassword.message}</p>
-          )}
-        </div>
-        <div className={s.strengthBarContainer}>
+          </div>
+          <div className={css.input_box}>
+            <Icon className={css.icon} name="lock" size={24} />
+
+            <input
+              {...register("password", { required: true })}
+              placeholder="Password"
+              className={css.input}
+              type={showPassword ? "text" : "password"}
+              onChange={handlePasswordChange}
+            />
+            <button
+              type="button"
+              className={css.passwordToggle}
+              onClick={toggleShowPassword}
+            >
+              {showPassword ? (
+                <Icon className={css.icon} name="eye-hidden" size={24} />
+              ) : (
+                <Icon className={css.icon} name="eye" size={24} />
+              )}
+            </button>
+            {errors.password && (
+              <p className={css.error}>{errors.password.message}</p>
+            )}
+          </div>
+          <div className={css.input_box}>
+            <Icon className={css.icon} name="lock" size={24} />
+
+            <input
+              {...register("confirmPassword", { required: true })}
+              placeholder="Confirm password"
+              className={css.input}
+              type={showConfirmPassword ? "text" : "password"}
+            />
+            <button
+              type="button"
+              className={css.passwordToggle}
+              onClick={toggleShowConfirmPassword}
+            >
+              {showConfirmPassword ? (
+                <Icon className={css.icon} name="eye-hidden" size={24} />
+              ) : (
+                <Icon className={css.icon} name="eye" size={24} />
+              )}
+            </button>
+            {errors.confirmPassword && (
+              <p className={css.error}>{errors.confirmPassword.message}</p>
+            )}
+          </div>
           <PasswordStrengthBar
             password={password}
-            className={s.strengthBar}
+            className={css.strengthBar}
             minLength={5}
           />
-        </div>
-        <div>
-          <CustomButton elementLike={{ btnType: "submit" }} btnStyle="colorful">
-            REGISTER
-          </CustomButton>
-          <CustomButton elementLike={{ linkTo: "/login" }} btnStyle="mono">
-            LOG IN
-          </CustomButton>
+          <div className={css.box_btn}>
+            <CustomButton
+              elementLike={{ btnType: "submit" }}
+              btnStyle="colorful"
+            >
+              REGISTER
+            </CustomButton>
+            <CustomButton elementLike={{ linkTo: "/login" }} btnStyle="mono">
+              LOG IN
+            </CustomButton>
+          </div>
         </div>
       </form>
     </div>

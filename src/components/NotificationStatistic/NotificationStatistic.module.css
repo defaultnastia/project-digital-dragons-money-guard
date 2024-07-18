@@ -6,3 +6,10 @@
 
   @apply max-[767px]:top-[60%];
 }
+
+@media only screen and (min-width: 1280px) {
+  .notice {
+    top: 60%;
+    transform: translateX(35%);
+  }
+}
