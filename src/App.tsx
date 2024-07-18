@@ -7,7 +7,7 @@ import { selectIsRefreshing } from "./redux/user/selectors";
 import React, { Suspense, useEffect } from "react";
 import { lazy } from "react";
 import { Toaster } from "react-hot-toast";
-import { getTransactionsCategories } from "./redux/transactions/operations";
+import { Loader } from "./components/Loader/Loader";
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
@@ -30,11 +30,11 @@ const App: React.FC = () => {
   }, [dispatch]);
 
   return userRefreshing ? (
-    <p>Refreshing user...</p>
+    <Loader />
   ) : (
     <>
       <Toaster />
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Routes>
           <Route
             path="/dashboard"

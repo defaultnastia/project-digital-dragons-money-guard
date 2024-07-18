@@ -1,6 +1,19 @@
-.wrapper {
+.container {
   width: 100vw;
   height: 100vh;
-  background-image: linear-gradient(rgba(158, 64, 186, 1), rgba(112, 0, 255, 1)),
-    url(../../img/login/login_desk@2x.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    background-image: url(/src/img/register/tab_reg@2x.png);
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .container {
+    background-image: url(/src/img/register/desk_reg@2x.png);
+  }
 }
