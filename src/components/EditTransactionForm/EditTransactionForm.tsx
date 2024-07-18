@@ -16,6 +16,9 @@ import {
 import toast from "react-hot-toast";
 import { getBalance } from "../../redux/user/operations";
 
+import "../AddTransactionForm/datepicker-custom.css";
+import { useRef } from "react";
+
 type EditFormPropsType = {
   userTransaction: Transaction;
   closeModal: () => void;
@@ -36,7 +39,9 @@ const schema = yup.object().shape({
   amount: yup
     .number()
     .typeError("Please enter a number")
-    .required("Please enter a number"),
+    .required("Please enter a number")
+    .positive("Income amount should be positive")
+    .max(1000000, "Amount cannot exceed 1,000,000"),
   comment: yup
     .string()
     .min(1, "leave a comment")
@@ -48,6 +53,7 @@ export const EditTransactionForm = ({
   closeModal,
 }: EditFormPropsType) => {
   const dispatch = useAppDispatch();
+  const datePickerRef = useRef<DatePicker | null>(null);
 
   const {
     handleSubmit,
@@ -57,17 +63,23 @@ export const EditTransactionForm = ({
     resolver: yupResolver(schema),
     defaultValues: {
       category: "Need to add category",
-      amount,
+      amount: amount < 0 ? -amount : amount,
       transactionDate: new Date(transactionDate),
       comment,
     },
   });
 
+  const handleIconClick = () => {
+    if (datePickerRef.current) {
+      datePickerRef.current.setFocus();
+    }
+  };
+
   const onSubmit = (data: formElementsType): void => {
     const updTransaction = {
       transactionDate: data.transactionDate,
       comment: data.comment,
-      amount: data.amount,
+      amount: data.amount > 0 ? -data.amount : data.amount,
       categoryId,
       type,
     };
@@ -111,7 +123,7 @@ export const EditTransactionForm = ({
                 <input
                   type="text"
                   {...field}
-                  className="w-[100%] p-[8px] pl-[20px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
+                  className="w-[100%] p-[8px] pl-[20px] md:pl-[8px] text-[var(--white-color)] bg-[transparent] border-solid border-b-[1px] border-[var(--white-40-color)]"
                 />
               )}
             />
@@ -124,7 +136,7 @@ export const EditTransactionForm = ({
                 <input
                   type="number"
                   {...field}
-                  className="mb:w-[181px] w-full md:p-2 pl-[20px] pb-[8px] text-start md:text-center border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100"
+                  className="mb:w-[181px] w-full md:p-2 pl-[20px] pb-[8px] text-start md:text-center border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 no-arrows"
                 />
               )}
             />
@@ -138,18 +150,21 @@ export const EditTransactionForm = ({
                     onChange={(date) => field.onChange(date)}
                     id="transactionDate"
                     dateFormat="dd.MM.yyyy"
-                    className="md:w-[181px] w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
+                    className="md:w-[181px] w-full p-2 pl-[20px] pb-[9px] border-b border-gray-300 border-opacity-60 bg-transparent text-white text-lg placeholder-gray-400 focus:outline-none font-poppins text-base font-normal leading-normal focus:border-opacity-100"
                     wrapperClassName="w-full"
                     calendarStartDay={1}
                     maxDate={new Date()}
+                    calendarClassName="react-datapicker"
+                    ref={datePickerRef}
                   />
                 )}
               />
               <svg
-                className="w-6 h-6 absolute"
+                className="absolute sb right-[16px] top-[3px] md:right-[10px] md:top-[1px] cursor-pointer"
                 style={{ top: "8px", right: "17px", fill: "#734AEF" }}
                 width="24"
                 height="24"
+                onClick={handleIconClick}
               >
                 <use href={`${sprite}#icon-ate_range`}></use>
               </svg>
@@ -166,9 +181,11 @@ export const EditTransactionForm = ({
               name="comment"
               control={control}
               render={({ field }) => (
-                <textarea
+                <input
+                  type="text"
                   {...field}
-                  className="w-full p-2 pl-[20px] pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg  focus:outline-none focus:border-opacity-100 resize-none"
+                  className="w-full p-2 pl-[20px] pb-[52px] md:pb-[8px] md:pl-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg  focus:outline-none focus:border-opacity-100 resize-none"
+                  placeholder="Comment"
                 />
               )}
             />
