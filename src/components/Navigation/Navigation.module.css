@@ -1,5 +1,5 @@
 .active {
-  @apply font-semibold;
+  @apply font-bold;
   display: flex;
 
   svg {

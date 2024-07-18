@@ -64,7 +64,7 @@ const StatisticsDashboard = ({ onFilterChange }: StatisticsDashboardProps) => {
         ]}
         onChange={handleMonthChange}
         className={css.select}
-        placeholder="Month"
+        backspaceDelete={false}
         dropdownHandleRenderer={() => <CustomDropdownIndicator />}
         style={{
           boxShadow: "none",

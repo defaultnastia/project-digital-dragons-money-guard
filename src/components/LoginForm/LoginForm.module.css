@@ -4,6 +4,13 @@
   gap: 40px;
   padding-top: 40px;
   padding-bottom: 20px;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    max-width: 375px;
+    gap: 0;
+    padding: 0;
+  }
 }
 .box_form {
   @apply flex flex-col;
@@ -11,13 +18,22 @@
   align-items: center;
   margin-top: 53px;
   gap: 40px;
-  max-width: 280px;
+  width: 100%;
   margin: 0 auto;
+
+  @media screen and (max-width: 767px) {
+    margin-top: 52px;
+  }
 }
 .input_wrapper {
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    gap: 40px;
+  }
 }
 .input_box {
   position: relative;
@@ -34,6 +50,10 @@
 }
 .box_btn {
   margin-top: 52px;
+
+  @media screen and (max-width: 767px) {
+    margin-top: 0;
+  }
 }
 @media screen and (min-width: 768px) {
   .input {
@@ -47,7 +67,7 @@
   }
 }
 .input {
-  width: 280px;
+  width: 100%;
   background: none;
   border-bottom: 1px solid var(--white-40-color);
   padding-left: 50px;
@@ -67,4 +87,10 @@
   position: absolute;
   top: 5px;
   right: 40px;
+}
+
+.loginLogo {
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 }
