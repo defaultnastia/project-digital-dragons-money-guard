@@ -1,14 +1,13 @@
-import {useEffect, useState} from "react";
-import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {selectStatistics} from "../../redux/transactions/selectors";
-import {selectUserData} from "../../redux/user/selectors";
-import {getBalance} from "../../redux/user/operations";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectStatistics } from "../../redux/transactions/selectors";
+import { selectUserData } from "../../redux/user/selectors";
 
 import Chart from "../Chart/Chart";
 import StatisticsDashboard from "../StatisticsDashboard/StatisticsDashboard";
 import StatisticsTable from "../StatisticsTable/StatisticsTable";
 import NotificationStatistic from "../NotificationStatistic/NotificationStatistic";
-import {getTransactionsSummary} from "../../redux/transactions/operations";
+import { getTransactionsSummary } from "../../redux/transactions/operations";
 
 const StatisticsTab = () => {
   const dispatch = useAppDispatch();
@@ -23,14 +22,15 @@ const StatisticsTab = () => {
 
   useEffect(() => {
     dispatch(getTransactionsSummary(filter));
-    dispatch(getBalance());
   }, [filter, dispatch]);
 
   const handleFilterChange = (newFilter: ParametersMonthYear) => {
     setFilter(newFilter);
   };
 
-  const cs = statistics?.categoriesSummary.filter((item) => item.type !== "INCOME");
+  const cs = statistics?.categoriesSummary.filter(
+    (item) => item.type !== "INCOME"
+  );
 
   const filteredStatistic = {
     ...statistics,
@@ -44,7 +44,9 @@ const StatisticsTab = () => {
       </h2>
       <div className="min-[768px]:flex justify-between min-[1280px]:max-w-[715px]">
         <div>
-          <h2 className="text-[1.875rem] mb-2 min-[768px]:mb-5 min-[1280px]:hidden ">Statistics</h2>
+          <h2 className="text-[1.875rem] mb-2 min-[768px]:mb-5 min-[1280px]:hidden ">
+            Statistics
+          </h2>
           <Chart dataTransaction={filteredStatistic} balance={balance} />
           {cs?.length === 0 && (
             <NotificationStatistic text="No transactions for the selected date" />
