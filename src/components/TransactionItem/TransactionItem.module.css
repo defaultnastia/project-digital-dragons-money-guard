@@ -7,6 +7,14 @@
     &:last-of-type {
       @apply border-b-0;
     }
+
+    .cell {
+      @apply pr-[10px] break-all;
+
+      &.cellBtn {
+        @apply pr-0;
+      }
+    }
   }
 
   &.scrollable {
