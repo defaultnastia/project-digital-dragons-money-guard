@@ -88,7 +88,7 @@ const DashboardPage = () => {
             <div
               className={clsx(
                 {
-                  "flex flex-col gap-[28px] w-[336px]": isTablet,
+                  "flex flex-col w-[336px] justify-between": isTablet,
                 },
                 { "flex flex-col gap-[28px]": isDesktop }
               )}

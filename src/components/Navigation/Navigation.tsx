@@ -26,12 +26,15 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
       <ul
         className={clsx(
           {
-            "pt-[40px] pl-[16px]": isDesktop || isTablet,
+            "pt-[40px] pl-[16px]": isDesktop,
+          },
+          {
+            "pt-[40px]": isTablet,
           },
           { "flex flex-row gap-[32px] justify-center py-[12px]": isMobile }
         )}
       >
-        <li>
+        <li className={clsx({ "w-[100px]": isDesktop || isTablet })}>
           <NavLink
             onClick={() => handleTabChange("home")}
             to="/dashboard/home"
@@ -55,8 +58,9 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
             {(isDesktop || isTablet) && "Home"}
           </NavLink>
         </li>
-        <li onClick={() => handleTabChange("statistics")}>
+        <li className={clsx({ "w-[130px]": isDesktop || isTablet })}>
           <NavLink
+            onClick={() => handleTabChange("statistics")}
             to="/dashboard/statistics"
             className={clsx(
               {
