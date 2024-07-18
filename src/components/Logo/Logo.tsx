@@ -7,12 +7,12 @@ interface Props {
 }
 
 const Logo = ({ sizeLogo, sizeText, icon }: Props) => {
-  const paramsText = `text-[${sizeText}px]`;
-
   return (
     <div className="flex flex-col items-center ">
       <Icon name={icon} size={sizeLogo} />
-      <p className={paramsText}>Money Guard</p>
+      <p style={sizeText ? { fontSize: `${sizeText}px` } : undefined}>
+        Money Guard
+      </p>
     </div>
   );
 };

@@ -1,27 +1,81 @@
-/* .icon {
-  fill: var(--white-40-color);
-  left: 31px;
-  position: absolute;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
-.input {
-  width: 280px;
-  width: auto;
-  background: none;
-  border-bottom: 1px solid var(--white-40-color);
-  padding-left: 60px;
-  padding-bottom: 8px;
-  outline: none;
-  font-size: 18px;
-  margin-left: 20px;
+.box_form {
+  @apply flex flex-col;
+  display: flex;
+  align-items: center;
+  margin-top: 53px;
+  gap: 40px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+.input_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.input_box {
+  position: relative;
 }
 
-.customClass {
-} */
+.icon {
+  fill: var(--white-40-color);
+  left: 10px;
+  position: absolute;
+}
+
 .box_form {
   position: relative;
 }
+@media screen and (min-width: 768px) {
+  .input {
+    min-width: 409px;
+  }
+  .strengthBar {
+    min-width: 409px;
+  }
+  .passwordToggle {
+    right: 60px;
+  }
+}
+.input {
+  width: 280px;
+  background: none;
+  border-bottom: 1px solid var(--white-40-color);
+  padding-left: 50px;
+  padding-bottom: 8px;
+  outline: none;
+  font-size: 18px;
+}
+
+.error {
+  color: var(--dashboard-text-color);
+  font-size: 10px;
+  margin-top: 5px;
+  text-align: center;
+}
+
 .passwordToggle {
   position: absolute;
   top: 5px;
-  right: 60px;
+  right: 40px;
+}
+
+.strengthBar {
+  width: 280px;
+  bottom: 20px;
+}
+
+.strengthBar > p {
+  display: none !important;
+}
+.strengthBar > div > div:nth-child(even) {
+  display: none !important;
+}
+.strengthBar > div > div {
+  flex-basis: auto !important;
+  height: 4px !important;
 }
