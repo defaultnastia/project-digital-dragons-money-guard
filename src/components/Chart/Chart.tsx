@@ -6,6 +6,11 @@ import NotificationStatistic from "../NotificationStatistic/NotificationStatisti
 
 ChartJS.register(ArcElement, Tooltip);
 
+interface ChartProps {
+  dataTransaction?: Statistics | null;
+  balance?: number | null;
+}
+
 const Chart = ({dataTransaction, balance}: ChartProps) => {
   if (!dataTransaction || !dataTransaction.categoriesSummary) {
     return null;

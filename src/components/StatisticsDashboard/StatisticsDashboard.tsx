@@ -7,6 +7,10 @@ import css from "./StatisticsDashboard.module.css";
 import StyledSelect from "./StyledSelect";
 import CustomDropdownIndicator from "../AddTransactionForm/CustomDropdownIndicator";
 
+interface StatisticsDashboardProps {
+  onFilterChange: (newFilter: ParametersMonthYear) => void;
+}
+
 const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());

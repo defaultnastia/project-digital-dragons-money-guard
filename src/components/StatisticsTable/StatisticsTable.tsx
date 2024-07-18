@@ -1,7 +1,11 @@
 import {nanoid} from "@reduxjs/toolkit";
 import {colorsStatistics} from "../../helpers/statistics/colors";
 
-const StatisticsTable = ({dataTransaction}: ChartProps) => {
+interface TableProps {
+  dataTransaction?: Statistics | null;
+}
+
+const StatisticsTable = ({dataTransaction}: TableProps) => {
   if (!dataTransaction || !dataTransaction.categoriesSummary) {
     return null;
   }
