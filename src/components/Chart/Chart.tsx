@@ -2,9 +2,13 @@ import {Chart as ChartJS, ArcElement, Tooltip} from "chart.js";
 import {Doughnut} from "react-chartjs-2";
 
 import {colorsStatistics} from "../../helpers/statistics/colors";
-import NotificationStatistic from "../NotificationStatistic/NotificationStatistic";
 
 ChartJS.register(ArcElement, Tooltip);
+
+interface ChartProps {
+  dataTransaction?: Statistics | null;
+  balance?: number | null;
+}
 
 const Chart = ({dataTransaction, balance}: ChartProps) => {
   if (!dataTransaction || !dataTransaction.categoriesSummary) {
@@ -16,7 +20,7 @@ const Chart = ({dataTransaction, balance}: ChartProps) => {
     labels: categoriesSummary.map((data) => data.name),
     datasets: [
       {
-        data: categoriesSummary.map((data) => -data.total),
+        data: categoriesSummary.map((data) => (data.type === "INCOME" ? data.total : -data.total)),
         backgroundColor: colorsStatistics,
         borderColor: colorsStatistics,
         borderWidth: 1,
@@ -39,18 +43,16 @@ const Chart = ({dataTransaction, balance}: ChartProps) => {
   };
 
   return (
-    <div className="mb-8 min-[768px]:w-[336px] min-[1280px]:w-[288px] grid place-items-center relative">
-      {categoriesSummary.length !== 0 ? (
-        <>
+    <>
+      {categoriesSummary.length !== 0 && (
+        <div className="mb-8 min-[768px]:w-[336px] min-[1280px]:w-[288px] grid place-items-center relative">
           <Doughnut data={data} plugins={[shadowPlugin]} />
           <p className="text-[1.125rem] font-semibold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             &#8372; {balance}
           </p>
-        </>
-      ) : (
-        <NotificationStatistic text="No transactions for the selected date" />
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
