@@ -17,8 +17,8 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   };
 
   return (
-    <>
-      <h2 className="mb-[32px] text-center text-[24px] md:text-[30px]">
+    <div className="max-h-screen md:max-h-full overflow-y-auto">
+      <h2 className="mt-[20px] md:mt-[0px] mb-[32px] text-center text-[24px] md:text-[30px]">
         Add transaction
       </h2>
       <SwitcherComponent isChecked={isChecked} handleChange={handleChange} />
@@ -27,7 +27,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
       ) : (
         <IncomeForm closeModal={closeModal} />
       )}
-    </>
+    </div>
   );
 };
 
