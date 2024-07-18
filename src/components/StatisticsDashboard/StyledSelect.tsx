@@ -9,6 +9,21 @@ const StyledSelect = styled(Select)`
     width: 18px;
   }
 
+  .react-dropdown-select {
+    position: relative;
+  }
+
+  .react-dropdown-select-input::placeholder {
+    position: absolute;
+    font-size: 16px;
+    width: 100px;
+  }
+
+  .react-dropdown-select-input {
+    margin-left: 0 !important;
+    font-size: 16px;
+  }
+
   .react-dropdown-select:focus-within {
     box-shadow: none !important;
   }
@@ -23,10 +38,6 @@ const StyledSelect = styled(Select)`
 
   .react-dropdown-select-option {
     border: none;
-  }
-
-  .react-dropdown-select-input {
-    color: #fff;
   }
 
   .react-dropdown-select-dropdown {
