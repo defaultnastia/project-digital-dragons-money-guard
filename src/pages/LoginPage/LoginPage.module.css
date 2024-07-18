@@ -1,8 +1,18 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-repeat: no-repeat;
+  background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
+}
 
-  background-image: url(../../img/login/login_tab@2.jpg);
+@media only screen and (min-width: 768px) {
+  .container {
+    background-image: url(../../img/login/tab_log@2.png);
+  }
+}
+@media only screen and (min-width: 1280px) {
+  .container {
+    background-image: url(../../img/login/desk_log@2x.png);
+  }
 }
