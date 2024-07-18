@@ -11,11 +11,13 @@ interface ChartProps {
   balance?: number | null;
 }
 
-const Chart = ({dataTransaction, balance}: ChartProps) => {
+const Chart = ({dataTransaction}: ChartProps) => {
   if (!dataTransaction || !dataTransaction.categoriesSummary) {
     return null;
   }
 
+  const diff = ((dataTransaction.incomeSummary as number) - Math.abs(dataTransaction.expenseSummary as number));
+  
   const categoriesSummary = dataTransaction.categoriesSummary;
   const data = {
     labels: categoriesSummary.map((data) => data.name),
@@ -50,7 +52,7 @@ const Chart = ({dataTransaction, balance}: ChartProps) => {
           <Doughnut data={data} plugins={[shadowPlugin]} />
           <span className="text-[1.125rem] font-semibold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex">
             <p>₴&nbsp;</p>
-            <FormattedBalance balance={balance} />
+            <FormattedBalance balance={diff} />
           </span>
         </div>
       )}

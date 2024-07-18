@@ -41,7 +41,7 @@ const CurrencyTab: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="h-[100%]">
       {loading ? (
         <p className="flex items-center justify-center h-[214px] xl:h-[380px] w-[320px] md:w-[336px] xl:w-[480px]">
           Loading...
@@ -51,8 +51,8 @@ const CurrencyTab: React.FC = () => {
           Error fetching currency rates
         </p>
       ) : (
-        <div className="flex-col md:w-[336px] xl:w-[480px] bg-[rgba(74,86,226,0.1)] rounded-br-[8px] rounded-bl-[8px] xl:rounded-none overflow-hidden mx-auto">
-          <table className="text-[16px] w-full table-fixed mb-[20px] xl:mb-[36px]">
+        <div className="flex flex-col h-[100%] md:w-[336px] xl:w-[480px] bg-[rgba(74,86,226,0.1)] rounded-br-[8px] rounded-bl-[8px] xl:rounded-none overflow-hidden mx-auto">
+          <table className="text-[16px] w-full table-fixed max-[767px]:mb-auto md:mb-[20px] xl:mb-[36px]">
             <thead className="text-[16px] bg-[rgba(255,255,255,0.20)] w-full">
               <tr>
                 <th

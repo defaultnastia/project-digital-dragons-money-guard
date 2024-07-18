@@ -44,10 +44,10 @@ const StatisticsTab = () => {
       </h2>
       <div className="min-[768px]:flex justify-between min-[1280px]:max-w-[715px]">
         <div>
-          <h2 className="text-[1.875rem] mb-2 min-[768px]:mb-5 min-[1280px]:hidden ">
+          <h2 className="text-[1.875rem] mb-2 md:mt-[20px] max-xl:mb-[31px] max-xl:text-center min-[768px]:mb-5 min-[1280px]:hidden ">
             Statistics
           </h2>
-          <Chart dataTransaction={filteredStatistic} balance={balance} />
+          <Chart dataTransaction={filteredStatistic} />
           {cs?.length === 0 && (
             <NotificationStatistic text="No expenses for the selected period" />
           )}

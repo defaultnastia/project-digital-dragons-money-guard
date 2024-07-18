@@ -97,7 +97,7 @@ const DashboardPage = () => {
               {(isDesktop || isTablet) && <Balance />}
             </div>
             {(isDesktop || isTablet) && (
-              <div className="mt-auto">
+              <div className="mt-auto flex-grow-1">
                 <CurrencyTab />
               </div>
             )}
@@ -112,7 +112,8 @@ const DashboardPage = () => {
               {
                 "pl-[69px] pt-[32px] flex-1 pr-[16px] h-[100%] overflow-y-auto":
                   isDesktop && activeTab === "statistics",
-              }
+              },
+              { "grow": isMobile }
             )}
           >
             {activeTab === "home" && <HomeTab />}
