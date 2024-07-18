@@ -45,7 +45,18 @@ const schema = yup.object().shape({
     .number()
     .typeError("Please enter a number")
     .required("Please enter a number")
-    .max(1000000, "Amount cannot exceed 1,000,000"),
+    .max(1000000, "Amount cannot exceed 1,000,000")
+    .test(
+      "decimal-places",
+      "Amount cannot have more than 2 decimal places",
+      (value) => {
+        if (value !== undefined && value !== null) {
+          const decimalPart = value.toString().split(".")[1];
+          return !decimalPart || decimalPart.length <= 2;
+        }
+        return true;
+      }
+    ),
   comment: yup
     .string()
     .trim()
@@ -62,10 +73,14 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
   useEffect(() => {
     if (categories) {
       setOptions(
-        categories.map((category) => ({
-          value: category.id,
-          label: category.name,
-        }))
+        categories
+          .filter(
+            (category) => category.id !== "063f1132-ba5d-42b4-951d-44011ca46262"
+          )
+          .map((category) => ({
+            value: category.id,
+            label: category.name,
+          }))
       );
     }
   }, [categories]);

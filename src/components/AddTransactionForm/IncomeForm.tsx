@@ -36,7 +36,18 @@ const schema = yup.object().shape({
     .typeError("Please enter a number")
     .required("Please enter a number")
     .positive("Income amount should be positive")
-    .max(1000000, "Amount cannot exceed 1,000,000"),
+    .max(1000000, "Amount cannot exceed 1,000,000")
+    .test(
+      "decimal-places",
+      "Amount cannot have more than 2 decimal places",
+      (value) => {
+        if (value !== undefined && value !== null) {
+          const decimalPart = value.toString().split(".")[1];
+          return !decimalPart || decimalPart.length <= 2;
+        }
+        return true;
+      }
+    ),
   comment: yup
     .string()
     .trim()
