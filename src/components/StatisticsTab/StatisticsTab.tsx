@@ -28,6 +28,13 @@ const StatisticsTab = () => {
     setFilter(newFilter);
   };
 
+  const cs = statistics?.categoriesSummary.filter((item) => item.type !== "INCOME");
+
+  const filteredStatistic = {
+    ...statistics,
+    categoriesSummary: cs,
+  };
+
   return (
     <div>
       <h2 className="text-[1.875rem] mb-5 min-[1280px]:ml-[15px] max-[1279px]:hidden">
@@ -36,11 +43,11 @@ const StatisticsTab = () => {
       <div className="min-[768px]:flex gap-8">
         <div>
           <h2 className="text-[1.875rem] mb-2 min-[768px]:mb-5 min-[1280px]:hidden ">Statistics</h2>
-          <Chart dataTransaction={statistics} balance={balance} />
+          <Chart dataTransaction={filteredStatistic} balance={balance} />
         </div>
         <div className="w-full min-[768px]:mt-[25px] min-[1280px]:mt-0 min-[768px]:w-[336px]">
           <StatisticsDashboard onFilterChange={handleFilterChange} />
-          <StatisticsTable dataTransaction={statistics} />
+          <StatisticsTable dataTransaction={filteredStatistic} />
         </div>
       </div>
     </div>
