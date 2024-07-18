@@ -11,6 +11,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import { getTransactionsCategories } from "../../redux/transactions/operations";
 import s from "./DashboardPage.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import Container from "../../components/Container/Container";
 
 const DashboardPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -48,67 +49,72 @@ const DashboardPage = () => {
   }, [activeTab, navigate]);
 
   return (
-    <div className="min-h-[100vh]">
-      <Header />
-      <div
-        className={clsx(
-          "flex",
-          s.background,
-          (isTablet && activeTab === "home") ||
-            ((isMobile || isTablet) && activeTab === "currency") ||
-            ((isMobile || isTablet) && activeTab === "statistics")
-            ? s.height
-            : "",
-          isMobile && activeTab === "currency" && "px-0",
-          { "": isDesktop },
-          {
-            "flex-col px-[32px]": isTablet,
-          },
-          { "flex-col px-[20px]": isMobile }
-        )}
-      >
+    <Container>
+      <div className="min-h-[100vh]">
+        <Header />
         <div
           className={clsx(
-            s.sidebar,
             "flex",
+            s.background,
+            (isTablet && activeTab === "home") ||
+              ((isMobile || isTablet) && activeTab === "currency") ||
+              (isTablet && activeTab === "statistics")
+              ? s.height
+              : "",
+            isMobile && activeTab === "currency" && "px-0",
+            { "": isDesktop },
             {
-              "flex-col gap-[32px] w-[480px] border-r-[1px] border-[rgba(255,255,255,0.6)] shadow-[1px_4px_1px_0_rgba(0,0,0,0.25)]":
-                isDesktop,
+              "flex-col px-[32px]": isTablet,
             },
-            {
-              "flex-row gap-[32px] border-none shadow-none mb-[20px]": isTablet,
-            },
-            { "flex-col": isMobile }
+            { "flex-col px-[20px]": isMobile }
           )}
         >
           <div
             className={clsx(
+              s.sidebar,
+              "flex",
               {
-                "flex flex-col gap-[28px] w-[336px]": isTablet,
+                "flex-col gap-[32px] w-[480px] border-r-[1px] border-[rgba(255,255,255,0.6)] shadow-[1px_4px_1px_0_rgba(0,0,0,0.25)]":
+                  isDesktop,
               },
-              { "flex flex-col gap-[28px]": isDesktop }
+              {
+                "flex-row gap-[32px] border-none shadow-none mb-[20px]":
+                  isTablet,
+              },
+              { "flex-col": isMobile }
             )}
           >
-            <Navigation setActiveTab={setActiveTab} activeTab={activeTab} />
-            {(isDesktop || isTablet) && <Balance />}
-          </div>
-          {(isDesktop || isTablet) && (
-            <div className="mt-auto">
-              <CurrencyTab />
+            <div
+              className={clsx(
+                {
+                  "flex flex-col gap-[28px] w-[336px]": isTablet,
+                },
+                { "flex flex-col gap-[28px]": isDesktop }
+              )}
+            >
+              <Navigation setActiveTab={setActiveTab} activeTab={activeTab} />
+              {(isDesktop || isTablet) && <Balance />}
             </div>
-          )}
-        </div>
-        <div
-          className={clsx({
-            "pl-[69px] pt-[46px] flex-1 pr-[16px] h-[100%]": isDesktop,
-          })}
-        >
-          {activeTab === "home" && <HomeTab />}
-          {activeTab === "statistics" && <StatisticsTab />}
-          {isMobile && activeTab === "currency" && <CurrencyTab />}
+            {(isDesktop || isTablet) && (
+              <div className="mt-auto">
+                <CurrencyTab />
+              </div>
+            )}
+          </div>
+
+          <div
+            className={clsx({
+              "pl-[69px] pt-[46px] flex-1 pr-[16px] h-[100%] overflow-y-auto":
+                isDesktop,
+            })}
+          >
+            {activeTab === "home" && <HomeTab />}
+            {activeTab === "statistics" && <StatisticsTab />}
+            {isMobile && activeTab === "currency" && <CurrencyTab />}
+          </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
