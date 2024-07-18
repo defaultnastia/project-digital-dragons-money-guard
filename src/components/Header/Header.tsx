@@ -51,7 +51,7 @@ const Header = () => {
       <div className="flex flex-col items-center">
         <Logo sizeLogo={24} sizeText={17} icon="logo" />
       </div>
-      <div className="flex gap-3">
+      <div className="flex gap-3 items-center">
         <p className="text-[rgba(255,255,255,0.6)]">{userData.username}</p>
         <div>
           <button
