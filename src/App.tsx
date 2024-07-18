@@ -3,11 +3,10 @@ import PrivateRoute from "./components/PrivateRoute";
 import RestrictedRoute from "./components/RestrictedRoute";
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
 import { refreshUser } from "./redux/user/operations";
-import { selectIsRefreshing } from "./redux/user/selectors";
+import { selectIsRefreshing, selectLoadingState } from "./redux/user/selectors";
 import React, { Suspense, useEffect } from "react";
 import { lazy } from "react";
 import { Toaster } from "react-hot-toast";
-import { getTransactionsCategories } from "./redux/transactions/operations";
 import { Loader } from "./components/Loader/Loader";
 
 const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
@@ -25,12 +24,13 @@ const CurrencyTab = lazy(() => import("./components/CurrencyTab/CurrencyTab"));
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const userRefreshing = useAppSelector(selectIsRefreshing);
+  const loading = useAppSelector(selectLoadingState);
 
   useEffect(() => {
     dispatch(refreshUser());
   }, [dispatch]);
 
-  return userRefreshing ? (
+  return userRefreshing && loading ? (
     <Loader />
   ) : (
     <>
