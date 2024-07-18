@@ -5,11 +5,13 @@
     @apply border-b-[1px] border-[var(--form-color-color)];
 
     &:last-of-type {
-      @apply border-b-0;
+      @apply border-b-0 md:max-xl:mb-[80px];
     }
 
     .cell {
-      @apply pr-[10px] break-all;
+      @apply pr-[10px];
+
+      word-break: break-word;
 
       &.cellBtn {
         @apply pr-0;
@@ -18,7 +20,7 @@
   }
 
   &.scrollable {
-    @apply md:pr-[16px];
+    @apply md:pr-[10px];
   }
 }
 

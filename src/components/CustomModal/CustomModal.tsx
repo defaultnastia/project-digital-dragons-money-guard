@@ -14,7 +14,6 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
-    backdropFilter: "blur(100px)",
     boxShadow: "0 4px 60px 0 rgba(0, 0, 0, 0.25)",
     background: "rgba(255, 255, 255, 0.1)",
     border: "none",
@@ -23,7 +22,7 @@ const customStyles = {
   },
   overlay: {
     backgroundColor: "rgba(34, 13, 91, 0.23)",
-    backdropFilter: "blur(7px)",
+    backdropFilter: "blur(10px)",
   },
 };
 

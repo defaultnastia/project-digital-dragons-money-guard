@@ -29,7 +29,7 @@ const HomeTab = () => {
   const transactionsSorted = Object.freeze(transactions)
     .slice()
     .sort(
-      (a, b) => Date.parse(a.transactionDate) - Date.parse(b.transactionDate)
+      (a, b) => Date.parse(b.transactionDate) - Date.parse(a.transactionDate)
     );
 
   const openAddTransactionModal = () => {
@@ -49,7 +49,7 @@ const HomeTab = () => {
   }, [dispatch]);
 
   return (
-    <>
+    <div className={s.homepageWrapper}>
       {transactionsSorted.length === 0 && !loading ? (
         <p className="text-center mx-[20px]">
           There are no transactions yet. <br /> To add the first one, click on
@@ -101,7 +101,7 @@ const HomeTab = () => {
           userTransaction={editTransaction as Transaction}
         />
       </CustomModal>
-    </>
+    </div>
   );
 };
 

@@ -1,13 +1,14 @@
-import CustomModal from "../../components/CustomModal/CustomModal";
+import CustomAuthModal from "../../components/CustomAuthModal/CustomAuthModal";
 import LoginForm from "../../components/LoginForm/LoginForm";
+
 import s from "./LoginPage.module.css";
 
 const LoginPage = () => {
   return (
     <div className={s.container}>
-      <CustomModal isOpen={true} type="auth" onClose={() => {}}>
+      <CustomAuthModal>
         <LoginForm />
-      </CustomModal>
+      </CustomAuthModal>
     </div>
   );
 };
