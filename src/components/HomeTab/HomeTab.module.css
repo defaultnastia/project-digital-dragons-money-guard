@@ -1,7 +1,11 @@
 .btnAddTransaction {
   @apply fixed bottom-[20px] right-[20px] w-[44px] h-[44px] rounded-[50%] flex justify-center items-center xl:absolute md:bottom-[40px] md:right-[42px] xl:right-[16px];
 
-  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  background: var(
+    --button-gradient,
+    linear-gradient(97deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%)
+  );
+  box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
 }
 
 .balanceWrapper {

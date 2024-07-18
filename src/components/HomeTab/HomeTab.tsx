@@ -72,10 +72,7 @@ const HomeTab = () => {
       )}
 
       <button
-        className={clsx(
-          s.btnAddTransaction,
-          "bg-gradient-to-r from-[#ffc727] from-0% via-[#9e40ba] via-61% to-[#7000ff] to-91%"
-        )}
+        className={clsx(s.btnAddTransaction)}
         onClick={openAddTransactionModal}
       >
         <svg width="20px" height="20px" stroke="var(--white-color)">
