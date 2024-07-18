@@ -15,6 +15,7 @@ import {
 import sprite from "../../img/icons.svg";
 import { UserTransaction, TransactionType } from "../../redux/data.types";
 import { getBalance } from "../../redux/user/operations";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 interface IncomeFormProps {
   closeModal: () => void;
@@ -36,7 +37,18 @@ const schema = yup.object().shape({
     .typeError("Please enter a number")
     .required("Please enter a number")
     .positive("Income amount should be positive")
-    .max(1000000, "Amount cannot exceed 1,000,000"),
+    .max(1000000, "Amount cannot exceed 1,000,000")
+    .test(
+      "decimal-places",
+      "Amount cannot have more than 2 decimal places",
+      (value) => {
+        if (value !== undefined && value !== null) {
+          const decimalPart = value.toString().split(".")[1];
+          return !decimalPart || decimalPart.length <= 2;
+        }
+        return true;
+      }
+    ),
   comment: yup
     .string()
     .trim()
@@ -57,7 +69,6 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
     defaultValues: {
       transactionDate: new Date(),
       comment: "",
-      amount: 0,
     },
   });
 
@@ -72,14 +83,13 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
       amount: data.amount,
     };
 
-    try {
-      await dispatch(addTransaction(formattedData));
-      await dispatch(getBalance());
-      await dispatch(getAllTransactions());
-      closeModal();
-    } catch (error) {
-      toast.error("Failed to add transaction. Please try again");
-    }
+    const resultAction = await dispatch(addTransaction(formattedData));
+    unwrapResult(resultAction);
+
+    await dispatch(getBalance());
+    await dispatch(getAllTransactions());
+    toast.success("Successfully added transaction.");
+    closeModal();
   };
 
   const handleIconClick = () => {
@@ -103,7 +113,7 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
                 <input
                   {...field}
                   id="amount"
-                  value={field.value === 0 ? "" : field.value}
+                  value={field.value || ""}
                   type="number"
                   placeholder="0.00"
                   className="w-full pl-[20px] pb-[8px] md:pl-[0px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 no-arrows md:text-center"
@@ -123,7 +133,7 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
               control={control}
               render={({ field }) => (
                 <DatePicker
-                  selected={field.value}
+                  selected={field.value || new Date()}
                   id="transactionDate"
                   onChange={(date) => field.onChange(date)}
                   dateFormat="dd.MM.yyyy"
@@ -163,6 +173,7 @@ const IncomeForm: React.FC<IncomeFormProps> = ({ closeModal }) => {
                 {...field}
                 id="comment"
                 type="text"
+                value={field.value || ""}
                 placeholder="Comment"
                 className="w-full pl-[20px] pb-[52px] md:pl-[9px] md:pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 "
               />

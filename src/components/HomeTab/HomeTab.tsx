@@ -29,7 +29,7 @@ const HomeTab = () => {
   const transactionsSorted = Object.freeze(transactions)
     .slice()
     .sort(
-      (a, b) => Date.parse(a.transactionDate) - Date.parse(b.transactionDate)
+      (a, b) => Date.parse(b.transactionDate) - Date.parse(a.transactionDate)
     );
 
   const openAddTransactionModal = () => {

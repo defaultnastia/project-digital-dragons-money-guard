@@ -9,7 +9,9 @@
     }
 
     .cell {
-      @apply pr-[10px] break-all;
+      @apply pr-[10px];
+
+      word-break: break-word;
 
       &.cellBtn {
         @apply pr-0;

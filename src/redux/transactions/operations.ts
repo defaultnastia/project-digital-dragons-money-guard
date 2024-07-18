@@ -22,7 +22,6 @@ export const addTransaction = createAsyncThunk(
   async (transaction: UserTransaction, thunkAPI) => {
     try {
       const response = await walletInstance.post("/transactions", transaction);
-      toast.success("New transaction was added");
       return response.data;
     } catch (error) {
       toast.error("Couldn't add the transaction, please try again.");
