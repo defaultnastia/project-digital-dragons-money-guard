@@ -28,6 +28,7 @@ const RegistrationForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<RegisterFormInputs>({
     resolver: yupResolver(registerFormSchema),
@@ -46,6 +47,8 @@ const RegistrationForm: React.FC = () => {
       console.log(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      reset();
     }
   };
 
@@ -64,7 +67,11 @@ const RegistrationForm: React.FC = () => {
   return (
     <div className={css.wrapper}>
       <Logo icon={"logo"} sizeLogo={36} sizeText={27} />
-      <form className={css.box_form} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={css.box_form}
+        onSubmit={handleSubmit(onSubmit)}
+        autoComplete="off"
+      >
         <div className={css.input_wrapper}>
           <div className={css.input_box}>
             <Icon className={css.icon} name="user" size={24} />

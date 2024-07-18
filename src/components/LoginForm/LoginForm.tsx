@@ -22,6 +22,7 @@ const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<LoginFormInputs>({ resolver: yupResolver(loginFormSchema) });
 
@@ -34,6 +35,7 @@ const LoginForm: React.FC = () => {
     };
 
     dispatch(signIn(userToSignIn));
+    reset();
   };
 
   const toggleShowPassword = () => {
