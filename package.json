@@ -36,6 +36,7 @@
     "react-responsive": "^10.0.0",
     "react-router-dom": "^6.24.1",
     "react-select": "^5.8.0",
+    "react-spinners-kit": "^1.9.1",
     "react-switch": "^7.0.0",
     "react-switchery": "^1.1.2",
     "redux-persist": "^6.0.0",
