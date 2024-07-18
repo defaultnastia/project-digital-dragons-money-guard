@@ -62,7 +62,7 @@ export const EditTransactionForm = ({
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      category: "Need to add category",
+      category: "Car",
       amount: amount < 0 ? -amount : amount,
       transactionDate: new Date(transactionDate),
       comment,
@@ -129,17 +129,24 @@ export const EditTransactionForm = ({
             />
           )}
           <div className="flex max-[767px]:flex-col max-[767px]:gap-[40px] md:row md:gap-[32px]">
-            <Controller
-              name="amount"
-              control={control}
-              render={({ field }) => (
-                <input
-                  type="number"
-                  {...field}
-                  className="mb:w-[181px] w-full md:p-2 pl-[20px] pb-[8px] text-start md:text-center border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 no-arrows"
-                />
+            <div className="w-full">
+              <Controller
+                name="amount"
+                control={control}
+                render={({ field }) => (
+                  <input
+                    type="number"
+                    {...field}
+                    className="mb:w-[181px] w-full md:p-2 pl-[20px] pb-[8px] text-start md:text-center border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 no-arrows"
+                  />
+                )}
+              />
+              {errors.amount && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.amount.message}
+                </p>
               )}
-            />
+            </div>
             <div className="w-full relative">
               <Controller
                 name="transactionDate"
