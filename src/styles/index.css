@@ -69,7 +69,6 @@
 }
 
 body {
-  /* background-color: var(--background-blue-color); */
   color: var(--white-color);
   background-image: radial-gradient(
       at 87.72581455394035% 73.46293901033157%,
