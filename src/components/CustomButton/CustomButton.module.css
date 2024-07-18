@@ -1,0 +1,28 @@
+.colorful {
+  background: var(
+    --button-gradient,
+    linear-gradient(97deg, #ffc727 -16.42%, #9e40ba 97.04%, #7000ff 150.71%)
+  );
+  box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
+
+  @apply transition-all delay-[250] ease-in-out block mx-auto w-[100%] uppercase text-center text-[18px] tracking-[0.1em] rounded-[20px] py-[13px] px-[20px] mb-[20px] md:w-[300px]  drop-shadow-xl;
+}
+
+.colorful:hover,
+.colorful:focus {
+  background: var(
+    --button-gradient,
+    linear-gradient(
+      97deg,
+      #ffc527de -16.42%,
+      #9d40bada 97.04%,
+      #6f00ffd0 150.71%
+    )
+  );
+}
+
+.mono {
+  box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
+
+  @apply transition-all delay-[250] block mx-auto w-[100%] uppercase text-center text-[18px] tracking-[0.1em] rounded-[20px] py-[13px] px-[20px] mb-[20px] bg-[var(--white-color)] hover:bg-gray-300 focus:bg-gray-300 text-[var(--text-button-color)] md:w-[300px];
+}

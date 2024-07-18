@@ -94,9 +94,13 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
     };
 
     try {
-      await dispatch(addTransaction(formattedData));
-      await dispatch(getBalance());
-      await dispatch(getAllTransactions());
+      dispatch(addTransaction(formattedData))
+        .unwrap()
+        .then(() => {
+          dispatch(getAllTransactions());
+          dispatch(getBalance());
+          toast.success("Transaction was successfully added");
+        });
       closeModal();
     } catch (error) {
       toast.error("Failed to add transaction. Please try again");
