@@ -10,21 +10,42 @@ import clsx from "clsx";
 import { useAppDispatch } from "../../redux/hooks";
 import { getTransactionsCategories } from "../../redux/transactions/operations";
 import s from "./DashboardPage.module.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const DashboardPage = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const isTablet = useMediaQuery({
-    query: "(min-width: 768px) and (max-width: 1023px)",
+    query: "(min-width: 768px) and (max-width: 1279px)",
   });
-  const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
+  const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
 
-  const [activeTab, setActiveTab] = useState<string>("home");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const initialTab =
+    localStorage.getItem("activeTab") ||
+    location.pathname.split("/")[2] ||
+    "home";
+  const [activeTab, setActiveTab] = useState<string>(initialTab);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getTransactionsCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+    const currentPath = location.pathname.split("/")[2];
+    if (currentPath && currentPath !== activeTab) {
+      setActiveTab(currentPath);
+      localStorage.setItem("activeTab", currentPath);
+    }
+  }, [location, activeTab]);
+
+  useEffect(() => {
+    navigate(`/dashboard/${activeTab}`);
+    localStorage.setItem("activeTab", activeTab);
+  }, [activeTab, navigate]);
 
   return (
     <div className="min-h-[100vh]">
@@ -51,7 +72,7 @@ const DashboardPage = () => {
             s.sidebar,
             "flex",
             {
-              "flex-col gap-[32px] w-[480px] border-r-[1px] border-[rgba(255,255,255,0.6)] shadow-[1px_4px_1px_0_rgba(0,0,0,0.25)],":
+              "flex-col gap-[32px] w-[480px] border-r-[1px] border-[rgba(255,255,255,0.6)] shadow-[1px_4px_1px_0_rgba(0,0,0,0.25)]":
                 isDesktop,
             },
             {

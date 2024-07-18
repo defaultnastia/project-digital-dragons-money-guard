@@ -12,9 +12,14 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const isTablet = useMediaQuery({
-    query: "(min-width: 768px) and (max-width: 1023px)",
+    query: "(min-width: 768px) and (max-width: 1279px)",
   });
-  const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
+  const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
+
+  const handleTabChange = (tab: string) => {
+    setActiveTab(tab);
+    localStorage.setItem("activeTab", tab);
+  };
 
   return (
     <nav>
@@ -28,7 +33,7 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
       >
         <li>
           <NavLink
-            onClick={() => setActiveTab("home")}
+            onClick={() => handleTabChange("home")}
             to="/dashboard/home"
             className={clsx(
               {
@@ -47,7 +52,7 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
             {(isDesktop || isTablet) && "Home"}
           </NavLink>
         </li>
-        <li onClick={() => setActiveTab("statistics")}>
+        <li onClick={() => handleTabChange("statistics")}>
           <NavLink
             to="/dashboard/statistics"
             className={clsx(
@@ -73,7 +78,7 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
               activeTab === "currency" && s.active,
               s.defaultLink
             )}
-            onClick={() => setActiveTab("currency")}
+            onClick={() => handleTabChange("currency")}
           >
             <NavLink to="/dashboard/currency">
               <Icon name="dollar" size={44} fill="rgba(255, 255, 255, 0.6)" />
