@@ -17,7 +17,7 @@ export const signUp = createAsyncThunk(
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
-      toast.error("Couldn't signup user, please check the credentials!");
+      toast.error("Couldn't signup user, please check the credentials");
       return thunkAPI.rejectWithValue((error as AxiosError).response?.status);
     }
   }
@@ -66,7 +66,7 @@ export const refreshUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       if (error instanceof Error) {
-        toast.error("Something went wrong!");
+        toast.error("Something went wrong");
         return thunkAPI.rejectWithValue(error.message);
       }
     }
@@ -81,7 +81,7 @@ export const getBalance = createAsyncThunk(
       return response.data.balance;
     } catch (error) {
       if (error instanceof Error) {
-        toast.error("Couldn't update balance, try again.");
+        toast.error("Couldn't update balance, try again");
         return thunkAPI.rejectWithValue(error.message);
       }
     }
