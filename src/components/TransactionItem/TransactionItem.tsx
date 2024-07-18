@@ -19,6 +19,7 @@ import { getBalance } from "../../redux/user/operations";
 
 import icon from "../../img/icons.svg";
 import s from "./TransactionItem.module.css";
+import { getTransactionCategory } from "../../helpers/getTransactionCategory";
 
 type Props = {
   transaction: Transaction;
@@ -37,14 +38,6 @@ const TransactionItem = ({
   const categories = useAppSelector(selectCategories);
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
   const [confirmDelete, setConfirmDelete] = useState(false);
-
-  const getTransactionCategory = (id: string): Category | undefined => {
-    const category: Category | undefined = categories.find(
-      (category) => category.id === id
-    );
-
-    return category;
-  };
 
   const onUpdateTransaction = (obj: Transaction): undefined => {
     setEditTransaction(obj);
@@ -118,35 +111,28 @@ const TransactionItem = ({
         </div>
       </div>
 
-      {confirmDelete && (
-        <CustomModal
-          isOpen={confirmDelete}
-          onClose={closeDeleteModal}
-          type="auth"
+      <CustomModal
+        isOpen={confirmDelete}
+        onClose={closeDeleteModal}
+        type="auth"
+      >
+        <Logo sizeLogo={36} sizeText={26} icon="logo" className="text-[26px]" />
+        <h2 className="mx-auto mt-[52px] mb-[52px] text-[18px] w-[300px] text-center">
+          Are you sure you want to delete transaction?
+        </h2>
+        <button
+          className={clsx(s.btnDeleteModal)}
+          onClick={() => onDeleteTransaction(transaction.id)}
         >
-          <Logo
-            sizeLogo={36}
-            sizeText={26}
-            icon="logo"
-            className="text-[26px]"
-          />
-          <h2 className="mx-auto mt-[52px] mb-[52px] text-[18px] w-[300px] text-center">
-            Are you sure you want to delete transaction?
-          </h2>
-          <button
-            className={clsx(s.btnDeleteModal)}
-            onClick={() => onDeleteTransaction(transaction.id)}
-          >
-            Delete
-          </button>
-          <CustomButton
-            elementLike={{ btnType: "button", onClick: closeDeleteModal }}
-            btnStyle="mono"
-          >
-            Cancel
-          </CustomButton>
-        </CustomModal>
-      )}
+          Delete
+        </button>
+        <CustomButton
+          elementLike={{ btnType: "button", onClick: closeDeleteModal }}
+          btnStyle="mono"
+        >
+          Cancel
+        </CustomButton>
+      </CustomModal>
     </>
   ) : (
     <>
@@ -179,7 +165,7 @@ const TransactionItem = ({
         <div className={clsx(s.row)}>
           <span className={s.cellLeft}>Category</span>
           <span className={s.cellRight}>
-            {getTransactionCategory(transaction.categoryId)?.name}
+            {getTransactionCategory(categories, transaction.categoryId)?.name}
           </span>
         </div>
         <div className={clsx(s.row)}>
@@ -226,29 +212,27 @@ const TransactionItem = ({
         </div>
       </div>
 
-      {confirmDelete && (
-        <CustomModal
-          isOpen={confirmDelete}
-          onClose={closeDeleteModal}
-          type="auth"
+      <CustomModal
+        isOpen={confirmDelete}
+        onClose={closeDeleteModal}
+        type="auth"
+      >
+        <h2 className="mx-auto mb-[40px] text-[18px] w-[300px] text-center">
+          Are you sure you want to delete transaction?
+        </h2>
+        <button
+          className={clsx(s.btnDeleteModal)}
+          onClick={() => onDeleteTransaction(transaction.id)}
         >
-          <h2 className="mx-auto mt-[52px] mb-[52px] text-[18px] w-[300px] text-center">
-            Are you sure you want to delete transaction?
-          </h2>
-          <button
-            className={clsx(s.btnDeleteModal)}
-            onClick={() => onDeleteTransaction(transaction.id)}
-          >
-            Delete
-          </button>
-          <CustomButton
-            elementLike={{ btnType: "button", onClick: closeDeleteModal }}
-            btnStyle="mono"
-          >
-            Cancel
-          </CustomButton>
-        </CustomModal>
-      )}
+          Delete
+        </button>
+        <CustomButton
+          elementLike={{ btnType: "button", onClick: closeDeleteModal }}
+          btnStyle="mono"
+        >
+          Cancel
+        </CustomButton>
+      </CustomModal>
     </>
   );
 };
