@@ -58,12 +58,16 @@ const DashboardPage = () => {
               (isTablet && activeTab === "statistics")
               ? s.height
               : "",
-            isMobile && activeTab === "currency" && "px-0",
             { "": isDesktop },
             {
               "flex-col px-[32px]": isTablet,
             },
-            { "flex-col px-[20px]": isMobile }
+            {
+              "flex-col px-[20px]":
+                (isMobile && activeTab === "statistics") ||
+                activeTab === "home",
+            },
+            { "px-0 flex-col": isMobile && activeTab === "currency" }
           )}
         >
           <div
