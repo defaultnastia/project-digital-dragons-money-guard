@@ -1,12 +1,14 @@
 import {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {selectStatistics} from "../../redux/transactions/selectors";
+import {selectUserData} from "../../redux/user/selectors";
+import {getBalance} from "../../redux/user/operations";
+
 import Chart from "../Chart/Chart";
 import StatisticsDashboard from "../StatisticsDashboard/StatisticsDashboard";
 import StatisticsTable from "../StatisticsTable/StatisticsTable";
+import NotificationStatistic from "../NotificationStatistic/NotificationStatistic";
 import {getTransactionsSummary} from "../../redux/transactions/operations";
-import {selectUserData} from "../../redux/user/selectors";
-import {getBalance} from "../../redux/user/operations";
 
 const StatisticsTab = () => {
   const dispatch = useAppDispatch();
@@ -40,10 +42,13 @@ const StatisticsTab = () => {
       <h2 className="text-[1.875rem] mb-5 min-[1280px]:ml-[15px] max-[1279px]:hidden">
         Statistics
       </h2>
-      <div className="min-[768px]:flex gap-8">
+      <div className="min-[768px]:flex justify-between">
         <div>
           <h2 className="text-[1.875rem] mb-2 min-[768px]:mb-5 min-[1280px]:hidden ">Statistics</h2>
           <Chart dataTransaction={filteredStatistic} balance={balance} />
+          {cs?.length === 0 && (
+            <NotificationStatistic text="No transactions for the selected date" />
+          )}
         </div>
         <div className="w-full min-[768px]:mt-[25px] min-[1280px]:mt-0 min-[768px]:w-[336px]">
           <StatisticsDashboard onFilterChange={handleFilterChange} />

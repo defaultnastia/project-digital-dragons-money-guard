@@ -1,11 +1,14 @@
 import {useEffect, useState} from "react";
 import Select from "react-dropdown-select";
+
 import {useAppDispatch} from "../../redux/hooks";
 import {getTransactionsSummary} from "../../redux/transactions/operations";
-import {monthNames} from "../../helpers/statistics/month";
-import css from "./StatisticsDashboard.module.css";
 import StyledSelect from "./StyledSelect";
 import CustomDropdownIndicator from "../AddTransactionForm/CustomDropdownIndicator";
+
+import {monthNames} from "../../helpers/statistics/month";
+
+import css from "./StatisticsDashboard.module.css";
 
 interface StatisticsDashboardProps {
   onFilterChange: (newFilter: ParametersMonthYear) => void;
