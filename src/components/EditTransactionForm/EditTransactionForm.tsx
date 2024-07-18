@@ -20,6 +20,7 @@ import "../AddTransactionForm/datepicker-custom.css";
 import { useRef } from "react";
 import { selectCategories } from "../../redux/transactions/selectors";
 import { getTransactionCategory } from "../../helpers/getTransactionCategory";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 type EditFormPropsType = {
   userTransaction: Transaction;
@@ -80,7 +81,7 @@ export const EditTransactionForm = ({
     }
   };
 
-  const onSubmit = (data: formElementsType): void => {
+  const onSubmit = async (data: formElementsType) => {
     const updTransaction = {
       transactionDate: data.transactionDate,
       comment: data.comment,
@@ -89,18 +90,14 @@ export const EditTransactionForm = ({
       type,
     };
 
-    try {
-      dispatch(updateTransaction({ updTransaction, transId: id as string }))
-        .unwrap()
-        .then(() => {
-          dispatch(getAllTransactions());
-          dispatch(getBalance());
-          toast.success("Transaction was successfully updated");
-        });
-      closeModal();
-    } catch (error) {
-      toast.error("Failed to update transaction. Please try again");
-    }
+    const resultAction = await dispatch(
+      updateTransaction({ updTransaction, transId: id as string })
+    );
+    unwrapResult(resultAction);
+    await dispatch(getBalance());
+    await dispatch(getAllTransactions());
+    toast.success("Successfully updated transaction");
+    closeModal();
   };
 
   return (
@@ -195,7 +192,6 @@ export const EditTransactionForm = ({
               render={({ field }) => (
                 <input
                   type="text"
-
                   {...field}
                   className="w-full p-2 pl-[20px] pb-[52px] md:pb-[8px] md:pl-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg  focus:outline-none focus:border-opacity-100 resize-none"
                   placeholder="Comment"

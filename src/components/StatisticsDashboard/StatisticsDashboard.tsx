@@ -1,12 +1,10 @@
-import {useEffect, useState} from "react";
-import Select from "react-dropdown-select";
-
-import {useAppDispatch} from "../../redux/hooks";
-import {getTransactionsSummary} from "../../redux/transactions/operations";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../../redux/hooks";
+import { getTransactionsSummary } from "../../redux/transactions/operations";
 import StyledSelect from "./StyledSelect";
 import CustomDropdownIndicator from "../AddTransactionForm/CustomDropdownIndicator";
 
-import {monthNames} from "../../helpers/statistics/month";
+import { monthNames } from "../../helpers/statistics/month";
 
 import css from "./StatisticsDashboard.module.css";
 
@@ -14,7 +12,7 @@ interface StatisticsDashboardProps {
   onFilterChange: (newFilter: ParametersMonthYear) => void;
 }
 
-const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
+const StatisticsDashboard = ({ onFilterChange }: StatisticsDashboardProps) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const dispatch = useAppDispatch();
@@ -23,26 +21,31 @@ const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
   const handleMonthChange = (values: (string | object)[]) => {
     const month = (values[0] as OptionType)?.value as number;
     setSelectedMonth(month);
-    onFilterChange({year: selectedYear, month});
+    onFilterChange({ year: selectedYear, month });
   };
 
   const handleYearChange = (values: (string | object)[]) => {
     const year = (values[0] as OptionType)?.value as number;
     setSelectedYear(year);
-    onFilterChange({year, month: selectedMonth});
+    onFilterChange({ year, month: selectedMonth });
   };
 
   useEffect(() => {
-    dispatch(getTransactionsSummary({year: selectedYear, month: selectedMonth}));
+    dispatch(
+      getTransactionsSummary({ year: selectedYear, month: selectedMonth })
+    );
   }, [selectedYear, selectedMonth, dispatch]);
 
-  const optionsYear = Array.from({length: new Date().getFullYear() - minYear + 1}, (_, i) => {
-    const year = minYear + i;
-    return {
-      label: year.toString(),
-      value: year,
-    };
-  });
+  const optionsYear = Array.from(
+    { length: new Date().getFullYear() - minYear + 1 },
+    (_, i) => {
+      const year = minYear + i;
+      return {
+        label: year.toString(),
+        value: year,
+      };
+    }
+  );
 
   const optionsMonth = monthNames.map((month) => ({
     label: month.label,
