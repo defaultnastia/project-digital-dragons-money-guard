@@ -46,8 +46,11 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
             <Icon
               name="home"
               size={24}
-              fill="rgba(255, 255, 255, 0.6)"
-              className={clsx({ "size-[44px]": isMobile })}
+              fill="#6D54EB"
+              className={clsx(
+                { "size-[44px]": isMobile },
+                "bg-[rgba(255,255,255,0.6)] rounded-[8px]"
+              )}
             />
             {(isDesktop || isTablet) && "Home"}
           </NavLink>
@@ -66,8 +69,11 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
             <Icon
               name="timeline"
               size={24}
-              fill="rgba(255, 255, 255, 0.6)"
-              className={clsx({ "size-[44px]": isMobile })}
+              fill="#6D54EB"
+              className={clsx(
+                { "size-[44px]": isMobile },
+                "bg-[rgba(255,255,255,0.6)] rounded-[8px]"
+              )}
             />
             {(isDesktop || isTablet) && "Statistics"}
           </NavLink>
@@ -81,7 +87,12 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
             onClick={() => handleTabChange("currency")}
           >
             <NavLink to="/dashboard/currency">
-              <Icon name="dollar" size={44} fill="rgba(255, 255, 255, 0.6)" />
+              <Icon
+                name="dollar"
+                size={44}
+                fill="#6D54EB"
+                className="bg-[rgba(255,255,255,0.6)] rounded-[8px]"
+              />
             </NavLink>
           </li>
         )}

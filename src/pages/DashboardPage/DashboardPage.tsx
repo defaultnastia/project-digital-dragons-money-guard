@@ -23,10 +23,7 @@ const DashboardPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const initialTab =
-    localStorage.getItem("activeTab") ||
-    location.pathname.split("/")[2] ||
-    "home";
+  const initialTab = localStorage.getItem("activeTab") || "home";
   const [activeTab, setActiveTab] = useState<string>(initialTab);
 
   const dispatch = useAppDispatch();
