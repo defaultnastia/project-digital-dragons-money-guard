@@ -1,5 +1,6 @@
 import {nanoid} from "@reduxjs/toolkit";
 import {colorsStatistics} from "../../helpers/statistics/colors";
+import FormattedBalance from "../FormattedBalance/FormattedBalance";
 
 interface TableProps {
   dataTransaction?: Statistics | null;
@@ -41,18 +42,24 @@ const StatisticsTable = ({dataTransaction}: TableProps) => {
                   ></span>
                   <p>{item.name}</p>
                 </span>
-                <p>{item.type === "INCOME" ? item.total : -item.total}</p>
+                <span>
+                  <FormattedBalance balance={item.type === "INCOME" ? item.total : -item.total} />
+                </span>
               </li>
             ))}
           </ul>
           <ul className="px-4 text-[0.875rem] font-semibold flex flex-col gap-[19px]">
             <li className="flex justify-between">
               <p>Expenses:</p>
-              <p style={{color: "var(--dashboard-text-color)"}}>{expenseSum}</p>
+              <span style={{color: "var(--dashboard-text-color)"}}>
+                <FormattedBalance balance={expenseSum} />
+              </span>
             </li>
             <li className="flex justify-between">
               <p>Income:</p>
-              <p style={{color: "var(--yellow-color)"}}>{incomeSum}</p>
+              <span style={{color: "var(--yellow-color)"}}>
+                <FormattedBalance balance={incomeSum} />
+              </span>
             </li>
           </ul>
         </div>

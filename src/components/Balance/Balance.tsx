@@ -12,9 +12,9 @@ const Balance: React.FC = () => {
       <p className="text-[12px] text-[rgba(255,255,255,0.40)] uppercase text-left">Your balance</p>
       <div className="flex gap-[8px]">
         <p className="text-[30px]">₴</p>
-        <p className="text-[30px] font-bold">
+        <span className="text-[30px] font-bold">
           <FormattedBalance balance={userBalance} />
-        </p>
+        </span>
       </div>
     </div>
   );
