@@ -18,6 +18,7 @@ import sprite from "../../img/icons.svg";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { UserTransaction, TransactionType } from "../../redux/data.types";
 import { getBalance } from "../../redux/user/operations";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 interface ExpenseFormProps {
   closeModal: () => void;
@@ -95,7 +96,6 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
       categoryId: "",
       transactionDate: new Date(),
       comment: "",
-      amount: 0,
     },
   });
 
@@ -108,18 +108,13 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
       amount: data.amount > 0 ? -data.amount : data.amount,
     };
 
-    try {
-      dispatch(addTransaction(formattedData))
-        .unwrap()
-        .then(() => {
-          dispatch(getAllTransactions());
-          dispatch(getBalance());
-          toast.success("Transaction was successfully added");
-        });
-      closeModal();
-    } catch (error) {
-      toast.error("Failed to add transaction. Please try again");
-    }
+    const resultAction = await dispatch(addTransaction(formattedData));
+    unwrapResult(resultAction);
+
+    await dispatch(getBalance());
+    await dispatch(getAllTransactions());
+    toast.success("Successfully added transaction.");
+    closeModal();
   };
 
   const handleIconClick = () => {
@@ -251,7 +246,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
                 <input
                   {...field}
                   id="amount"
-                  value={field.value === 0 ? "" : field.value}
+                  value={field.value || ""}
                   type="number"
                   placeholder="0.00"
                   className="w-full pl-[20px] pb-[8px] md:pl-[0px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 no-arrows md:text-center"
@@ -271,7 +266,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
               control={control}
               render={({ field }) => (
                 <DatePicker
-                  selected={field.value ? field.value : new Date()}
+                  selected={field.value || new Date()}
                   id="transactionDate"
                   onChange={(date) => field.onChange(date)}
                   dateFormat="dd.MM.yyyy"
@@ -312,6 +307,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ closeModal }) => {
                 id="comment"
                 type="text"
                 placeholder="Comment"
+                value={field.value || ""}
                 className="w-full pl-[20px] pb-[52px] md:pl-[9px] md:pb-[8px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 "
               />
             )}
