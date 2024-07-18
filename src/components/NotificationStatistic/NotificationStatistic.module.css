@@ -1,0 +1,8 @@
+.notice {
+  position: absolute;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @apply max-[767px]:top-[60%];
+}

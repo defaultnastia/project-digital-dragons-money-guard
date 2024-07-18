@@ -1,7 +1,11 @@
 import {nanoid} from "@reduxjs/toolkit";
 import {colorsStatistics} from "../../helpers/statistics/colors";
 
-const StatisticsTable = ({dataTransaction}: ChartProps) => {
+interface TableProps {
+  dataTransaction?: Statistics | null;
+}
+
+const StatisticsTable = ({dataTransaction}: TableProps) => {
   if (!dataTransaction || !dataTransaction.categoriesSummary) {
     return null;
   }
@@ -18,8 +22,8 @@ const StatisticsTable = ({dataTransaction}: ChartProps) => {
   return (
     <div>
       {categoriesSummary.length !== 0 && (
-        <div>
-          <div className="flex justify-between p-4 bg-[rgba(82,59,126,0.60)] rounded-lg mb-[14px]">
+        <div className="min-[1280px]:w-[395px]">
+          <div className="flex justify-between p-4 bg-[rgba(82,59,126,0.60)] rounded-lg mb-[14px] ">
             <p>Category</p>
             <p>Sum</p>
           </div>
@@ -28,7 +32,7 @@ const StatisticsTable = ({dataTransaction}: ChartProps) => {
             {categoriesSummary.map((item) => (
               <li
                 key={item.id}
-                className="flex justify-between py-[12.4px] px-4  border-b border-[rgba(255,255,255,0.41)]"
+                className="flex justify-between py-[12.4px] px-4 border-b border-[rgba(255,255,255,0.41)]"
               >
                 <span className="flex gap-4">
                   <span
