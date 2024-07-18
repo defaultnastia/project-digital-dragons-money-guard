@@ -1,12 +1,14 @@
 import {useEffect, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {selectStatistics} from "../../redux/transactions/selectors";
+import {selectUserData} from "../../redux/user/selectors";
+import {getBalance} from "../../redux/user/operations";
+
 import Chart from "../Chart/Chart";
 import StatisticsDashboard from "../StatisticsDashboard/StatisticsDashboard";
 import StatisticsTable from "../StatisticsTable/StatisticsTable";
+import NotificationStatistic from "../NotificationStatistic/NotificationStatistic";
 import {getTransactionsSummary} from "../../redux/transactions/operations";
-import {selectUserData} from "../../redux/user/selectors";
-import {getBalance} from "../../redux/user/operations";
 
 const StatisticsTab = () => {
   const dispatch = useAppDispatch();
@@ -28,19 +30,29 @@ const StatisticsTab = () => {
     setFilter(newFilter);
   };
 
+  const cs = statistics?.categoriesSummary.filter((item) => item.type !== "INCOME");
+
+  const filteredStatistic = {
+    ...statistics,
+    categoriesSummary: cs,
+  };
+
   return (
     <div>
       <h2 className="text-[1.875rem] mb-5 min-[1280px]:ml-[15px] max-[1279px]:hidden">
         Statistics
       </h2>
-      <div className="min-[768px]:flex gap-8 justify-center">
+      <div className="min-[768px]:flex justify-between min-[1280px]:max-w-[715px]">
         <div>
           <h2 className="text-[1.875rem] mb-2 min-[768px]:mb-5 min-[1280px]:hidden ">Statistics</h2>
-          <Chart dataTransaction={statistics} balance={balance} />
+          <Chart dataTransaction={filteredStatistic} balance={balance} />
+          {cs?.length === 0 && (
+            <NotificationStatistic text="No transactions for the selected date" />
+          )}
         </div>
-        <div className="w-full min-[768px]:mt-[25px] min-[1280px]:mt-0 min-[768px]:w-[336px]">
+        <div className="w-full min-[768px]:mt-[25px] min-[1280px]:mt-0 min-[768px]:w-[336px] min-[1280px]:w-[396px]">
           <StatisticsDashboard onFilterChange={handleFilterChange} />
-          <StatisticsTable dataTransaction={statistics} />
+          <StatisticsTable dataTransaction={filteredStatistic} />
         </div>
       </div>
     </div>

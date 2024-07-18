@@ -46,17 +46,29 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
 }) => {
   const incomeColor = isChecked ? "rgba(255, 255, 255, 0.60)" : "#FFB627";
   const expenseColor = isChecked ? "#FF868D" : "rgba(255, 255, 255, 0.60)";
+  const incomeTextShadow = !isChecked
+    ? "0px 0px 10px rgba(255, 182, 39, 0.7)"
+    : "none";
+  const expenseTextShadow = isChecked
+    ? "0px 0px 10px rgba(255, 134, 141, 0.7)"
+    : "none";
 
   return (
-    <Box display="flex" alignItems="center" justifyContent="center">
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      gap="20px"
+      sx={{ padding: "10px", borderRadius: "10px" }}
+    >
       <Typography
         variant="body1"
         style={{
-          marginRight: 20,
           color: incomeColor,
           fontFamily: "Poppins",
-          fontWeight: 500,
+          fontWeight: 600,
           lineHeight: "normal",
+          textShadow: incomeTextShadow,
         }}
       >
         Income
@@ -115,11 +127,11 @@ const SwitcherComponent: React.FC<SwitcherComponentProps> = ({
       <Typography
         variant="body1"
         style={{
-          marginLeft: 20,
           color: expenseColor,
           fontFamily: "Poppins",
-          fontWeight: 500,
+          fontWeight: 600,
           lineHeight: "normal",
+          textShadow: expenseTextShadow,
         }}
       >
         Expense

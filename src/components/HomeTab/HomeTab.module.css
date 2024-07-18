@@ -1,9 +1,13 @@
 .btnAddTransaction {
-  @apply fixed bottom-[20px] right-[20px] w-[44px] h-[44px] rounded-[50%] flex justify-center items-center md:bottom-[40px] md:right-[40px];
+  @apply fixed bottom-[20px] right-[20px] w-[44px] h-[44px] rounded-[50%] flex justify-center items-center xl:absolute md:bottom-[40px] md:right-[42px] xl:right-[16px];
 
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
 }
 
 .balanceWrapper {
   @apply mb-[32px];
+}
+
+.homepageWrapper {
+  @apply relative h-[100%];
 }

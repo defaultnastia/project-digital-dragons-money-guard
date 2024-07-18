@@ -1,9 +1,18 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Select from "react-dropdown-select";
+
 import {useAppDispatch} from "../../redux/hooks";
 import {getTransactionsSummary} from "../../redux/transactions/operations";
+import StyledSelect from "./StyledSelect";
+import CustomDropdownIndicator from "../AddTransactionForm/CustomDropdownIndicator";
+
 import {monthNames} from "../../helpers/statistics/month";
+
 import css from "./StatisticsDashboard.module.css";
+
+interface StatisticsDashboardProps {
+  onFilterChange: (newFilter: ParametersMonthYear) => void;
+}
 
 const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
@@ -11,14 +20,14 @@ const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
   const dispatch = useAppDispatch();
   const minYear = 2020;
 
-  const handleMonthChange = (values: OptionType[]) => {
-    const month = values[0]?.value as number;
+  const handleMonthChange = (values: (string | object)[]) => {
+    const month = (values[0] as OptionType)?.value as number;
     setSelectedMonth(month);
     onFilterChange({year: selectedYear, month});
   };
 
-  const handleYearChange = (values: OptionType[]) => {
-    const year = values[0]?.value as number;
+  const handleYearChange = (values: (string | object)[]) => {
+    const year = (values[0] as OptionType)?.value as number;
     setSelectedYear(year);
     onFilterChange({year, month: selectedMonth});
   };
@@ -42,7 +51,7 @@ const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
 
   return (
     <div className="flex flex-col min-[768px]:flex-row gap-5 min-[768px]:gap-4 min-[1280px]:gap-8 mb-5">
-      <Select
+      <StyledSelect
         options={optionsMonth}
         values={[
           optionsMonth.find((option) => option.value === selectedMonth) || {
@@ -51,9 +60,15 @@ const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
           },
         ]}
         onChange={handleMonthChange}
+        className={css.select}
+        placeholder="Month"
+        dropdownHandleRenderer={() => <CustomDropdownIndicator />}
+        style={{
+          boxShadow: "none",
+        }}
       />
 
-      <Select
+      <StyledSelect
         options={optionsYear}
         values={[
           optionsYear.find((option) => option.value === selectedYear) || {
@@ -63,6 +78,11 @@ const StatisticsDashboard = ({onFilterChange}: StatisticsDashboardProps) => {
         ]}
         onChange={handleYearChange}
         className={css.select}
+        backspaceDelete={false}
+        dropdownHandleRenderer={() => <CustomDropdownIndicator />}
+        style={{
+          boxShadow: "none",
+        }}
       />
     </div>
   );
