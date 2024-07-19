@@ -2,10 +2,7 @@ import { useState } from "react";
 import SwitcherComponent from "./SwitcherComponent";
 import IncomeForm from "./IncomeForm";
 import ExpenseForm from "./ExpenseForm";
-
-interface AddTransactionFormProps {
-  closeModal: () => void;
-}
+import { AddTransactionFormProps } from "./types";
 
 const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   closeModal,

@@ -42,14 +42,9 @@ const RegistrationForm: React.FC = () => {
       email: data.email,
       password: data.password,
     };
-    try {
-      dispatch(signUp(userToSignUp));
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      reset();
-    }
+
+    await dispatch(signUp(userToSignUp));
+    reset();
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
