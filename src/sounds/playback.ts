@@ -19,3 +19,7 @@ export const successSound: Howl = new Howl({
 export const errorSound: Howl = new Howl({
   src: ["/src/sounds/soundscape/error.mp3"],
 });
+
+export const unexpectedSound: Howl = new Howl({
+  src: ["/src/sounds/soundscape/unexpected.mp3"],
+});

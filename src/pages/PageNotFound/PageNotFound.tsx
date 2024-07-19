@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
+import { unexpectedSound } from "../../sounds/playback";
 
 const PageNotFound = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 767px)" });
@@ -8,6 +9,10 @@ const PageNotFound = () => {
     query: "(min-width: 768px) and (max-width: 1279px)",
   });
   const isDesktop = useMediaQuery({ query: "(min-width: 1280px)" });
+
+  const handlePlaySound = () => {
+    unexpectedSound.play();
+  };
 
   return (
     <div className="w-screen h-screen bg-[var(--white-color)] text-center text-[#180243] flex items-center justify-center">
@@ -37,6 +42,7 @@ const PageNotFound = () => {
         <Link
           className="btn btn-sm uppercase text-white w-fit my-1 bg-[#180243]"
           to="/"
+          onClick={handlePlaySound}
         >
           Go to homepage
         </Link>
