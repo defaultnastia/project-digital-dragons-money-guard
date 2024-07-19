@@ -16,24 +16,15 @@
   @apply flex flex-col;
   display: flex;
   align-items: center;
-  margin-top: 53px;
   gap: 40px;
   width: 100%;
-  margin: 0 auto;
-
-  @media screen and (max-width: 767px) {
-    margin-top: 52px;
-  }
+  margin: 12px auto 0;
 }
 .input_wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-
-  @media screen and (max-width: 767px) {
-    width: 100%;
-    gap: 40px;
-  }
+  width: 100%;
+  gap: 40px;
 }
 .input_box {
   position: relative;
@@ -48,13 +39,11 @@
 .box_form {
   position: relative;
 }
-.box_btn {
-  margin-top: 52px;
 
-  @media screen and (max-width: 767px) {
-    margin-top: 0;
-  }
+.box_btn {
+  @apply mt-[-30px];
 }
+
 @media screen and (min-width: 768px) {
   .input {
     min-width: 409px;
@@ -98,7 +87,7 @@
 .strengthBar {
   padding: 4px 0;
   height: 1px;
-  bottom: 20px;
+  bottom: 40px;
 }
 
 .strengthBar > p {
