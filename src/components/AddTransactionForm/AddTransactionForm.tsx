@@ -17,7 +17,7 @@ const AddTransactionForm: React.FC<AddTransactionFormProps> = ({
   };
 
   return (
-    <div className="max-h-screen md:max-h-full overflow-y-auto">
+    <div className="max-h-screen md:max-h-full overflow-y-hidden md:overflow-y-visible">
       <h2 className="mt-[20px] md:mt-[0px] mb-[32px] text-center text-[24px] md:text-[30px]">
         Add transaction
       </h2>
