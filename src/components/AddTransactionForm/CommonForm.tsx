@@ -43,7 +43,11 @@ const CommonForm: React.FC<CommonFormProps> = ({
       ...data,
       type,
       amount:
-        type === "EXPENSE" && data.amount > 0 ? -data.amount : data.amount,
+        data.amount !== null
+          ? type === "EXPENSE" && data.amount > 0
+            ? -data.amount
+            : data.amount
+          : 0,
       categoryId:
         type === "INCOME"
           ? "063f1132-ba5d-42b4-951d-44011ca46262"
@@ -184,7 +188,11 @@ const CommonForm: React.FC<CommonFormProps> = ({
                 <input
                   {...field}
                   id="amount"
-                  value={field.value !== undefined ? field.value : ""}
+                  value={
+                    field.value !== undefined && field.value !== null
+                      ? field.value
+                      : ""
+                  }
                   type="number"
                   placeholder="0.00"
                   className="w-full pl-[20px] pb-[8px] md:pl-[0px] border-b border-gray-300 bg-transparent border-opacity-60 text-white text-lg placeholder-gray-400 focus:outline-none focus:border-opacity-100 no-arrows md:text-center"

@@ -17,7 +17,7 @@ const ExpenseForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
     categoryId: "",
     transactionDate: new Date(),
     comment: "",
-    amount: undefined,
+    amount: null,
   };
 
   return (

@@ -2,7 +2,7 @@ import { TransactionType } from "../../redux/data.types";
 import * as yup from "yup";
 
 export interface BaseFormInput {
-  amount: undefined | number;
+  amount: number | null;
   transactionDate: Date;
   comment: string;
 }
@@ -24,4 +24,8 @@ export interface CommonFormProps {
   schema: yup.ObjectSchema<BaseFormInput | ExpenseFormInput>;
   defaultValues: BaseFormInput | ExpenseFormInput;
   options?: Option[];
+}
+
+export interface AddTransactionFormProps {
+  closeModal: () => void;
 }

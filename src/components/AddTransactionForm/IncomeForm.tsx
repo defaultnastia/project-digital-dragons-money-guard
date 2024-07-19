@@ -7,7 +7,7 @@ const IncomeForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const defaultValues: BaseFormInput = {
     transactionDate: new Date(),
     comment: "",
-    amount: undefined,
+    amount: null,
   };
 
   return (
