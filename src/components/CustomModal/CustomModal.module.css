@@ -1,7 +1,7 @@
 .bgModal {
   @apply w-[100vw] p-[20px] h-screen flex justify-center items-center overflow-hidden md:flex-row md:flex-wrap md:max-w-[533px] md:h-auto md:py-[40px] md:px-[73px] relative flex flex-wrap;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 1279px) {
     flex-flow: column;
     background: radial-gradient(
         at 87.72581455394035% 73.46293901033157%,
