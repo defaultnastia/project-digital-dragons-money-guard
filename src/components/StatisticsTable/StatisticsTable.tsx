@@ -55,7 +55,7 @@ const StatisticsTable = ({dataTransaction}: TableProps) => {
                 <FormattedBalance balance={expenseSum} />
               </span>
             </li>
-            <li className="flex justify-between">
+            <li className="flex justify-between pb-[20px]">
               <p>Income:</p>
               <span style={{color: "var(--yellow-color)"}}>
                 <FormattedBalance balance={incomeSum} />

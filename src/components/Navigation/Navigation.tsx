@@ -31,7 +31,7 @@ const Navigation: React.FC<NavigationProps> = ({ setActiveTab, activeTab }) => {
           {
             "pt-[40px]": isTablet,
           },
-          { "flex flex-row gap-[32px] justify-center py-[12px]": isMobile }
+          { "flex flex-row gap-[32px] justify-center py-[20px]": isMobile }
         )}
       >
         <li className={clsx({ "w-[100px]": isDesktop || isTablet })}>

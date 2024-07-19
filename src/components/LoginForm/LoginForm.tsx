@@ -44,7 +44,7 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className={s.wrapper}>
-      <Logo icon={"logo"} sizeLogo={36} sizeText={27} />
+      <Logo icon={"logo"} sizeLogo={36} sizeText={27} className={s.loginLogo} />
       <form className={s.box_form} onSubmit={handleSubmit(onSubmit)}>
         <div className={s.input_wrapper}>
           <div className={s.input_box}>

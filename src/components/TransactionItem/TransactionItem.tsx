@@ -8,7 +8,7 @@ import CustomModal from "../CustomModal/CustomModal";
 import { CustomButton } from "../CustomButton/CustomButton";
 import FormattedBalance from "../FormattedBalance/FormattedBalance";
 
-import { Category, Transaction } from "../../redux/data.types";
+import { Transaction } from "../../redux/data.types";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectCategories } from "../../redux/transactions/selectors";
 import {

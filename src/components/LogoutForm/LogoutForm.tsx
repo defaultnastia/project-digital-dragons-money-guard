@@ -31,9 +31,12 @@ const LogoutForm: React.FC<LogoutFormProps> = ({ onSubmit, onClose }) => {
           />
         )}
         <h2
-          className={clsx("mx-auto mt-[52px] mb-[52px] text-[18px] w-[300px]", {
-            "w-[214px] text-center": isMobile,
-          })}
+          className={clsx(
+            "mx-auto mb-[40px] md:mt-[52px] md:mb-[52px] text-[18px] w-[300px]",
+            {
+              "w-[214px] text-center": isMobile,
+            }
+          )}
         >
           Are you sure you want to log out?
         </h2>

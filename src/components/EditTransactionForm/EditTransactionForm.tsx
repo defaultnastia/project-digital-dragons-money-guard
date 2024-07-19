@@ -34,7 +34,7 @@ type formElementsType = {
 };
 
 const schema = yup.object().shape({
-  category: yup.string().min(1, "Have to be at list 1 symbol"),
+  category: yup.string().min(1, "Have to be at least 1 symbol"),
   transactionDate: yup
     .date()
     .required("Please select a date")
@@ -43,7 +43,7 @@ const schema = yup.object().shape({
     .number()
     .typeError("Please enter a number")
     .required("Please enter a number")
-    .positive("Income amount should be positive")
+    .positive("Amount should be bigger than 0")
     .max(1000000, "Amount cannot exceed 1,000,000"),
   comment: yup
     .string()
