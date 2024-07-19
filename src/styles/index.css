@@ -116,3 +116,7 @@ body {
 .ReactModal__Body--open {
   overflow: hidden;
 }
+
+input:disabled {
+  cursor: not-allowed;
+}
